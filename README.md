@@ -21,6 +21,7 @@
 ### Definition of Done ###
 
 General
+
 * All products checked by at least 1 other team member 
 * Everything is written in English
 * Product reviews are done via progress reports and Scrumdesk.com
@@ -29,6 +30,7 @@ General
 * All documents contain a table of contents, have numbered pages and a version number
 
 Scrum
+
 * Sprints iterations are bi-weekly
 * Daily stand-up at 9:30 each day
 * Sprints start on Tuesday and end on Friday
@@ -37,6 +39,7 @@ Scrum
 * Scrum board, burndown chart and velocity chart managed via Scrumdesk.com
 
 Code
+
 * All partial products will be tested using a test plan
 * Compiled without errors and warnings
 * Contains commentary detailing how the code works
@@ -54,6 +57,7 @@ Code
 * Third party software, libraries and packages are described in the documentation
 
 Definitive Product
+
 * Up to date Functional Design
 * Up to date Technical Design
 * Unsolved issues/bugs documented and described
@@ -61,4 +65,3 @@ Definitive Product
 * Untested scenario’s documented
 * Accepted by product owner, project coach and stakeholders
 * Contains a video detailing the product
- 
