@@ -29,5 +29,7 @@ namespace ICE_Server.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ICE_Server.Models.PreDefMessages> PreDefMessages { get; set; }
     }
 }

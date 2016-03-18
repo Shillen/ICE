@@ -14,11 +14,7 @@ namespace ICE_Server
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapHttpRoute(
-                name: "ActionApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+           
 
             routes.MapRoute(
                 name: "Default",
