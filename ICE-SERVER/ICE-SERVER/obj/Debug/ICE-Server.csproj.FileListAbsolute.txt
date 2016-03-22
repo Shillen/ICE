@@ -86,4 +86,3 @@ E:\ICE\ICE-SERVER\ice-back-end\ICE-Server\ICE-Server\bin\Microsoft.Owin.Security
 E:\ICE\ICE-SERVER\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csprojResolveAssemblyReference.cache
 E:\ICE\ICE-SERVER\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.dll
 E:\ICE\ICE-SERVER\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.pdb
-E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csprojResolveAssemblyReference.cache
