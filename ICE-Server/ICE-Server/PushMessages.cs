@@ -16,7 +16,7 @@ namespace ICE_Server
         private PushBroker pushBroker { get; set; }
         private string message { get; set; }
         private bool succces = true;
-
+        // hallo
         /// <param name="message">String of the message</param>
         public Pushmessage(string message)
         {
