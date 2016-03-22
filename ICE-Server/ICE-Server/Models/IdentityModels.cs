@@ -31,5 +31,7 @@ namespace ICE_Server.Models
         }
 
         public System.Data.Entity.DbSet<ICE_Server.Models.PreDefMessages> PreDefMessages { get; set; }
+
+        public System.Data.Entity.DbSet<ICE_Server.Models.Broadcasts> Broadcasts { get; set; }
     }
 }

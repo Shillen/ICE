@@ -1,5 +1,8 @@
-﻿using Microsoft.Owin;
+﻿using ICE_Server.Models;
+using Microsoft.Owin;
 using Owin;
+using Microsoft.Framework.DependencyInjection;
+
 
 [assembly: OwinStartupAttribute(typeof(ICE_Server.Startup))]
 namespace ICE_Server
@@ -10,5 +13,6 @@ namespace ICE_Server
         {
             ConfigureAuth(app);
         }
+        
     }
 }
