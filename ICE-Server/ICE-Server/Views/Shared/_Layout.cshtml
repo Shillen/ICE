@@ -22,8 +22,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Messages", "Index", "Message")</li>
+                    <li>@Html.ActionLink("Broadcasts", "Index", "Broadcasts")</li>
+                    <li>@Html.ActionLink("Buildings", "Index", "Buildings")</li>
                     <li>@Html.ActionLink("Emergency Types", "Index", "Emergency")</li>
+                    <li>@Html.ActionLink("Devices", "Index", "Devices")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -33,7 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - ICE application</p>
+            <p>&copy; @DateTime.Now.Year - Windesheim University - Project ICE</p>
         </footer>
     </div>
 

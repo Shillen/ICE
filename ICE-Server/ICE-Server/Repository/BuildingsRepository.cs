@@ -10,37 +10,37 @@ using ICE_Server.DAL;
 
 namespace ICE_Server.Repository
 {
-    public class BroadcastsRepository : IRepository<Broadcast>
+    public class BuildingsRepository : IRepository<Building>
     {
         ICEContext context = new ICEContext();
-        
-        public IEnumerable<Broadcast> GetAll()
+
+        public IEnumerable<Building> GetAll()
         {
-            return context.Broadcasts;
+            return context.Buildings;
         }
 
-        public Broadcast Get(int ids)
+        public Building Get(int ids)
         {
-            var result = (from r in context.Broadcasts where r.ID == ids select r).FirstOrDefault();
+            var result = (from r in context.Buildings where r.ID == ids select r).FirstOrDefault();
             return result;
         }
 
-        public bool Insert(Broadcast item)
+        public bool Insert(Building item)
         {
-            context.Broadcasts.Add(item);
+            context.Buildings.Add(item);
             context.SaveChanges();
             return true;
         }
 
-        public bool Update(Broadcast item, int[] ids)
+        public bool Update(Building item, int[] ids)
         {
             context.Entry(item).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
             return true;
         }
-        public bool Delete(Broadcast item)
+        public bool Delete(Building item)
         {
-            context.Broadcasts.Remove(item);
+            context.Buildings.Remove(item);
             context.SaveChanges();
             return true;
         }

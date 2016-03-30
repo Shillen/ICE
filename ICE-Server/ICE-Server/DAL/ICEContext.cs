@@ -16,14 +16,14 @@ namespace ICE_Server.DAL
         {
         }
 
-        
-
-        public DbSet<Broadcasts> Broadcasts { get; set; }
-        public DbSet<Buildings> Buildings { get; set; }
-        public DbSet<Devices> Devices { get; set; }
-        public DbSet<EmergencyTypes> EmergencyTypes { get; set; }
-        public DbSet<Messages> Messages { get; set; }
-
+        public virtual DbSet<Broadcast> Broadcasts { get; set; }
+        public virtual DbSet<Building> Buildings { get; set; }
+        public virtual DbSet<Device> Devices { get; set; }
+        public virtual DbSet<Emergency> Emergencies { get; set; }
+        public virtual DbSet<EmergencyTranslated> EmergenciesTranslated { get; set; }
+        public virtual DbSet<PredefinedMessage> PredefinedMessages { get; set; }
+        public virtual DbSet<PredefinedMessageTranslated> PredefinedMessagesTranslated { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

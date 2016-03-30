@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace ICE_Server.Models
 {
-    public class Devices
+    public partial class Device
     {
-        public int ID { get; set; }
+        [Key]
+        public string UniqueID { get; set; }
         public string DeviceOS { get; set; }
     }
 }

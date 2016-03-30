@@ -1,4 +1,5 @@
 ﻿body {
+    background: #eee;
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -21,4 +22,8 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.body-content{
+    background: #fff;
 }
