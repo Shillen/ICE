@@ -26,5 +26,11 @@ namespace ICE_Server.Controllers
 
             return View();
         }
+        public ActionResult Languages()
+        {
+            ViewBag.Message = "Languages.";
+
+            return View();
+        }
     }
 }

@@ -190,10 +190,12 @@ E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Mi
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.AddEmergencyTranslatedClass.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.AddBuildingClass.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.AddPredefinedMessageClass.resources
-E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csproj.GenerateResource.Cache
-E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.dll
-E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.pdb
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.AddPredefinedMessageTranslatedClass.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.AddBroadcastClass.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.AddBroadcastClassToContext.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.AddDeviceClass.resources
+E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.FillDatabase.resources
+E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.FillDB.resources
+E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csproj.GenerateResource.Cache
+E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.dll
+E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.pdb

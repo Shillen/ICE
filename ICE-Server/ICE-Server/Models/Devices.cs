@@ -9,6 +9,8 @@ namespace ICE_Server.Models
     public partial class Device
     {
         [Key]
+        public int ID { get; set; }
+        [MaxLength(200)]
         public string UniqueID { get; set; }
         public string DeviceOS { get; set; }
     }

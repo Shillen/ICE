@@ -250,7 +250,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BroadcastsController.cs" />
+    <Compile Include="Controllers\DevicesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PushMessagesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -300,6 +302,14 @@
     <Compile Include="Migrations\201603301222311_AddDeviceClass.Designer.cs">
       <DependentUpon>201603301222311_AddDeviceClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603301456147_FillDatabase.cs" />
+    <Compile Include="Migrations\201603301456147_FillDatabase.Designer.cs">
+      <DependentUpon>201603301456147_FillDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603301503140_FillDB.cs" />
+    <Compile Include="Migrations\201603301503140_FillDB.Designer.cs">
+      <DependentUpon>201603301503140_FillDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Broadcast.cs" />
@@ -317,7 +327,11 @@
     <Compile Include="Models\PushMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BuildingsRepository.cs" />
-    <Compile Include="Repository\LanguageRepository.cs" />
+    <Compile Include="Repository\DevicesRepository.cs" />
+    <Compile Include="Repository\EmergencyRepository.cs" />
+    <Compile Include="Repository\EmergencyTranslatedRepository.cs" />
+    <Compile Include="Repository\LanguagesRepository.cs" />
+    <Compile Include="Repository\PredefinedMessageRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -380,10 +394,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Home\Languages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\" />
+    <Folder Include="Views\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -426,6 +443,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603301222311_AddDeviceClass.resx">
       <DependentUpon>201603301222311_AddDeviceClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603301456147_FillDatabase.resx">
+      <DependentUpon>201603301456147_FillDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603301503140_FillDB.resx">
+      <DependentUpon>201603301503140_FillDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
