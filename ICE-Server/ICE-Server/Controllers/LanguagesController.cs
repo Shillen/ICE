@@ -11,7 +11,6 @@ using System.Web.Http.Description;
 using ICE_Server.DAL;
 using ICE_Server.Models;
 using ICE_Server.Repository;
-using System.Web.Mvc;
 
 namespace ICE_Server.Controllers
 {
@@ -19,7 +18,6 @@ namespace ICE_Server.Controllers
     {
         private LanguagesRepository languageRepository;
         private ICEContext db = new ICEContext();
-        private int[] ids;
 
         public LanguagesController()
         {
@@ -41,6 +39,7 @@ namespace ICE_Server.Controllers
 
         // POST: api/Languages
         [ResponseType(typeof(Language))]
+        [HttpPost]
         public IHttpActionResult Insert(Language item)
         {
             if (!ModelState.IsValid)
@@ -55,13 +54,14 @@ namespace ICE_Server.Controllers
 
         // PUT: api/Languages/5
         [ResponseType(typeof(void))]
+        [HttpPut]
         public IHttpActionResult Update(Language item)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            int[] ids = { item.ID };
             languageRepository.Update(item, ids);
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -69,12 +69,13 @@ namespace ICE_Server.Controllers
 
         // DELETE: api/Languages/5
         [ResponseType(typeof(Language))]
+        [HttpDelete]
         public IHttpActionResult Delete(Language item)
         {
             languageRepository.Delete(item);
 
             return Ok(item);
         }
-        // test
+        
     }
 }

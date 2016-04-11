@@ -1,33 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using ICE_Server.Repository;
+using System.Web.Http.Description;
+using ICE_Server.DAL;
 using ICE_Server.Models;
-
+using ICE_Server.Repository;
 
 namespace ICE_Server.Controllers
 {
     public class DevicesController : ApiController
     {
-        
-        DevicesRepository _repository = new DevicesRepository();
+        private DevicesRepository deviceRepository;
+        private ICEContext db = new ICEContext();
 
-        public IEnumerable<Device> Get()
+        public DevicesController()
         {
-            return _repository.GetAll();
+            this.deviceRepository = new DevicesRepository(new ICEContext());
         }
 
-        public IHttpActionResult Get(int id)
+        // GET: api/Devices
+        public IEnumerable<Device> GetAll()
         {
-            var product = _repository.Get(id);
-            if (product == null)
+            return deviceRepository.GetAll();
+        }
+
+        // GET: api/Devices/5
+        [ResponseType(typeof(Device))]
+        public IHttpActionResult GetDevice(int id)
+        {
+            return Ok(deviceRepository.Get(id));
+        }
+
+        // POST: api/Devices
+        [ResponseType(typeof(Device))]
+        [HttpPost]
+        public IHttpActionResult Insert(Device item)
+        {
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest(ModelState);
             }
-            return Ok(product);
+
+            deviceRepository.Insert(item);
+
+            return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
         }
+
+        // PUT: api/Devices/5
+        [ResponseType(typeof(void))]
+        [HttpPut]
+        public IHttpActionResult Update(Device item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            int[] ids = {item.ID};
+            deviceRepository.Update(item, ids);
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // DELETE: api/Devices/5
+        [ResponseType(typeof(Device))]
+        [HttpDelete]
+        public IHttpActionResult Delete(Device item)
+        {
+            deviceRepository.Delete(item);
+
+            return Ok(item);
+        }
+
     }
 }

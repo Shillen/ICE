@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICE-Server", "ICE-Server\IC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICE-Server.Tests", "ICE-Server.Tests\ICE-Server.Tests.csproj", "{AF5B924D-6DCC-459D-B759-758397ABA311}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICE-Webserver", "ICE-Webserver\ICE-Webserver.csproj", "{A3127ED9-AF06-42FE-BED2-1E7AAC47839A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICE-Webserver.Tests", "ICE-Webserver.Tests\ICE-Webserver.Tests.csproj", "{4A9D1325-D8C0-408F-AB8A-92E3111680D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{AF5B924D-6DCC-459D-B759-758397ABA311}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF5B924D-6DCC-459D-B759-758397ABA311}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF5B924D-6DCC-459D-B759-758397ABA311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3127ED9-AF06-42FE-BED2-1E7AAC47839A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3127ED9-AF06-42FE-BED2-1E7AAC47839A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3127ED9-AF06-42FE-BED2-1E7AAC47839A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3127ED9-AF06-42FE-BED2-1E7AAC47839A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A9D1325-D8C0-408F-AB8A-92E3111680D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9D1325-D8C0-408F-AB8A-92E3111680D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9D1325-D8C0-408F-AB8A-92E3111680D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A9D1325-D8C0-408F-AB8A-92E3111680D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

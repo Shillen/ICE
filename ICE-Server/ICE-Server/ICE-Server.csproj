@@ -89,32 +89,32 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PushSharp.Amazon, Version=1.0.5926.35688, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
-      <HintPath>..\packages\PushSharp.4.0.1\lib\net45\PushSharp.Amazon.dll</HintPath>
+    <Reference Include="PushSharp.Amazon, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Amazon.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PushSharp.Apple, Version=1.0.5926.35687, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
-      <HintPath>..\packages\PushSharp.4.0.1\lib\net45\PushSharp.Apple.dll</HintPath>
+    <Reference Include="PushSharp.Apple, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Apple.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PushSharp.Blackberry, Version=1.0.5926.35689, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
-      <HintPath>..\packages\PushSharp.4.0.1\lib\net45\PushSharp.Blackberry.dll</HintPath>
+    <Reference Include="PushSharp.Blackberry, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Blackberry.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PushSharp.Core, Version=1.0.5926.35686, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
-      <HintPath>..\packages\PushSharp.4.0.1\lib\net45\PushSharp.Core.dll</HintPath>
+    <Reference Include="PushSharp.Core, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PushSharp.Firefox, Version=1.0.5926.35689, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
-      <HintPath>..\packages\PushSharp.4.0.1\lib\net45\PushSharp.Firefox.dll</HintPath>
+    <Reference Include="PushSharp.Firefox, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Firefox.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PushSharp.Google, Version=1.0.5926.35688, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
-      <HintPath>..\packages\PushSharp.4.0.1\lib\net45\PushSharp.Google.dll</HintPath>
+    <Reference Include="PushSharp.Google, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Google.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PushSharp.Windows, Version=1.0.5926.35688, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
-      <HintPath>..\packages\PushSharp.4.0.1\lib\net45\PushSharp.Windows.dll</HintPath>
+    <Reference Include="PushSharp.Windows, Version=4.0.10.0, Culture=neutral, PublicKeyToken=cf74b75eab2c0170, processorArchitecture=MSIL">
+      <HintPath>..\packages\PushSharp.4.0.10\lib\net45\PushSharp.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -122,6 +122,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Json.4.0.20126.16343\lib\net40\System.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
@@ -244,16 +252,14 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BroadcastsController.cs" />
+    <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\DevicesController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeAPIController.cs" />
     <Compile Include="Controllers\LanguagesController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PredefinedMessagesController.cs" />
     <Compile Include="Controllers\PushMessagesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="DAL\ICEContext.cs" />
@@ -262,66 +268,24 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Migrations\201603301100529_Initial.cs" />
-    <Compile Include="Migrations\201603301100529_Initial.Designer.cs">
-      <DependentUpon>201603301100529_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201604061330099_Initial.cs" />
+    <Compile Include="Migrations\201604061330099_Initial.Designer.cs">
+      <DependentUpon>201604061330099_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603301140077_Initial1.cs" />
-    <Compile Include="Migrations\201603301140077_Initial1.Designer.cs">
-      <DependentUpon>201603301140077_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301158272_AddEmergencyClass.cs" />
-    <Compile Include="Migrations\201603301158272_AddEmergencyClass.Designer.cs">
-      <DependentUpon>201603301158272_AddEmergencyClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301159267_AddEmergencyTranslatedClass.cs" />
-    <Compile Include="Migrations\201603301159267_AddEmergencyTranslatedClass.Designer.cs">
-      <DependentUpon>201603301159267_AddEmergencyTranslatedClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301201217_AddBuildingClass.cs" />
-    <Compile Include="Migrations\201603301201217_AddBuildingClass.Designer.cs">
-      <DependentUpon>201603301201217_AddBuildingClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301203528_AddPredefinedMessageClass.cs" />
-    <Compile Include="Migrations\201603301203528_AddPredefinedMessageClass.Designer.cs">
-      <DependentUpon>201603301203528_AddPredefinedMessageClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301215484_AddPredefinedMessageTranslatedClass.cs" />
-    <Compile Include="Migrations\201603301215484_AddPredefinedMessageTranslatedClass.Designer.cs">
-      <DependentUpon>201603301215484_AddPredefinedMessageTranslatedClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301218505_AddBroadcastClass.cs" />
-    <Compile Include="Migrations\201603301218505_AddBroadcastClass.Designer.cs">
-      <DependentUpon>201603301218505_AddBroadcastClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301219308_AddBroadcastClassToContext.cs" />
-    <Compile Include="Migrations\201603301219308_AddBroadcastClassToContext.Designer.cs">
-      <DependentUpon>201603301219308_AddBroadcastClassToContext.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301222311_AddDeviceClass.cs" />
-    <Compile Include="Migrations\201603301222311_AddDeviceClass.Designer.cs">
-      <DependentUpon>201603301222311_AddDeviceClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301456147_FillDatabase.cs" />
-    <Compile Include="Migrations\201603301456147_FillDatabase.Designer.cs">
-      <DependentUpon>201603301456147_FillDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603301503140_FillDB.cs" />
-    <Compile Include="Migrations\201603301503140_FillDB.Designer.cs">
-      <DependentUpon>201603301503140_FillDB.cs</DependentUpon>
+    <Compile Include="Migrations\201604061412227_DatabaseUpdate.cs" />
+    <Compile Include="Migrations\201604061412227_DatabaseUpdate.Designer.cs">
+      <DependentUpon>201604061412227_DatabaseUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Broadcast.cs" />
     <Compile Include="Models\EmergencyTranslated.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\PredefinedMessagesTranslated.cs" />
-    <Compile Include="PushMessages.cs" />
+    <Compile Include="PushNotifications\PushMessages.cs" />
     <Compile Include="Repository\BroadcastsRepository.cs" />
     <Compile Include="Models\Building.cs" />
-    <Compile Include="Models\Devices.cs" />
+    <Compile Include="Models\Device.cs" />
     <Compile Include="Models\Emergency.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PredefinedMessage.cs" />
     <Compile Include="Models\PushMessages.cs" />
@@ -331,7 +295,7 @@
     <Compile Include="Repository\EmergencyRepository.cs" />
     <Compile Include="Repository\EmergencyTranslatedRepository.cs" />
     <Compile Include="Repository\LanguagesRepository.cs" />
-    <Compile Include="Repository\PredefinedMessageRepository.cs" />
+    <Compile Include="Repository\PredefinedMessagesRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -348,6 +312,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\ICE.pubxml" />
+    <Content Include="Resources\aps_development.cer" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -371,36 +337,18 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\HomeAPI\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
-    <Content Include="Views\Home\Languages.cshtml" />
+    <Content Include="Views\HomeAPI\Languages.cshtml" />
+    <Content Include="Views\HomeAPI\Buildings.cshtml" />
+    <Content Include="Views\HomeAPI\Broadcasts.cshtml" />
+    <Content Include="Views\HomeAPI\Devices.cshtml" />
+    <Content Include="Views\HomeAPI\Emergencies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Views\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -414,41 +362,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603301100529_Initial.resx">
-      <DependentUpon>201603301100529_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604061330099_Initial.resx">
+      <DependentUpon>201604061330099_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301140077_Initial1.resx">
-      <DependentUpon>201603301140077_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301158272_AddEmergencyClass.resx">
-      <DependentUpon>201603301158272_AddEmergencyClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301159267_AddEmergencyTranslatedClass.resx">
-      <DependentUpon>201603301159267_AddEmergencyTranslatedClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301201217_AddBuildingClass.resx">
-      <DependentUpon>201603301201217_AddBuildingClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301203528_AddPredefinedMessageClass.resx">
-      <DependentUpon>201603301203528_AddPredefinedMessageClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301215484_AddPredefinedMessageTranslatedClass.resx">
-      <DependentUpon>201603301215484_AddPredefinedMessageTranslatedClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301218505_AddBroadcastClass.resx">
-      <DependentUpon>201603301218505_AddBroadcastClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301219308_AddBroadcastClassToContext.resx">
-      <DependentUpon>201603301219308_AddBroadcastClassToContext.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301222311_AddDeviceClass.resx">
-      <DependentUpon>201603301222311_AddDeviceClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301456147_FillDatabase.resx">
-      <DependentUpon>201603301456147_FillDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603301503140_FillDB.resx">
-      <DependentUpon>201603301503140_FillDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604061412227_DatabaseUpdate.resx">
+      <DependentUpon>201604061412227_DatabaseUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -485,6 +403,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
