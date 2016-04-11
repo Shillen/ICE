@@ -25,6 +25,7 @@ namespace ICE_Webserver
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/justified.css",
                       "~/Content/site.css"));
         }
     }

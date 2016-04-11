@@ -1,13 +1,22 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #F7F7F7;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
 }
+
+
+.body-content {
+    background-color: white;
+    min-height: 600px;
+}
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -22,3 +31,134 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.centeredImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centeredText {
+    text-align: center;
+}
+
+.rightText {
+    text-align: right;
+}
+
+.divLeft {
+    float: left;
+}
+
+.divRight {
+    float: right;
+}
+
+.accountLog {
+    width: 100%;
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.mainFooter {
+    height: 30px;
+    background-color: #E5ECF2;
+    max-width: 1170px;
+    width: 100%;
+    color: #00418C;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .mainFooter a {
+        color: #00418C;
+        text-decoration: none;
+    }
+
+    .mainFooter :active:hover {
+        color: #00418C;
+        text-decoration: none;
+    }
+
+    .mainFooter > div {
+        padding-top: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+.masthead {
+    margin: 20px -15px 0 -15px;
+}
+
+.container > .jumbotron {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+}
+
+.masthead > .nav > .navLi > a {
+    background-color: #69B6D8;
+    color: white;
+    border-radius: 0px;
+    max-height: 65px !important;
+}
+
+.login {
+    background: white;
+    max-width: 400px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 100px;
+}
+
+.form-horizontal .control-label {
+    text-align: left !important;
+}
+
+.img {
+    width: 100%;
+}
+
+.overflowHandler {
+    overflow: scroll;
+    width: 100%;
+    margin: 0px auto;
+    clear: both;
+    border-collapse: separate;
+    border-spacing: 0px;
+}
+
+@media screen and (max-width: 1200px) {
+    .mainFooter {
+        max-width: 970px;
+    }
+
+    .login {
+        max-width: 400px;
+    }
+}
+ 
+@media screen and (max-width: 992px) {
+    .mainFooter {
+        max-width: 750px;
+    }
+
+    .login {
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login {
+        max-width: 300px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .masthead > .nav > .navLi > a {
+        min-height: 65px !important;
+    }
+}
+
