@@ -189,7 +189,6 @@ E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\bin\Microsoft.Owin.Secu
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\bin\Microsoft.Owin.Security.Twitter.xml
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csproj.App.config
-E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csprojResolveAssemblyReference.cache
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.Initial.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.DatabaseUpdate.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csproj.GenerateResource.Cache

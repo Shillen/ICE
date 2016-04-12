@@ -24,31 +24,5 @@ namespace ICE_Server.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeAPIController controller = new HomeAPIController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeAPIController controller = new HomeAPIController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
     }
 }

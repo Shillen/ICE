@@ -11,10 +11,8 @@ using ICE_Server.Models;
 
 namespace ICE_Webserver.Controllers
 {
-    public class DevicesWebController : Controller
+    public class DevicesController : BaseController
     {
-        private ICEContext db = new ICEContext();
-
         // GET: DevicesWeb
         public ActionResult Index()
         {

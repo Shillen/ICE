@@ -254,13 +254,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\BroadcastsController.cs" />
-    <Compile Include="Controllers\BuildingsController.cs" />
-    <Compile Include="Controllers\DevicesController.cs" />
+    <Compile Include="Controllers\BroadcastsAPIController.cs" />
+    <Compile Include="Controllers\BuildingsAPIController.cs" />
+    <Compile Include="Controllers\DevicesAPIController.cs" />
     <Compile Include="Controllers\HomeAPIController.cs" />
-    <Compile Include="Controllers\LanguagesController.cs" />
-    <Compile Include="Controllers\PredefinedMessagesController.cs" />
-    <Compile Include="Controllers\PushMessagesController.cs" />
+    <Compile Include="Controllers\LanguagesAPIController.cs" />
+    <Compile Include="Controllers\PredefinedMessagesAPIController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="DAL\ICEContext.cs" />
     <Compile Include="DAL\ICEInitialize.cs" />
@@ -277,6 +276,7 @@
       <DependentUpon>201604061412227_DatabaseUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApiResponseModel.cs" />
     <Compile Include="Models\Broadcast.cs" />
     <Compile Include="Models\EmergencyTranslated.cs" />
     <Compile Include="Models\Language.cs" />
@@ -346,6 +346,7 @@
     <Content Include="Views\HomeAPI\Broadcasts.cshtml" />
     <Content Include="Views\HomeAPI\Devices.cshtml" />
     <Content Include="Views\HomeAPI\Emergencies.cshtml" />
+    <Content Include="Views\HomeAPI\TestPushNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

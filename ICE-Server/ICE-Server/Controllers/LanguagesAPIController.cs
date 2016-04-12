@@ -14,12 +14,11 @@ using ICE_Server.Repository;
 
 namespace ICE_Server.Controllers
 {
-    public class LanguagesController : ApiController
+    public class LanguagesAPIController : ApiController
     {
         private LanguagesRepository languageRepository;
-        private ICEContext db = new ICEContext();
 
-        public LanguagesController()
+        public LanguagesAPIController()
         {
             this.languageRepository = new LanguagesRepository(new ICEContext());
         }

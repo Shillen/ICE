@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 10px;
     padding-bottom: 20px;
     background-color: #F7F7F7;
 }
@@ -64,7 +64,7 @@ textarea {
 
 .mainFooter {
     height: 30px;
-    background-color: #E5ECF2;
+    background-color: #DEE8F1;
     max-width: 1170px;
     width: 100%;
     color: #00418C;
@@ -89,7 +89,7 @@ textarea {
     }
 
 .masthead {
-    margin: 20px -15px 0 -15px;
+    margin: 30px -15px 0 -15px;
 }
 
 .container > .jumbotron {
@@ -99,7 +99,7 @@ textarea {
 }
 
 .masthead > .nav > .navLi > a {
-    background-color: #69B6D8;
+    background-color: #616161;
     color: white;
     border-radius: 0px;
     max-height: 65px !important;

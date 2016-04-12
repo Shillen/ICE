@@ -18,6 +18,7 @@ namespace ICE_Server.PushNotifications
 {
     public class Pushmessage
     {
+        private string title { get; set; }
         private string message { get; set; }
         private bool successful = true;
         private ICEContext context = new ICEContext();
@@ -33,15 +34,10 @@ namespace ICE_Server.PushNotifications
         /// Push a message 
         /// </summary>
         /// <param name="message">String of the message</param>
-        public Pushmessage(string message)
+        public Pushmessage(string title, string message)
         {
-            foreach (var regId in context.Devices)
-            {
-               Debug.WriteLine(string.Format("Device ID: {0}______{1}", regId.DeviceID, regId.DeviceID.Length));
-                
-            }
-                    // Configuration
-                    var config = new GcmConfiguration("239888546853", "AIzaSyDrgqsARFm_ldt9YI2tn4VQe2HfjPrj8hI", null);
+            // Configuration
+            var config = new GcmConfiguration("877886927121 ", "AIzaSyBksWdag7DeN7h4jRM0gqLgjN6fyEcQ8r0", null);
 
             // Create a new broker
             var gcmBroker = new GcmServiceBroker(config);
@@ -76,7 +72,7 @@ namespace ICE_Server.PushNotifications
                             var n = failedKvp.Key;
                             var e = failedKvp.Value;
 
-                            Console.WriteLine($"GCM Notification Failed: ID={n.MessageId}, Desc={e.InnerException}");
+                            Console.WriteLine($"GCM Notification Failed: ID={n.MessageId}, Desc={e.Message}");
                         }
 
                     }
@@ -89,11 +85,11 @@ namespace ICE_Server.PushNotifications
 
                         Console.WriteLine($"Device RegistrationId Expired: {oldId}");
 
-                        //if (!string.IsNullOrWhitespace(newId))
-                        //{
-                        //    // If this value isn't null, our subscription changed and we should update our database
-                        //    Console.WriteLine($"Device RegistrationId Changed To: {newId}");
-                        //}
+                        if (!string.IsNullOrWhiteSpace(newId))
+                        {
+                            // If this value isn't null, our subscription changed and we should update our database
+                            Console.WriteLine($"Device RegistrationId Changed To: {newId}");
+                        }
                     }
                     else if (ex is RetryAfterException)
                     {
@@ -113,21 +109,16 @@ namespace ICE_Server.PushNotifications
             gcmBroker.OnNotificationSucceeded += (notification) => {
                 Console.WriteLine("GCM Notification Sent!");
             };
-
+            
             // Start the broker
             gcmBroker.Start();
-
             foreach (var regId in context.Devices)
             {
-                Console.WriteLine("Device ID:" + regId.DeviceID);
                 // Queue a notification to send
                 gcmBroker.QueueNotification(new GcmNotification
                 {
-                    RegistrationIds = new List<string> {
-                        "APA91bH-sVYpa-Q39zs3NPet9e40Ry-cpBy84NNWGY_-0CQP7SZuBVs3P05iyHen2f_jR-4ES-CjZkiz5DPCNInUF-PJnmlwNLavwiMPzRxQozcJpM4LLwPAd3DGOjZwEETbwrUkmnJZ"
-            //regId.DeviceID
-                    },
-                    Data = JObject.Parse("{ \"pedro\" : \"silva\" }")
+                    RegistrationIds = new List<string> { regId.DeviceID },
+                    Data = JObject.Parse("{\"Title\":\"" + title + "\",\"Content\":\"" + message + "\"}")
                 });
             }
 

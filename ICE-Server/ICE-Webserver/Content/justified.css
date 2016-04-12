@@ -33,7 +33,7 @@
   color: #777;
   text-align: center;
   
-  border-bottom: 1px solid #d5d5d5; 
+  border-bottom: 1px solid #565656; 
 }
 .nav-justified > .active > a,
 .nav-justified > .active > a:hover,
@@ -47,7 +47,7 @@
   border-radius: 5px 5px 0 0;
 }
 .nav-justified > li:last-child > a {
-  border-bottom: 0;
+  border-bottom: 1px solid #565656;
   border-radius: 0 0 5px 5px;
 }
 
@@ -56,8 +56,8 @@
     max-height: 52px;
   }
   .nav-justified > li > a {
-    border-right: 1px solid #8AC4DD;
-    border-left: 1px solid #8AC4DD;
+    border-right: 1px solid #777777;
+    border-left: 1px solid #777777;
   }
   .nav-justified > li:first-child > a {
     border-left: 0;

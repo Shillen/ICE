@@ -14,12 +14,11 @@ using ICE_Server.Repository;
 
 namespace ICE_Server.Controllers
 {
-    public class DevicesController : ApiController
+    public class DevicesAPIController : ApiController
     {
         private DevicesRepository deviceRepository;
-        private ICEContext db = new ICEContext();
 
-        public DevicesController()
+        public DevicesAPIController()
         {
             this.deviceRepository = new DevicesRepository(new ICEContext());
         }
