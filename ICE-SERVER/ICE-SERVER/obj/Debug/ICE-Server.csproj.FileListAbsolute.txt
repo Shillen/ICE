@@ -194,3 +194,4 @@ E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Mi
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csproj.GenerateResource.Cache
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.dll
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.pdb
+E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csprojResolveAssemblyReference.cache
