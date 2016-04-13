@@ -17,18 +17,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ICE", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ICE Application", "Index", "HomeAPI", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "HomeAPI")</li>
-                    <li>@Html.ActionLink("Broadcasts", "Broadcasts", "HomeAPI")</li>
-                    <li>@Html.ActionLink("Buildings", "Buildings", "HomeAPI")</li>
-                    <li>@Html.ActionLink("Emergency Types", "Emergencies", "HomeAPI")</li>
-                    <li>@Html.ActionLink("Devices", "Devices", "HomeAPI")</li>
-                    <li>@Html.ActionLink("Languages", "Languages", "HomeAPI")</li>
+                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
                 </ul>
-               
             </div>
         </div>
     </div>
