@@ -9,5 +9,6 @@ namespace ICE_Server.Controllers
 {
     public class SynchronizeController : ApiController
     {
+        // SYNCHRONIIIIIIIIIIZE
     }
 }
