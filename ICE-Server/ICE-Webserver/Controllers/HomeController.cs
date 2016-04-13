@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ICE_Server.PushNotifications;
+using ICE_Webserver.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,13 @@ namespace ICE_Webserver.Controllers
 {
     public class HomeController : Controller
     {
+        private Pushmessage pushNotification;
+
+        public ActionResult TestPushNotification()
+        {
+            this.pushNotification = new Pushmessage("Swampmonster", "Watch out! A swampmonster is in the building!");
+            return View("Index");
+        }
         public ActionResult Index()
         {
             return View();

@@ -1,14 +1,9 @@
-﻿@model ICE_Webserver.Models.API
-@{
-    ViewBag.Title = "Home Page";
-}
-
-
-<!-- API Overview-->
-<p class="lead">
-    Most commonnly used API Calls
+﻿<p class="lead">
+    API Calls overview
 </p>
+
 <hr />
+
 <div class="method">
     <div class="row margin-0 list-header hidden-sm hidden-xs">
         <div class="col-md-2"><div class="header">Item</div></div>
@@ -17,81 +12,6 @@
         <div class="col-md-4"><div class="header">Description</div></div>
         <div class="col-md-2"><div class="header">URL</div></div>
     </div>
-    <div class="row margin-0">
-        <div class="col-md-2">
-            <div class="cell">
-                <div class="propertyname">
-                    Broadcasts overview<span class="mobile-isrequired">[Required]</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="cell">
-                <div class="type">
-                    <code>Broadcast object</code>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="cell">
-                <div class="isrequired">
-                    Yes
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="cell">
-                <div class="description">
-                    Get all the latest broadcasts
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="cell">
-                <div class="description">
-                    /api/broadcasts/
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row margin-0">
-        <div class="col-md-2">
-            <div class="cell">
-                <div class="propertyname">
-                    Broadcasts overview
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="cell">
-                <div class="type">
-                    <code>Broadcast object</code>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="cell">
-                <div class="isrequired">
-                    <span class="text-muted">No</span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="cell">
-                <div class="description">
-                    Get all the latest broadcasts
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="cell">
-                <div class="description">
-                    /api/broadcasts/
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="row margin-0">
         <div class="col-md-2">
@@ -168,53 +88,81 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- PANELS -->
-
-<div class="row">
-    <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Swampmonster attack</h3>
+    <div class="row margin-0">
+        <div class="col-md-2">
+            <div class="cell">
+                <div class="propertyname">
+                    Broadcasts overview<span class="mobile-isrequired">[Required]</span>
+                </div>
             </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.<br /><br />
-                <input type="button" value="Send in a swampmonster attack!" class="btn btn-block btn-default" onclick="location.href='@Url.Action("TestPushNotification", "Home")'" />
+        </div>
+        <div class="col-md-2">
+            <div class="cell">
+                <div class="type">
+                    <code>Broadcast object</code>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="cell">
+                <div class="isrequired">
+                    Yes
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cell">
+                <div class="description">
+                    Get all the latest broadcasts
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="cell">
+                <div class="description">
+                    /api/broadcasts/
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">API - Create data</h3>
-            </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U
 
+    <div class="row margin-0">
+        <div class="col-md-2">
+            <div class="cell">
+                <div class="propertyname">
+                    Broadcasts overview
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="cell">
+                <div class="type">
+                    <code>Broadcast object</code>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="cell">
+                <div class="isrequired">
+                    <span class="text-muted">No</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cell">
+                <div class="description">
+                    Get all the latest broadcasts
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="cell">
+                <div class="description">
+                    /api/broadcasts/
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">API - Create data</h3>
-            </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U
 
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">API - Create data</h3>
-            </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U
-
-            </div>
-        </div>
-    </div>
 </div>

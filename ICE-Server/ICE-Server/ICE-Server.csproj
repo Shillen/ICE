@@ -257,9 +257,11 @@
     <Compile Include="Controllers\BroadcastsAPIController.cs" />
     <Compile Include="Controllers\BuildingsAPIController.cs" />
     <Compile Include="Controllers\DevicesAPIController.cs" />
+    <Compile Include="Controllers\EmergencyAPIController.cs" />
     <Compile Include="Controllers\HomeAPIController.cs" />
     <Compile Include="Controllers\LanguagesAPIController.cs" />
     <Compile Include="Controllers\PredefinedMessagesAPIController.cs" />
+    <Compile Include="Controllers\SynchronizeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="DAL\ICEContext.cs" />
     <Compile Include="DAL\ICEInitialize.cs" />
@@ -340,7 +342,6 @@
     <Content Include="Views\HomeAPI\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\HomeAPI\Languages.cshtml" />
     <Content Include="Views\HomeAPI\Buildings.cshtml" />
     <Content Include="Views\HomeAPI\Broadcasts.cshtml" />

@@ -303,6 +303,7 @@
     <Content Include="Views\Broadcasts\Details.cshtml" />
     <Content Include="Views\Broadcasts\Edit.cshtml" />
     <Content Include="Views\Broadcasts\Index.cshtml" />
+    <Content Include="Views\Home\APIOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
