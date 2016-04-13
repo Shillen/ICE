@@ -3,39 +3,42 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - ICE Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+    <div class="container">
+        <img class="centeredImg" src="~/Content/Images/windesheim.png" alt="Windesheim" />
+        <div class="masthead">
+            <ul class="nav nav-justified">
+                <li class="navLi">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "active" })</li>
+                <li class="navLi">@Html.ActionLink("Broadcasts", "Index", "Broadcasts")</li>
+                <li class="navLi">@Html.ActionLink("Buildings", "Index", "Buildings")</li>
+                <li class="navLi">@Html.ActionLink("Emergency Types", "Index", "Emergencies")</li>
+                <li class="navLi">@Html.ActionLink("Messages", "Index", "Messages")</li>
+                <li class="navLi">@Html.ActionLink("Devices", "Index", "Devices")</li>
+                <li class="navLi">@Html.ActionLink("Settings", "Settings", "Home")</li>
+            </ul>
         </div>
     </div>
     <div class="container body-content">
+        <br />
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+    <footer class="mainFooter">
+        <div>
+            <div class="divLeft">
+                &copy; @DateTime.Now.Year - ICE Application Windesheim University
+            </div>
+
+            <div class="divRight">
+                @Html.ActionLink("IT-Support", "Contact", "Home") - @Html.ActionLink("About", "About", "Home")
+            </div>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
