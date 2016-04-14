@@ -4,48 +4,69 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Broadcasts overview</h2>
+<div class="row">
+    <hr class="hr-primary" />
+    <ol class="breadcrumb bread-primary ">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>Broadcast overview</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">All broadcasts</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table" id="broadcasts">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Message)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Time)
+                            </th>
+                            <th>
+                                Emergency @Html.DisplayNameFor(model => model.Emergency.ID)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Message)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Time)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Emergency.ID)
+                                </td>
+                                <td class="rightText">
+                                    <a href="@Url.Action("Details", "Broadcasts", new { id = item.ID })"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a href="@Url.Action("Edit", "Broadcasts", new { id = item.ID })"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="@Url.Action("Delete", "Broadcasts", new { id = item.ID })"><span class="glyphicon glyphicon-trash"></span></a>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Message)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Time)
-        </th>
-        <th>
-            Emergency @Html.DisplayNameFor(model => model.Emergency.ID)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Message)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Emergency.ID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                    
+                </table>
+            </div>
+            <div class="panel-footer rightText">
+                <input type="button" value="Create new broadcast" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Broadcasts")'" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,9 +31,22 @@ namespace ICE_Server.Repository
 
         public bool Insert(Device item)
         {
+            if (context.Devices.Count(e => e.DeviceID == item.DeviceID) > 0)
+            {
+                return false;
+            }
+
             context.Devices.Add(item);
-            context.SaveChanges();
-            return true;
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
         }
 
         public bool Update(Device item, int[] ids)
@@ -74,7 +87,5 @@ namespace ICE_Server.Repository
         {
             return context.Devices.Count(e => e.ID == id) > 0;
         }
-
-
     }
 }

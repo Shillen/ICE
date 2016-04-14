@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using ICE_Server.DAL;
 using ICE_Server.Models;
+using System.Threading.Tasks;
+using System.Net.Http;
+using ICE_Webserver.Models;
 
 namespace ICE_Webserver.Controllers
 {
@@ -45,15 +48,25 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,DeviceID,DeviceOS")] Device device)
+        public async Task<ActionResult> Create([Bind(Include = "ID,DeviceID,DeviceOS")] Device device)
         {
+
+            // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
-                db.Devices.Add(device);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                // Request to API
+                var response = await api.Request(HttpMethod.Post, "api/DevicesAPI/", device);
 
+                // Check API's response
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                // Otherwise check if any model state error were returned that can be displayed
+                await DisplayModelStateErrors(response);
+
+            }
             return View(device);
         }
 

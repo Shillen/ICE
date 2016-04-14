@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - ICE Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/datatable")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -16,8 +17,8 @@
                 <li class="navLi">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "active" })</li>
                 <li class="navLi">@Html.ActionLink("Broadcasts", "Index", "Broadcasts")</li>
                 <li class="navLi">@Html.ActionLink("Buildings", "Index", "Buildings")</li>
-                <li class="navLi">@Html.ActionLink("Emergency Types", "Index", "Emergencies")</li>
-                <li class="navLi">@Html.ActionLink("Messages", "Index", "Messages")</li>
+                <li class="navLi">@Html.ActionLink("Emergencies", "Index", "Emergencies")</li>
+                <li class="navLi">@Html.ActionLink("Messages", "Index", "PredefinedMessages")</li>
                 <li class="navLi">@Html.ActionLink("Devices", "Index", "Devices")</li>
                 <li class="navLi">@Html.ActionLink("Settings", "Settings", "Home")</li>
             </ul>
@@ -25,7 +26,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        
     </div>
     <footer class="mainFooter">
         <div>
@@ -42,6 +43,32 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/datetime")
+    @Scripts.Render("~/bundles/table")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#broadcasts').dataTable({
+            "columns": [
+              { "width": "10%" },
+              { "width": "45%" },
+              { "width": "20%" },
+              { "width": "15%" },
+              { "width": "10%" }
+            ],
+            bFilter: false, bInfo: false
+        });
+        $('#overview').dataTable({ bFilter: false, bInfo: false });
+        $('#devices').dataTable({
+            "columns": [
+              { "width": "10%" },
+              { "width": "60%" },
+              { "width": "15%" },
+              { "width": "15%" }
+            ],
+             bFilter: false, bInfo: false
+        });
+    });
+    </script>
 </body>
 </html>

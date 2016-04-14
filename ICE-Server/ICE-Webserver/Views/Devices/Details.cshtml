@@ -4,31 +4,39 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Device</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DeviceID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeviceID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeviceOS)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeviceOS)
-        </dd>
-
-    </dl>
+<div class="row">
+    <hr class="hr-primary" />
+    <ol class="breadcrumb bread-primary ">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("Device overview", "Index", "Devices")</li>
+        <li>Device details</li>
+    </ol>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Device details</h3>
+            </div>
+            <table class="table">
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.ID)</strong></td>
+                    <td>@Html.DisplayFor(model => model.ID)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.DeviceID)</strong></td>
+                    <td>@Html.DisplayFor(model => model.DeviceID)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.DeviceOS)</strong></td>
+                    <td>@Html.DisplayFor(model => model.DeviceOS)</td>
+                </tr>
+            </table>
+            <div class="panel-footer rightText">
+                <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Devices")'" />
+                <input type="button" value="Edit" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", "Devices", new { id = Model.ID })'" />
+
+            </div>
+        </div>
+    </div>
+</div>
