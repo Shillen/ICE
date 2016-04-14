@@ -15,7 +15,6 @@ namespace ICE_Server.Controllers
         private BuildingsRepository buildingRepository;
         private DevicesRepository deviceRepository;
         private EmergencyRepository emergencyRepository;
-        private EmergencyTranslatedRepository emergencytranslatedRepository;
         private LanguagesRepository languageRepository;
         private PredefinedMessagesRepository predefinedmessageRepository;
 
@@ -46,9 +45,13 @@ namespace ICE_Server.Controllers
             {
                 return Ok(deviceRepository.GetAll());
             }
-            if(tableType.Equals("Emergencies"))
+            if (tableType.Equals("Emergencies"))
             {
                 return Ok(emergencyRepository.GetAll());
+            }
+            if (tableType.Equals("EmergenciesTranslated"))
+            {
+                return Ok(emergencyRepository.GetAllTranslated());
             }
             if(tableType.Equals("PredefinedMessages"))
             {

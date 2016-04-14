@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control datepicker" } })
                 @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -49,3 +49,16 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+@section scripts {
+<script type="text/javascript">
+  $(function () {
+    $('.datepicker').datetimepicker({
+      defaultDate: '@Model.Time',
+      format: 'dd/MM/yyyy hh:mm:ss',
+      showClose: true,
+      showClear: true,
+      toolbarPlacement: 'top'
+    });
+  });
+</script>
+}

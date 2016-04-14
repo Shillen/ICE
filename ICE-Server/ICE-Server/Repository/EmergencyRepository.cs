@@ -23,18 +23,55 @@ namespace ICE_Server.Repository
             return context.Emergencies;
         }
 
+        public IEnumerable<EmergencyTranslated> GetAllTranslated()
+        {
+            return context.EmergenciesTranslated;
+        }
+
         public Emergency Get(int id)
         {
             var result = (from r in context.Emergencies where r.ID == id select r).FirstOrDefault();
             return result;
         }
 
+        public EmergencyTranslated GetEmergencyTranslations(int id)
+        {
+            var result = (from r in context.EmergenciesTranslated where r.EmergencyID == id select r).FirstOrDefault();
+            return result;
+        }
+
         public bool Insert(Emergency item)
         {
-            context.Emergencies.Add(item);
-            context.SaveChanges();
             return true;
         }
+
+        public bool InsertTranslations(List<EmergencyTranslated> itemList)
+        {
+            Emergency emergency = new Emergency();
+            context.Emergencies.Add(emergency);
+            context.SaveChanges();
+
+            int id = emergency.ID;
+
+            foreach (EmergencyTranslated translationItem in itemList)
+            {
+                translationItem.EmergencyID = id;
+                context.EmergenciesTranslated.Add(translationItem);
+            }
+
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
+        }
+
+        
 
         public bool Update(Emergency item, int[] ids)
         {

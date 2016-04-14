@@ -15,6 +15,11 @@
 .body-content {
     background-color: white;
     min-height: 600px;
+    padding-top:10px;
+}
+
+h2{
+    margin-top: 5px;
 }
 
 .panel{

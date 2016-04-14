@@ -22,21 +22,23 @@ namespace ICE_Server.Controllers
         {
             this.broadcastRepository = new BroadcastsRepository(new ICEContext());
         }
-
-        // GET: api/Broadcasts
+        /// <summary>
+        /// Get all of the broadcasts
+        /// </summary>
+        // GET: api/BroadcastsAPI
         public IEnumerable<Broadcast> GetAll()
         {
             return broadcastRepository.GetAll();
         }
 
-        // GET: api/Broadcasts/5
+        // GET: api/BroadcastsAPI/5
         [ResponseType(typeof(Broadcast))]
         public IHttpActionResult GetBroadcast(int id)
         {
             return Ok(broadcastRepository.Get(id));
         }
 
-        // POST: api/Broadcasts
+        // POST: api/BroadcastsAPI
         [ResponseType(typeof(Broadcast))]
         [HttpPost]
         public IHttpActionResult Insert(Broadcast item)
@@ -51,7 +53,7 @@ namespace ICE_Server.Controllers
             return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
         }
 
-        // PUT: api/Broadcasts/5
+        // PUT: api/BroadcastsAPI/5
         [ResponseType(typeof(void))]
         [HttpPut]
         public IHttpActionResult Update(Broadcast item)
@@ -66,7 +68,7 @@ namespace ICE_Server.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/Broadcasts/5
+        // DELETE: api/BroadcastsAPI/5
         [ResponseType(typeof(Broadcast))]
         [HttpDelete]
         public IHttpActionResult Delete(Broadcast item)

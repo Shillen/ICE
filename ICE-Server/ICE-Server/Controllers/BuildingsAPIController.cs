@@ -22,8 +22,10 @@ namespace ICE_Server.Controllers
         {
             this.buildingRepository = new BuildingsRepository(new ICEContext());
         }
-
-        // GET: api/Buildings
+        /// <summary>
+        /// Get all of the buildings
+        /// </summary>
+        // GET: api/BuildingsAPI
         public IEnumerable<Building> GetAll()
         {
             return buildingRepository.GetAll();

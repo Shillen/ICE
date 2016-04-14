@@ -42,7 +42,7 @@ namespace ICE_Webserver.Controllers
         public ActionResult Create()
         {
             ViewBag.EmergencyId = new SelectList(db.Emergencies, "ID", "ID");
-            return View();
+            return View(new Broadcast { Time = DateTime.Now });
         }
 
         // POST: Broadcasts/Create
@@ -58,7 +58,7 @@ namespace ICE_Webserver.Controllers
             if (ModelState.IsValid)
             {
                 // Request to API
-                var response = await api.Request(HttpMethod.Post, "api/Broadcasts/", broadcast);
+                var response = await api.Request(HttpMethod.Post, "api/BroadcastsAPI/", broadcast);
 
                 // Check API's response
                 if (response.IsSuccessStatusCode)

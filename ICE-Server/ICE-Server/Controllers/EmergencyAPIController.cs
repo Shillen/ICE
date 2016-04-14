@@ -24,21 +24,38 @@ namespace ICE_Server.Controllers
         }
 
         // GET: api/Emergency
+        [Route("api/Emergency")]
         public IEnumerable<Emergency> GetAll()
         {
             return emergencyRepository.GetAll();
         }
+        // GET: api/EmergencyTranslated
+        [Route("api/EmergencyTranslated")]
+        public IEnumerable<EmergencyTranslated> GetAllTranslated()
+        {
+            return emergencyRepository.GetAllTranslated();
+        }
 
         // GET: api/Emergency/5
         [ResponseType(typeof(Emergency))]
+        [Route("api/Emergency")]
         public IHttpActionResult GetEmergency(int id)
         {
             return Ok(emergencyRepository.Get(id));
         }
 
+        // GET: api/EmergencyTranslated/5
+        [ResponseType(typeof(EmergencyTranslated))]
+        [Route("api/EmergencyTranslated")]
+        public IHttpActionResult GetEmergencyTranslations(int id)
+        {
+            return Ok(emergencyRepository.GetEmergencyTranslations(id));
+        }
+
         // POST: api/Emergency
         [ResponseType(typeof(Emergency))]
         [HttpPost]
+        [Route("api/Emergency")]
         public IHttpActionResult Insert(Emergency item)
         {
             if (!ModelState.IsValid)
@@ -50,6 +67,24 @@ namespace ICE_Server.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
         }
+
+        // POST: api/EmergencyTranslated
+        [ResponseType(typeof(EmergencyTranslated))]
+        [HttpPost]
+        [Route("api/EmergencyTranslated")]
+        public IHttpActionResult InsertTranslations(List<EmergencyTranslated> itemList)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            emergencyRepository.InsertTranslations(itemList);
+
+            return Ok(itemList);
+
+        }
+
 
         // PUT: api/Emergency/5
         [ResponseType(typeof(void))]

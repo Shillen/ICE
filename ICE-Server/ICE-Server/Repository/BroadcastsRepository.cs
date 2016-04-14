@@ -7,12 +7,15 @@ using ICE_Server.Interfaces;
 using ICE_Server.Models;
 using ICE_Server.DAL;
 using System.Data.Entity.Infrastructure;
+using ICE_Server.PushNotifications;
 
 namespace ICE_Server.Repository
 {
     public class BroadcastsRepository : IRepository<Broadcast>
     {
         private ICEContext context = new ICEContext();
+        private Pushmessage pushNotification;
+
         public BroadcastsRepository(ICEContext context)
         {
             this.context = context;
@@ -32,8 +35,18 @@ namespace ICE_Server.Repository
         public bool Insert(Broadcast item)
         {
             context.Broadcasts.Add(item);
-            context.SaveChanges();
-            return true;
+            try
+            {
+
+                context.SaveChanges();
+                this.pushNotification = new Pushmessage("Swampmonster", item.Message);
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
         }
 
         public bool Update(Broadcast item, int[] ids)
