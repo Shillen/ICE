@@ -3,24 +3,35 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>Building</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
+<div class="row">
+    <hr class="hr-primary" />
+    <ol class="breadcrumb bread-primary ">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("Building overview", "Index", "Buildings")</li>
+        <li>Building details</li>
+    </ol>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Building details</h3>
+            </div>
+            <table class="table">
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.ID)</strong></td>
+                    <td>@Html.DisplayFor(model => model.ID)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+            </table>
+            <div class="panel-footer rightText">
+                <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Buildings")'" />
+                <input type="button" value="Edit" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", "Buildings", new { id = Model.ID }) |'" />
+                
+            </div>
+        </div>
+    </div>
+</div>

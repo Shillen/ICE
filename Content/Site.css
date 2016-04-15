@@ -15,10 +15,19 @@
 .body-content {
     background-color: white;
     min-height: 600px;
+    padding-top:10px;
+}
+
+h2{
+    margin-top: 5px;
 }
 
 .panel{
     border-radius: 0px;
+}
+
+.panel-body{
+    min-height:130px;
 }
 
 .panel-heading{
@@ -37,7 +46,6 @@
 input,
 select,
 textarea {
-    max-width: 280px;
 }
 
 .centeredImg {
@@ -66,27 +74,24 @@ textarea {
     width: 100%;
 }
 
-.row {
-    margin-top: 20px;
-}
 
 .mainFooter {
     height: 30px;
-    background-color: #DEE8F1;
+    background-color: #E4E4E4;
     max-width: 1170px;
     width: 100%;
-    color: #00418C;
+    color: #444444;
     margin-left: auto;
     margin-right: auto;
 }
 
     .mainFooter a {
-        color: #00418C;
+        color: #444444;
         text-decoration: none;
     }
 
     .mainFooter :active:hover {
-        color: #00418C;
+        color: #444444;
         text-decoration: none;
     }
 
@@ -170,6 +175,66 @@ textarea {
     }
 }
 
+.method {
+    margin-bottom:20px;
+}
+
+table span {
+    margin-left:5px;
+    font-weight: 600 !important;
+}
+
+.row {
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~  DATATABLES ~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+table.dataTable thead th, table.dataTable thead td, table.dataTable.no-footer{
+    border-bottom-color: #e02222 !important;
+}
+
+.dataTables_length {
+    display: none;
+}
+
+.btn-datatable {
+    margin-top: -35px;
+    margin-bottom:50px;
+}
+
+table { table-layout: fixed; }
+td { word-wrap:break-word; }
+
+/* ~~~~~~~~~~~~~~~~~~~~~ BREADCRUMBS ~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+hr {
+  height: 5px;
+  margin-left: 15px;
+  margin-bottom:-3px;
+  margin-top:0px;
+}
+.hr-warning{
+  background-image: -webkit-linear-gradient(left, rgba(210,105,30,.8), rgba(210,105,30,.6), rgba(0,0,0,0));
+}
+.hr-success{
+  background-image: -webkit-linear-gradient(left, rgba(15,157,88,.8), rgba(15, 157, 88,.6), rgba(0,0,0,0));
+}
+.hr-primary{
+  background-image: -webkit-linear-gradient(left, rgba(66,133,244,.8), rgba(66, 133, 244,.6), rgba(0,0,0,0));
+}
+.hr-danger{
+  background-image: -webkit-linear-gradient(left, rgba(244,67,54,.8), rgba(244,67,54,.6), rgba(0,0,0,0));
+}
+
+.breadcrumb {
+  background: rgba(245, 245, 245, 0); 
+  border: 0px solid rgba(245, 245, 245, 1); 
+  border-radius: 25px; 
+  display: block;
+  margin-bottom: 10px;
+  color: #444444;
+}
 
 /* ~~~~~~~~~~~~~~~~~~~~~ API TABLE CODE ~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 

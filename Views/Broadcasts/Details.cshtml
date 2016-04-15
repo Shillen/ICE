@@ -4,39 +4,39 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Broadcast</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Emergency.ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Emergency.ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Message)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-
-    </dl>
+<div class="row">
+    <hr class="hr-primary" />
+    <ol class="breadcrumb bread-primary ">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("Broadcast overview", "Index", "Broadcasts")</li>
+        <li>Broadcast details</li>
+    </ol>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Broadcast details</h3>
+            </div>
+            <table class="table">
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.ID)</strong></td>
+                    <td>@Html.DisplayFor(model => model.ID)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Message)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Message)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Time)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Time)</td>
+                </tr>
+            </table>
+            <div class="panel-footer rightText">
+                <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Broadcasts")'" />
+                <input type="button" value="Edit" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", "Broadcasts", new { id = Model.ID })'" />
+
+            </div>
+        </div>
+    </div>
+</div>
