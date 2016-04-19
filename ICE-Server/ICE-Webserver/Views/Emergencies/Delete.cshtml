@@ -3,22 +3,34 @@
 @{
     ViewBag.Title = "Delete";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Emergency</h4>
-    <hr />
-    <dl class="dl-horizontal">
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<div class="row">
+    <hr class="hr-primary" />
+    <ol class="breadcrumb bread-primary ">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("Emergency overview", "Index", "Emergencies")</li>
+        <li>Delete emergency</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Are you sure you want to delete this item?</h3>
+            </div>
+            <table class="table">
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.ID)</strong></td>
+                    <td>@Html.DisplayFor(model => model.ID)</td>
+                </tr>
+            </table>
+            <div class="panel-footer rightText">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Emergencies")'" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                }
+            </div>
         </div>
-    }
+    </div>
 </div>
