@@ -22,6 +22,10 @@ namespace ICE_Server.Repository
         {
             return context.PredefinedMessages;
         }
+        public IEnumerable<PredefinedMessageTranslated> GetAllTranslated()
+        {
+            return context.PredefinedMessagesTranslated;
+        }
 
         public PredefinedMessage Get(int id)
         {
@@ -29,11 +33,41 @@ namespace ICE_Server.Repository
             return result;
         }
 
+        public PredefinedMessageTranslated GetPredefinedMessageTranslations(int id)
+        {
+            var result = (from r in context.PredefinedMessagesTranslated where r.PredefinedMessageID == id select r).FirstOrDefault();
+            return result;
+        }
+
         public bool Insert(PredefinedMessage item)
         {
-            context.PredefinedMessages.Add(item);
-            context.SaveChanges();
             return true;
+        }
+
+        public bool InsertTranslations(List<PredefinedMessageTranslated> itemList)
+        {
+            PredefinedMessage predefinedMessage = new PredefinedMessage();
+            context.PredefinedMessages.Add(predefinedMessage);
+            context.SaveChanges();
+
+            int id = predefinedMessage.ID;
+
+            foreach (PredefinedMessageTranslated translationItem in itemList)
+            {
+                translationItem.PredefinedMessageID = id;
+                context.PredefinedMessagesTranslated.Add(translationItem);
+            }
+
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
         }
 
         public bool Update(PredefinedMessage item, int[] ids)

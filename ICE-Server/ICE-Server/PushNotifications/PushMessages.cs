@@ -20,9 +20,7 @@ namespace ICE_Server.PushNotifications
     {
         private string title { get; set; }
         private string message { get; set; }
-        private bool successful = true;
-        private ICEContext context = new ICEContext();
-        
+        private DevicesRepository deviceRepository;
 
         public enum PushTypes
         {
@@ -36,7 +34,9 @@ namespace ICE_Server.PushNotifications
         /// <param name="message">String of the message</param>
         public Pushmessage(string title, string message)
         {
-            // Configuration
+            this.deviceRepository = new DevicesRepository(new ICEContext());
+
+            // Configuration: Setup the GCM sender information here
             var config = new GcmConfiguration("877886927121 ", "AIzaSyBksWdag7DeN7h4jRM0gqLgjN6fyEcQ8r0", null);
 
             // Create a new broker
@@ -88,6 +88,7 @@ namespace ICE_Server.PushNotifications
                         if (!string.IsNullOrWhiteSpace(newId))
                         {
                             // If this value isn't null, our subscription changed and we should update our database
+                            deviceRepository.UpdateToken(oldId, newId);
                             Console.WriteLine($"Device RegistrationId Changed To: {newId}");
                         }
                     }
@@ -112,7 +113,7 @@ namespace ICE_Server.PushNotifications
             
             // Start the broker
             gcmBroker.Start();
-            foreach (var regId in context.Devices)
+            foreach (var regId in deviceRepository.GetAll())
             {
                 // Queue a notification to send
                 gcmBroker.QueueNotification(new GcmNotification

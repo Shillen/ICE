@@ -23,20 +23,20 @@ namespace ICE_Server.Controllers
             this.languageRepository = new LanguagesRepository(new ICEContext());
         }
 
-        // GET: api/Languages
+        // GET: api/LanguagesAPI
         public IEnumerable<Language> GetAll()
         {
             return languageRepository.GetAll();
         }
 
-        // GET: api/Languages/5
+        // GET: api/LanguagesAPI/5
         [ResponseType(typeof(Language))]
         public IHttpActionResult GetLanguage(int id)
         {
             return Ok(languageRepository.Get(id));
         }
 
-        // POST: api/Languages
+        // POST: api/LanguagesAPI
         [ResponseType(typeof(Language))]
         [HttpPost]
         public IHttpActionResult Insert(Language item)
@@ -51,7 +51,7 @@ namespace ICE_Server.Controllers
             return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
         }
 
-        // PUT: api/Languages/5
+        // PUT: api/LanguagesAPI/5
         [ResponseType(typeof(void))]
         [HttpPut]
         public IHttpActionResult Update(Language item)
@@ -66,7 +66,7 @@ namespace ICE_Server.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/Languages/5
+        // DELETE: api/LanguagesAPI/5
         [ResponseType(typeof(Language))]
         [HttpDelete]
         public IHttpActionResult Delete(Language item)

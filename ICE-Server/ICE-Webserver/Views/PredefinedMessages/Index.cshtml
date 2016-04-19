@@ -4,30 +4,53 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <hr class="hr-primary" />
+    <ol class="breadcrumb bread-primary ">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>Predefined messages overview</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">All predefined messages</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table" id="overview">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ID)
+                            </th>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Emergency.ID)
-        </th>
-        <th></th>
-    </tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Emergency.ID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+                                <td class="rightText">
+                                    <a href="@Url.Action("Details", "PredefinedMessages", new { id = item.ID })"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a href="@Url.Action("Edit", "PredefinedMessages", new { id = item.ID })"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="@Url.Action("Delete", "PredefinedMessages", new { id = item.ID })"><span class="glyphicon glyphicon-trash"></span></a>
 
-</table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+
+                </table>
+            </div>
+            <div class="panel-footer rightText">
+                <input type="button" value="Create new message" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "PredefinedMessages")'" />
+            </div>
+        </div>
+    </div>
+</div>

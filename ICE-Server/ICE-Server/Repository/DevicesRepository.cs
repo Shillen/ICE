@@ -70,6 +70,28 @@ namespace ICE_Server.Repository
             }
 
         }
+        public bool UpdateToken(string oldToken, string newToken)
+        {
+            Device item = context.Devices.SingleOrDefault(device => device.DeviceID == oldToken);
+
+            if (checkEntry(item.ID) == false)
+            {
+                return false;
+            }
+            item.DeviceID = newToken;
+
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
+
+        }
         public bool Delete(Device item)
         {
             if (checkEntry(item.ID) == false)

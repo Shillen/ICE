@@ -23,8 +23,8 @@ namespace ICE_Server.Controllers
             this.emergencyRepository = new EmergencyRepository(new ICEContext());
         }
 
-        // GET: api/Emergency
-        [Route("api/Emergency")]
+        // GET: api/EmergencyAPI
+        [Route("api/EmergencyAPI")]
         public IEnumerable<Emergency> GetAll()
         {
             return emergencyRepository.GetAll();
@@ -36,9 +36,9 @@ namespace ICE_Server.Controllers
             return emergencyRepository.GetAllTranslated();
         }
 
-        // GET: api/Emergency/5
+        // GET: api/EmergencyAPI/5
         [ResponseType(typeof(Emergency))]
-        [Route("api/Emergency")]
+        [Route("api/EmergencyAPI")]
         public IHttpActionResult GetEmergency(int id)
         {
             return Ok(emergencyRepository.Get(id));
@@ -52,10 +52,10 @@ namespace ICE_Server.Controllers
             return Ok(emergencyRepository.GetEmergencyTranslations(id));
         }
 
-        // POST: api/Emergency
+        // POST: api/EmergencyAPI
         [ResponseType(typeof(Emergency))]
         [HttpPost]
-        [Route("api/Emergency")]
+        [Route("api/EmergencyAPI")]
         public IHttpActionResult Insert(Emergency item)
         {
             if (!ModelState.IsValid)
@@ -86,9 +86,10 @@ namespace ICE_Server.Controllers
         }
 
 
-        // PUT: api/Emergency/5
+        // PUT: api/EmergencyAPI/5
         [ResponseType(typeof(void))]
         [HttpPut]
+        [Route("api/EmergencyAPI")]
         public IHttpActionResult Update(Emergency item)
         {
             if (!ModelState.IsValid)
@@ -101,9 +102,10 @@ namespace ICE_Server.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/Emergency/5
+        // DELETE: api/EmergencyAPI/5
         [ResponseType(typeof(Emergency))]
         [HttpDelete]
+        [Route("api/EmergencyAPI")]
         public IHttpActionResult Delete(Emergency item)
         {
             emergencyRepository.Delete(item);

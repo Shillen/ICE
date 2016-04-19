@@ -24,7 +24,6 @@ namespace ICE_Server.Controllers
             this.buildingRepository = new BuildingsRepository(new ICEContext());
             this.deviceRepository = new DevicesRepository(new ICEContext());
             this.emergencyRepository = new EmergencyRepository(new ICEContext());
-            //this.emergencytranslatedRepository = new EmergencyTranslatedRepository(new ICEContext());
             this.predefinedmessageRepository = new PredefinedMessagesRepository(new ICEContext());
         }
         // GET api/synchronize
@@ -56,6 +55,10 @@ namespace ICE_Server.Controllers
             if(tableType.Equals("PredefinedMessages"))
             {
                 return Ok(predefinedmessageRepository.GetAll());
+            }
+            if (tableType.Equals("PredefinedMessageTranslated"))
+            {
+                return Ok(predefinedmessageRepository.GetAllTranslated());
             }
             else
             {

@@ -12,6 +12,7 @@ namespace ICE_Webserver.Models
     public class API
     {
         private string host = "http://localhost:6465/";
+        //private string host = "http://192.168.2.52:443/";
         private string accessToken;
 
         public API()

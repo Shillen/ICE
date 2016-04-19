@@ -11,35 +11,52 @@ using System.Web.Http.Description;
 using ICE_Server.DAL;
 using ICE_Server.Models;
 using ICE_Server.Repository;
-using System.Web.Mvc;
 
 namespace ICE_Server.Controllers
 {
-    public class PreDefinedMessagesController : ApiController
+    public class PredefinedMessagesController : ApiController
     {
         private PredefinedMessagesRepository predefinedmessageRepository;
-        private ICEContext db = new ICEContext();
 
-        public PreDefinedMessagesController()
+        public PredefinedMessagesController()
         {
             this.predefinedmessageRepository = new PredefinedMessagesRepository(new ICEContext());
         }
 
-        // GET: api/PreDefinedMessages
+        // GET: api/PredefinedMessagesAPI
+        [Route("api/PredefinedMessagesAPI")]
         public IEnumerable<PredefinedMessage> GetAll()
         {
             return predefinedmessageRepository.GetAll();
         }
 
-        // GET: api/PreDefinedMessages/5
+        // GET: api/PredefinedMessageTranslated
+        [Route("api/PredefinedMessageTranslated")]
+        public IEnumerable<PredefinedMessageTranslated> GetAllTranslated()
+        {
+            return predefinedmessageRepository.GetAllTranslated();
+        }
+
+        // GET: api/PredefinedMessagesAPI/5
         [ResponseType(typeof(PredefinedMessage))]
+        [Route("api/PredefinedMessagesAPI")]
         public IHttpActionResult GetPredefinedMessage(int id)
         {
             return Ok(predefinedmessageRepository.Get(id));
         }
 
-        // POST: api/PreDefinedMessages
+        // GET: api/PredefinedMessageTranslated/5
+        [ResponseType(typeof(PredefinedMessageTranslated))]
+        [Route("api/PredefinedMessageTranslated")]
+        public IHttpActionResult GetPredefinedMessageTranslations(int id)
+        {
+            return Ok(predefinedmessageRepository.GetPredefinedMessageTranslations(id));
+        }
+
+        // POST: api/PredefinedMessagesAPI
         [ResponseType(typeof(PredefinedMessage))]
+        [HttpPost]
+        [Route("api/PredefinedMessagesAPI")]
         public IHttpActionResult Insert(PredefinedMessage item)
         {
             if (!ModelState.IsValid)
@@ -52,7 +69,24 @@ namespace ICE_Server.Controllers
             return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
         }
 
-        // PUT: api/PreDefinedMessages/5
+        // POST: api/PredefinedMessageTranslated
+        [ResponseType(typeof(PredefinedMessageTranslated))]
+        [HttpPost]
+        [Route("api/PredefinedMessageTranslated")]
+        public IHttpActionResult InsertTranslations(List<PredefinedMessageTranslated> itemList)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            predefinedmessageRepository.InsertTranslations(itemList);
+
+            return Ok(itemList);
+
+        }
+
+        // PUT: api/PredefinedMessagesAPI/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Update(PredefinedMessage item)
         {
@@ -66,7 +100,7 @@ namespace ICE_Server.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/PreDefinedMessages/5
+        // DELETE: api/PredefinedMessagesAPI/5
         [ResponseType(typeof(PredefinedMessage))]
         public IHttpActionResult Delete(PredefinedMessage item)
         {

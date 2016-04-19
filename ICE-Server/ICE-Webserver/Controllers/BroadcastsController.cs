@@ -11,30 +11,49 @@ using ICE_Server.Models;
 using System.Threading.Tasks;
 using System.Net.Http;
 using ICE_Webserver.Models;
+using Newtonsoft.Json;
 
 namespace ICE_Webserver.Controllers
 {
     public class BroadcastsController : BaseController
     {
         // GET: Broadcasts
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var broadcasts = db.Broadcasts.Include(b => b.Emergency);
+            //var broadcasts = db.Broadcasts.Include(b => b.Emergency);
+
+            List<Broadcast> broadcasts = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI");
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                broadcasts = await JsonConvert.DeserializeObjectAsync<List<Broadcast>>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
             return View(broadcasts.ToList());
         }
 
         // GET: Broadcasts/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Broadcast broadcast = db.Broadcasts.Find(id);
+
+            Broadcast broadcast = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                broadcast = await JsonConvert.DeserializeObjectAsync<Broadcast>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
             if (broadcast == null)
             {
                 return HttpNotFound();
             }
+
             return View(broadcast);
         }
 
@@ -52,8 +71,6 @@ namespace ICE_Webserver.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Message,Time,EmergencyId")] Broadcast broadcast)
         {
-            
-
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
@@ -108,29 +125,49 @@ namespace ICE_Webserver.Controllers
         }
 
         // GET: Broadcasts/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Broadcast broadcast = db.Broadcasts.Find(id);
+
+            Broadcast broadcast = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                broadcast = await JsonConvert.DeserializeObjectAsync<Broadcast>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
             if (broadcast == null)
             {
                 return HttpNotFound();
             }
+
             return View(broadcast);
         }
 
         // POST: Broadcasts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Broadcast broadcast = db.Broadcasts.Find(id);
-            db.Broadcasts.Remove(broadcast);
-            db.SaveChanges();
+
+            if (ModelState.IsValid)
+            {
+                var response = await api.Request(HttpMethod.Post, "api/BroadcastsAPI/", id);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                await DisplayModelStateErrors(response);
+
+            }
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)

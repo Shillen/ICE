@@ -26,6 +26,7 @@ namespace ICE_Server.Controllers
         /// Get all of the broadcasts
         /// </summary>
         // GET: api/BroadcastsAPI
+        [Route("api/BroadcastsAPI")]
         public IEnumerable<Broadcast> GetAll()
         {
             return broadcastRepository.GetAll();
@@ -76,6 +77,16 @@ namespace ICE_Server.Controllers
             broadcastRepository.Delete(item);
 
             return Ok(item);
+        }
+
+        // DELETE: api/BroadcastsAPI/5
+        [ResponseType(typeof(Broadcast))]
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            broadcastRepository.Delete(id);
+
+            return Ok(id);
         }
 
     }

@@ -503,6 +503,7 @@
     <Content Include="Views\PredefinedMessages\Details.cshtml" />
     <Content Include="Views\PredefinedMessages\Edit.cshtml" />
     <Content Include="Views\PredefinedMessages\Index.cshtml" />
+    <Content Include="Views\Home\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

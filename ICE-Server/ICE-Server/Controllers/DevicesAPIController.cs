@@ -23,20 +23,20 @@ namespace ICE_Server.Controllers
             this.deviceRepository = new DevicesRepository(new ICEContext());
         }
 
-        // GET: api/Devices
+        // GET: api/DevicesAPI
         public IEnumerable<Device> GetAll()
         {
             return deviceRepository.GetAll();
         }
 
-        // GET: api/Devices/5
+        // GET: api/DevicesAPI/5
         [ResponseType(typeof(Device))]
         public IHttpActionResult GetDevice(int id)
         {
             return Ok(deviceRepository.Get(id));
         }
 
-        // POST: api/Devices
+        // POST: api/DevicesAPI
         [ResponseType(typeof(Device))]
         [HttpPost]
         public IHttpActionResult Insert(Device item)
@@ -51,16 +51,15 @@ namespace ICE_Server.Controllers
             return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
         }
 
-        // PUT: api/Devices/5
+        // PUT: api/DevicesAPI/5
         [ResponseType(typeof(void))]
         [HttpPut]
-        public IHttpActionResult Update(Device item)
+        public IHttpActionResult Update(Device item, params int[] ids)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            int[] ids = {item.ID};
             deviceRepository.Update(item, ids);
 
             return StatusCode(HttpStatusCode.NoContent);

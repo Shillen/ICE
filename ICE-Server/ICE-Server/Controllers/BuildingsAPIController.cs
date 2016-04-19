@@ -31,14 +31,14 @@ namespace ICE_Server.Controllers
             return buildingRepository.GetAll();
         }
 
-        // GET: api/Buildings/5
+        // GET: api/BuildingsAPI/5
         [ResponseType(typeof(Building))]
         public IHttpActionResult GetBuilding(int id)
         {
             return Ok(buildingRepository.Get(id));
         }
 
-        // POST: api/Buildings
+        // POST: api/BuildingsAPI
         [ResponseType(typeof(Building))]
         [HttpPost]
         public IHttpActionResult Insert(Building item)
@@ -53,7 +53,7 @@ namespace ICE_Server.Controllers
             return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
         }
 
-        // PUT: api/Buildings/5
+        // PUT: api/BuildingsAPI/5
         [ResponseType(typeof(void))]
         [HttpPut]
         public IHttpActionResult Update(Building item)
@@ -68,7 +68,7 @@ namespace ICE_Server.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/Buildings/5
+        // DELETE: api/BuildingsAPI/5
         [ResponseType(typeof(Building))]
         [HttpDelete]
         public IHttpActionResult Delete(Building item)

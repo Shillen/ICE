@@ -39,7 +39,7 @@ namespace ICE_Server.Repository
             {
 
                 context.SaveChanges();
-                this.pushNotification = new Pushmessage("Swampmonster", item.Message);
+                this.pushNotification = new Pushmessage("New Broadcast", item.Message);
                 return true;
             }
             catch (DbUpdateConcurrencyException)
@@ -78,9 +78,35 @@ namespace ICE_Server.Repository
             }
 
             context.Broadcasts.Remove(item);
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
 
-            return true;
+            }
+        }
+        public bool Delete(int id)
+        {
+            if (checkEntry(id) == false)
+            {
+                return false;
+            }
+            Broadcast bc = context.Broadcasts.Find(id);
+            context.Broadcasts.Remove(bc);
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
         }
 
         private bool checkEntry(int id)
