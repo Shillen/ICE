@@ -11,16 +11,18 @@
     </ol>
 </div>
 
+
 <!-- PANELS -->
 
 <div class="row">
     <div class="col-md-4">
         <div class="panel panel-default panel-info">
             <div class="panel-heading">
-                <h3 class="panel-title">Latest broadcasts</h3>
+                <h3 class="panel-title">Welcome Swampy Swamp</h3>
             </div>
             <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.<br /><br />
+                It has been 8 hours since your last login. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.<br /><br />
+                <input type="button" value="Send in a swampmonster attack!" class="btn btn-block btn-default" onclick="location.href='@Url.Action("TestPushNotification", "Home")'" />
             </div>
         </div>
     </div>
@@ -29,56 +31,32 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Scheduled broadcasts</h3>
             </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">ICE Overview</h3>
-            </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.<br /><br />
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- API Overview-->
-<div class="row">
-    <div class="col-md-8">
-        <div class="panel panel-info">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Most commonnly used API Calls</div>
-            
-
-            <!-- Table -->
             <table class="table">
                 <tr>
-                    <th>Item</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>URL</th>
+                    <th width="40%">Title</th>
+                    <th width="50%">Date</th>
+                    <th width="10%"></th>
                 </tr>
                 <tr>
-                    <td>Broadcasts overview</td>
-                    <td>Broadcast object</td>
-                    <td>Broadcast object</td>
-                    <td>Broadcast object</td>
+                    <td>Swampmonster</td>
+                    <td>20/04/2016 12:32:44</td>
+                    <td>
+                        <a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Broadcasts overview</td>
-                    <td>Broadcast object</td>
-                    <td>Broadcast object</td>
-                    <td>Broadcast object</td>
+                    <td>Swampmonster</td>
+                    <td>20/04/2016 12:32:44</td>
+                    <td>
+                        <a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Broadcasts overview</td>
-                    <td>Broadcast object</td>
-                    <td>Broadcast object</td>
-                    <td>Broadcast object</td>
+                    <td>Swampmonster</td>
+                    <td>20/04/2016 12:32:44</td>
+                    <td>
+                        <a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -86,12 +64,69 @@
     <div class="col-md-4">
         <div class="panel panel-default panel-info">
             <div class="panel-heading">
-                <h3 class="panel-title">Swampmonster attack</h3>
+                <h3 class="panel-title">Application overview</h3>
             </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.<br /><br />
-                <input type="button" value="Send in a swampmonster attack!" class="btn btn-block btn-default" onclick="location.href='@Url.Action("TestPushNotification", "Home")'" />
-            </div>
+            <table class="table">
+                <tr>
+                    <th width="70%">Type</th>
+                    <th width="30%">Stats</th>
+                </tr>
+                <tr>
+                    <td>Broadcasts</td>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>Broadcasts</td>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>Buildings</td>
+                    <td>12</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Broadcast Overview-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Past broadcasts</div>
+            <!-- Table -->
+            <table class="table">
+                <tr>
+                    <th width="25%">Title</th>
+                    <th width="40%">Message</th>
+                    <th width="15%">Emergency</th>
+                    <th width="20%">Date</th>
+                </tr>
+                <tr>
+                    <td>Swampmonster attack</td>
+                    <td>Leave building X, there is an swampmonster!</td>
+                    <td>Other</td>
+                    <td>20/04/2016 12:32:44</td>
+                </tr>
+                <tr>
+                    <td>Swampmonster attack</td>
+                    <td>Leave building X, there is an swampmonster!</td>
+                    <td>Other</td>
+                    <td>20/04/2016 12:32:44</td>
+                </tr>
+                <tr>
+                    <td>Swampmonster attack</td>
+                    <td>Leave building X, there is an swampmonster!</td>
+                    <td>Other</td>
+                    <td>20/04/2016 12:32:44</td>
+                </tr>
+                <tr>
+                    <td>Swampmonster attack</td>
+                    <td>Leave building X, there is an swampmonster!</td>
+                    <td>Other</td>
+                    <td>20/04/2016 12:32:44</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
