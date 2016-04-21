@@ -24,6 +24,7 @@ namespace ICE_Server.DAL
         public virtual DbSet<PredefinedMessage> PredefinedMessages { get; set; }
         public virtual DbSet<PredefinedMessageTranslated> PredefinedMessagesTranslated { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<User> User { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

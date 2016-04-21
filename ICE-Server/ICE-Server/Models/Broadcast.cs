@@ -46,5 +46,15 @@ namespace ICE_Server.Models
         /// </summary>
         public Emergency Emergency { get; set; }
 
+        /// <summary>
+        /// Get/set the id of type of the broadcast message type.
+        /// </summary>
+        [ForeignKey("PredefinedMessage")]
+        public int? PredefinedMessageID { get; set;}
+        /// <summary>
+        /// Get/set the type of the broadcast message type.
+        /// </summary>
+        public PredefinedMessage PredefinedMessage { get; set; }
+
     }
 }

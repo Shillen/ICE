@@ -17,6 +17,7 @@ namespace ICE_Webserver.Controllers
 {
     public class BroadcastsController : BaseController
     {
+        #pragma warning disable CS0618
         // GET: Broadcasts
         public async Task<ActionResult> Index()
         {
@@ -156,7 +157,7 @@ namespace ICE_Webserver.Controllers
 
             if (ModelState.IsValid)
             {
-                var response = await api.Request(HttpMethod.Post, "api/BroadcastsAPI/", id);
+                var response = await api.Request(HttpMethod.Delete, "api/BroadcastsAPI/", id);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -178,5 +179,6 @@ namespace ICE_Webserver.Controllers
             }
             base.Dispose(disposing);
         }
+        #pragma warning restore CS0618
     }
 }

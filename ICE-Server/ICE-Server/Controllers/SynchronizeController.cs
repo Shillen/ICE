@@ -24,6 +24,7 @@ namespace ICE_Server.Controllers
             this.buildingRepository = new BuildingsRepository(new ICEContext());
             this.deviceRepository = new DevicesRepository(new ICEContext());
             this.emergencyRepository = new EmergencyRepository(new ICEContext());
+            this.languageRepository = new LanguagesRepository(new ICEContext());
             this.predefinedmessageRepository = new PredefinedMessagesRepository(new ICEContext());
         }
         // GET api/synchronize
@@ -32,33 +33,37 @@ namespace ICE_Server.Controllers
         [HttpGet]
         public IHttpActionResult Synchronize(string tableType)
         {
-            if(tableType.Equals("Broadcasts"))
+            if(tableType.ToLower() == "broadcasts")
             {
                 return Ok(broadcastRepository.GetAll());
             }
-            if(tableType.Equals("Buildings"))
+            if(tableType.ToLower() == "buildings")
             {
                 return Ok(buildingRepository.GetAll());
             }
-            if(tableType.Equals("Devices"))
+            if(tableType.ToLower() == "devices")
             {
                 return Ok(deviceRepository.GetAll());
             }
-            if (tableType.Equals("Emergencies"))
+            if (tableType.ToLower() == "emergencies")
             {
                 return Ok(emergencyRepository.GetAll());
             }
-            if (tableType.Equals("EmergenciesTranslated"))
+            if (tableType.ToLower() == "emergenciestranslated")
             {
                 return Ok(emergencyRepository.GetAllTranslated());
             }
-            if(tableType.Equals("PredefinedMessages"))
+            if(tableType.ToLower() == "predefinedmessages")
             {
                 return Ok(predefinedmessageRepository.GetAll());
             }
-            if (tableType.Equals("PredefinedMessageTranslated"))
+            if (tableType.ToLower() == "predefinedmessagestranslated")
             {
                 return Ok(predefinedmessageRepository.GetAllTranslated());
+            }
+            if (tableType.ToLower() == "languages")
+            {
+                return Ok(languageRepository.GetAll());
             }
             else
             {

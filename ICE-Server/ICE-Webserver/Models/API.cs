@@ -12,7 +12,7 @@ namespace ICE_Webserver.Models
     public class API
     {
         private string host = "http://localhost:6465/";
-        //private string host = "http://192.168.2.52:443/";
+        //private string host = "http://jeej-em.nl:443/";
         private string accessToken;
 
         public API()
@@ -80,7 +80,10 @@ namespace ICE_Webserver.Models
                 if (@object != null)
                 {
                     // Convert the object to json
+                    #pragma warning disable CS0618
                     var objectJson = await JsonConvert.SerializeObjectAsync(@object);
+                    Console.WriteLine(objectJson);
+                    #pragma warning restore CS0618
 
                     // Set the post content
                     request.Content = new StringContent(objectJson);

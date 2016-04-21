@@ -31,9 +31,20 @@ namespace ICE_Server.Repository
 
         public bool Insert(Language item)
         {
+            if (context.Languages.Count(e => e.Code == item.Code) > 0)
+            {
+                return false;
+            }
             context.Languages.Add(item);
-            context.SaveChanges();
-            return true;
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
         }
 
         public bool Update(Language item, int[] ids)

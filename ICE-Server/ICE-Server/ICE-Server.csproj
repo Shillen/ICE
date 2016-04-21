@@ -301,9 +301,13 @@
     <Compile Include="Migrations\201604061330099_Initial.Designer.cs">
       <DependentUpon>201604061330099_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604061412227_DatabaseUpdate.cs" />
-    <Compile Include="Migrations\201604061412227_DatabaseUpdate.Designer.cs">
-      <DependentUpon>201604061412227_DatabaseUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\201604211018342_NewDB.cs" />
+    <Compile Include="Migrations\201604211018342_NewDB.Designer.cs">
+      <DependentUpon>201604211018342_NewDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604211043545_AddUser.cs" />
+    <Compile Include="Migrations\201604211043545_AddUser.Designer.cs">
+      <DependentUpon>201604211043545_AddUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApiResponseModel.cs" />
@@ -311,6 +315,7 @@
     <Compile Include="Models\EmergencyTranslated.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\PredefinedMessageTranslated.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="PushNotifications\PushMessages.cs" />
     <Compile Include="Repository\BroadcastsRepository.cs" />
     <Compile Include="Models\Building.cs" />
@@ -406,8 +411,11 @@
     <EmbeddedResource Include="Migrations\201604061330099_Initial.resx">
       <DependentUpon>201604061330099_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604061412227_DatabaseUpdate.resx">
-      <DependentUpon>201604061412227_DatabaseUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604211018342_NewDB.resx">
+      <DependentUpon>201604211018342_NewDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604211043545_AddUser.resx">
+      <DependentUpon>201604211043545_AddUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

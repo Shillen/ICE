@@ -65,7 +65,7 @@ namespace ICE_Server.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE: api/Devices/5
+        // DELETE: api/DevicesAPI/5
         [ResponseType(typeof(Device))]
         [HttpDelete]
         public IHttpActionResult Delete(Device item)
@@ -73,6 +73,15 @@ namespace ICE_Server.Controllers
             deviceRepository.Delete(item);
 
             return Ok(item);
+        }
+        // DELETE: api/DevicesAPI/5
+        [ResponseType(typeof(Broadcast))]
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            deviceRepository.Delete(id);
+
+            return Ok(id);
         }
 
     }

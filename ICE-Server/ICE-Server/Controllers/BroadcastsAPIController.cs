@@ -40,8 +40,9 @@ namespace ICE_Server.Controllers
         }
 
         // POST: api/BroadcastsAPI
-        [ResponseType(typeof(Broadcast))]
+        [Route("api/BroadcastsAPI")]
         [HttpPost]
+        [ResponseType(typeof(Broadcast))]
         public IHttpActionResult Insert(Broadcast item)
         {
             if (!ModelState.IsValid)
@@ -50,8 +51,7 @@ namespace ICE_Server.Controllers
             }
 
             broadcastRepository.Insert(item);
-
-            return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
+            return (Ok());
         }
 
         // PUT: api/BroadcastsAPI/5

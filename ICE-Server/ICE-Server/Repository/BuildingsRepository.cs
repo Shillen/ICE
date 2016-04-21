@@ -31,9 +31,23 @@ namespace ICE_Server.Repository
 
         public bool Insert(Building item)
         {
+
+            if (context.Buildings.Count(e => e.Name == item.Name) > 0)
+            {
+                return false;
+            }
+
             context.Buildings.Add(item);
-            context.SaveChanges();
-            return true;
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
         }
 
         public bool Update(Building item, int[] ids)

@@ -11,30 +11,51 @@ using ICE_Server.Models;
 using System.Threading.Tasks;
 using System.Net.Http;
 using ICE_Webserver.Models;
+using Newtonsoft.Json;
 
 namespace ICE_Webserver.Controllers
 {
     public class DevicesController : BaseController
     {
+        #pragma warning disable CS0618
         // GET: DevicesWeb
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.Devices.ToList());
+            //var broadcasts = db.Broadcasts.Include(b => b.Emergency);
+
+            List<Device> devices = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/DevicesAPI");
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                devices = await JsonConvert.DeserializeObjectAsync<List<Device>>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
+            return View(devices.ToList());
         }
 
         // GET: DevicesWeb/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Device device = db.Devices.Find(id);
-            if (device == null)
+
+            Device devices = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/DevicesAPI/", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                devices = await JsonConvert.DeserializeObjectAsync<Device>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
+            if (devices == null)
             {
                 return HttpNotFound();
             }
-            return View(device);
+
+            return View(devices);
         }
 
         // GET: DevicesWeb/Create
@@ -102,29 +123,49 @@ namespace ICE_Webserver.Controllers
         }
 
         // GET: DevicesWeb/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Device device = db.Devices.Find(id);
+
+            Device device = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/DevicesAPI/", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                device = await JsonConvert.DeserializeObjectAsync<Device>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
             if (device == null)
             {
                 return HttpNotFound();
             }
+
             return View(device);
         }
 
         // POST: DevicesWeb/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Device device = db.Devices.Find(id);
-            db.Devices.Remove(device);
-            db.SaveChanges();
+
+            if (ModelState.IsValid)
+            {
+                var response = await api.Request(HttpMethod.Delete, "api/DevicesAPI/", id);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                await DisplayModelStateErrors(response);
+
+            }
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)
@@ -135,5 +176,6 @@ namespace ICE_Webserver.Controllers
             }
             base.Dispose(disposing);
         }
+        #pragma warning restore CS0618
     }
 }

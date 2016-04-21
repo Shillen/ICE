@@ -31,17 +31,17 @@ namespace ICE_Server.Migrations
             context.Buildings.Add(new Models.Building { Name = "X" });
 
             // Add some devices
-            context.Devices.Add(new Models.Device { DeviceID = "APA91bECIBtIhVHGC_VoN4DZiC6SekEucXTwbLtpcVQGnaij_X0eDPN9jBaNVzv_uNRR3SDbREKxdt9DQhDhbfh1IQp9J4byJq7nCPiC-1i3NgsaKXUGhP6c7m3GDfRrbKVY0WBn3CuyewzLw5jSwj0smZd3lWGXjA", DeviceOS = "Android" });
-            context.Devices.Add(new Models.Device { DeviceID = "APA91sECIBtIhVHGC_VoN4DZiC6SekEucXTwbLtpcVQGnaij_X0eDPN9jBaNVzv_uNRR3SDbREKxdt9DQhDhbfh1IQp9J4byJq7nCPiC-1i3NgsaKXUGhP6c7m3GDfRrbKVY0WBn3CuyewzLw5jSwj0smZd3lWGXjA", DeviceOS = "Android" });
+            context.Devices.Add(new Models.Device { DeviceID = "APA91bECIBtIhVHGC_VoN4DZiC6SekEucXTwbLtpcVQGnaij_X0eDPN9jBaNVzv_uNRR3SDbREKxdt9DQhDhbfh1IQp9J4byJq7nCPiC-1i3NgsaKXUGhP6c7m3GDfRrbKVY0WBn3CuyewzLw5jSwj0smZd3lWGXjA", DeviceOS = Models.OS.Android });
+            context.Devices.Add(new Models.Device { DeviceID = "APA91sECIBtIhVHGC_VoN4DZiC6SekEucXTwbLtpcVQGnaij_X0eDPN9jBaNVzv_uNRR3SDbREKxdt9DQhDhbfh1IQp9J4byJq7nCPiC-1i3NgsaKXUGhP6c7m3GDfRrbKVY0WBn3CuyewzLw5jSwj0smZd3lWGXjA", DeviceOS = Models.OS.Android });
 
             //Add some languages
             context.Languages.Add(new Models.Language { ID = 1, Code = "EN" });
             context.Languages.Add(new Models.Language { ID = 2, Code = "NL" });
 
             // Add some EmergencyTyes
-            context.Emergencies.Add(new Models.Emergency { ID = 1 });
-            context.Emergencies.Add(new Models.Emergency { ID = 2 });
-            context.Emergencies.Add(new Models.Emergency { ID = 3 });
+            context.Emergencies.Add(new Models.Emergency { ID = 1, Name = "Fire" });
+            context.Emergencies.Add(new Models.Emergency { ID = 2, Name = "Shooting" });
+            context.Emergencies.Add(new Models.Emergency { ID = 3, Name = "Earthquake" });
 
             // Add some translations
             context.EmergenciesTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 1, LanguageID = 1, Name = "Fire" });

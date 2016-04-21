@@ -27,7 +27,9 @@ namespace ICE_Webserver.Controllers
         {
 
             // Otherwise check if any model state error were returned that can be displayed
+            #pragma warning disable CS0618 // Type or member is obsolete
             var model = await JsonConvert.DeserializeObjectAsync<ApiResponseModel>(await apiResponse.Content.ReadAsStringAsync());
+            #pragma warning restore CS0618 // Type or member is obsolete
 
             if (model != null && model.ModelState != null)
             {

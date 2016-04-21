@@ -104,6 +104,25 @@ namespace ICE_Server.Repository
 
             return true;
         }
+        public bool Delete(int id)
+        {
+            if (checkEntry(id) == false)
+            {
+                return false;
+            }
+            Device dv = context.Devices.Find(id);
+            context.Devices.Remove(dv);
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
+        }
 
         private bool checkEntry(int id)
         {

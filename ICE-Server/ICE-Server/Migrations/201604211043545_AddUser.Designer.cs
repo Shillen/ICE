@@ -7,13 +7,13 @@ namespace ICE_Server.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class DatabaseUpdate : IMigrationMetadata
+    public sealed partial class AddUser : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DatabaseUpdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUser));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604061412227_DatabaseUpdate"; }
+            get { return "201604211043545_AddUser"; }
         }
         
         string IMigrationMetadata.Source

@@ -28,7 +28,7 @@ namespace ICE_Server.Models
         /// <summary>
         /// Get/set the type of the predefined message type.
         /// </summary>
-        public Emergency Emergency { get; set; } 
+        public Emergency Emergency { get; set; }
 
     }
 }
