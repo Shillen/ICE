@@ -23,6 +23,11 @@ namespace ICE_Server.Models
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Get/set the building location.
+        /// </summary>
+        public string Location { get; set; }
+
         // In the future it will be good to have something like the code below.
         // It will allow the application to send specific and relevant messages to the user.
         // But because of the time, this feature will not be implemented in this phase of the project.

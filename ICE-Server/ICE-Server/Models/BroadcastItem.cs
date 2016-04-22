@@ -11,13 +11,8 @@ namespace ICE_Server.Models
 	/// View Model of the Database object Broadcast.
 	/// This model has the details of a broadcast message.
 	/// </summary>
-	public class Broadcast
+	public class BroadcastItem
     {
-        /// <summary>
-        /// Get/set of the broadcast ID.
-        /// </summary>
-        [Key]
-        public int ID { get; set; }
 
         /// <summary>
         /// Get/set the message text of the broadcast message.
@@ -28,33 +23,17 @@ namespace ICE_Server.Models
         /// Get/set the list of the buildings related with this broadcast message.
         /// </summary>
         /// <value>The buildings.</value>
-        public List<BroadcastBuilding> BroadcastBuildings { get; set; }
-
-        /// <summary>
-        /// Get/set the time of when the message was received by the server received.
-        /// </summary>
-        public DateTime Time { get; set; }
+        public List<Building> Buildings { get; set; }
 
         /// <summary>
         /// Get/set the id of type of the broadcast message type.
         /// </summary>
-        [ForeignKey("Emergency")]
         public int EmergencyId { get; set; }
 
         /// <summary>
-        /// Get/set the type of the broadcast message type.
-        /// </summary>
-        public Emergency Emergency { get; set; }
-
-        /// <summary>
         /// Get/set the id of type of the broadcast message type.
         /// </summary>
-        [ForeignKey("PredefinedMessage")]
-        public int? PredefinedMessageID { get; set;}
-        /// <summary>
-        /// Get/set the type of the broadcast message type.
-        /// </summary>
-        public PredefinedMessage PredefinedMessage { get; set; }
+        public int? PredefinedMessageID { get; set; }
 
     }
 }

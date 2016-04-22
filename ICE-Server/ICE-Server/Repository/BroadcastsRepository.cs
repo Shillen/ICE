@@ -31,10 +31,44 @@ namespace ICE_Server.Repository
             var result = (from r in context.Broadcasts where r.ID == id select r).FirstOrDefault();
             return result;
         }
-
         public bool Insert(Broadcast item)
         {
-            context.Broadcasts.Add(item);
+            return true;
+        }
+
+
+        public bool Insert(BroadcastItem item)
+        {
+            DateTime time = DateTime.Now;
+            Broadcast broadcast = new Broadcast {
+                Message = item.Message,
+                EmergencyId = item.EmergencyId,
+                PredefinedMessageID = item.PredefinedMessageID,
+                BroadcastBuildings = new List<BroadcastBuilding>(),
+                Time = time
+            };
+            context.Broadcasts.Add(broadcast);
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+            int id = broadcast.ID;
+
+            foreach (Building building in item.Buildings)
+            {
+                broadcast.BroadcastBuildings.Add(new BroadcastBuilding { BroadcastID = id, BuildingID = building.ID});
+            }
+
+            foreach (BroadcastBuilding BroadcastBuildingItem in broadcast.BroadcastBuildings)
+            {
+                context.BroadcastBuilding.Add(BroadcastBuildingItem);
+            }
+
+            context.Entry(broadcast).State = System.Data.Entity.EntityState.Modified;
             try
             {
 
@@ -48,7 +82,7 @@ namespace ICE_Server.Repository
 
             }
         }
-
+        
         public bool Update(Broadcast item, int[] ids)
         {
             if (checkEntry(item.ID) == false)

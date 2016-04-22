@@ -309,12 +309,19 @@
     <Compile Include="Migrations\201604211043545_AddUser.Designer.cs">
       <DependentUpon>201604211043545_AddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604221415307_NewDBUpdate.cs" />
+    <Compile Include="Migrations\201604221415307_NewDBUpdate.Designer.cs">
+      <DependentUpon>201604221415307_NewDBUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApiResponseModel.cs" />
     <Compile Include="Models\Broadcast.cs" />
+    <Compile Include="Models\BroadcastBuilding.cs" />
+    <Compile Include="Models\BroadcastItem.cs" />
     <Compile Include="Models\EmergencyTranslated.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\PredefinedMessageTranslated.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="PushNotifications\PushMessages.cs" />
     <Compile Include="Repository\BroadcastsRepository.cs" />
@@ -416,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604211043545_AddUser.resx">
       <DependentUpon>201604211043545_AddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604221415307_NewDBUpdate.resx">
+      <DependentUpon>201604221415307_NewDBUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

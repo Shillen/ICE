@@ -43,7 +43,7 @@ namespace ICE_Server.Controllers
         [Route("api/BroadcastsAPI")]
         [HttpPost]
         [ResponseType(typeof(Broadcast))]
-        public IHttpActionResult Insert(Broadcast item)
+        public IHttpActionResult Insert(BroadcastItem item)
         {
             if (!ModelState.IsValid)
             {

@@ -192,6 +192,7 @@ E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.cs
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.Initial.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.NewDB.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.AddUser.resources
+E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE_Server.Migrations.NewDBUpdate.resources
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.csproj.GenerateResource.Cache
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.dll
 E:\ICE\ICE-SERVER-DEV\ice-back-end\ICE-Server\ICE-Server\obj\Debug\ICE-Server.pdb
