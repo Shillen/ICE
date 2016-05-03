@@ -324,17 +324,18 @@
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="PushNotifications\PushMessages.cs" />
-    <Compile Include="Repository\BroadcastsRepository.cs" />
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\Emergency.cs" />
     <Compile Include="Models\PredefinedMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BroadcastsRepository.cs" />
     <Compile Include="Repository\BuildingsRepository.cs" />
     <Compile Include="Repository\DevicesRepository.cs" />
     <Compile Include="Repository\EmergencyRepository.cs" />
     <Compile Include="Repository\LanguagesRepository.cs" />
     <Compile Include="Repository\PredefinedMessagesRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -374,6 +375,8 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="Properties\PublishProfiles\ICE.pubxml" />
     <Content Include="Resources\aps_development.cer" />
+    <Content Include="Resources\bhv-apns-dev-cert.p12" />
+    <Content Include="Resources\ice-apns-dev-cert.p12" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

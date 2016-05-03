@@ -31,6 +31,7 @@ namespace ICE_Server.Repository
             var result = (from r in context.Broadcasts where r.ID == id select r).FirstOrDefault();
             return result;
         }
+
         public bool Insert(Broadcast item)
         {
             return true;
@@ -40,7 +41,8 @@ namespace ICE_Server.Repository
         public bool Insert(BroadcastItem item)
         {
             DateTime time = DateTime.Now;
-            Broadcast broadcast = new Broadcast {
+            Broadcast broadcast = new Broadcast
+            {
                 Message = item.Message,
                 EmergencyId = item.EmergencyId,
                 PredefinedMessageID = item.PredefinedMessageID,
@@ -60,7 +62,7 @@ namespace ICE_Server.Repository
 
             foreach (Building building in item.Buildings)
             {
-                broadcast.BroadcastBuildings.Add(new BroadcastBuilding { BroadcastID = id, BuildingID = building.ID});
+                broadcast.BroadcastBuildings.Add(new BroadcastBuilding { BroadcastID = id, BuildingID = building.ID });
             }
 
             foreach (BroadcastBuilding BroadcastBuildingItem in broadcast.BroadcastBuildings)
@@ -82,7 +84,7 @@ namespace ICE_Server.Repository
 
             }
         }
-        
+
         public bool Update(Broadcast item, int[] ids)
         {
             if (checkEntry(item.ID) == false)
@@ -147,7 +149,5 @@ namespace ICE_Server.Repository
         {
             return context.Broadcasts.Count(e => e.ID == id) > 0;
         }
-
-
     }
 }

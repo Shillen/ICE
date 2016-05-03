@@ -13,6 +13,7 @@ using ICE_Server.DAL;
 using PushSharp.Google;
 using PushSharp.Core;
 using Newtonsoft.Json.Linq;
+using PushSharp.Apple;
 
 namespace ICE_Server.PushNotifications
 {
@@ -28,6 +29,12 @@ namespace ICE_Server.PushNotifications
             sendPushNotifications
         }
 
+        public static string getPath()
+        {
+            var actualPath = HttpContext.Current.Server.MapPath("/Resources/ice-apns-dev-cert.p12");
+            return actualPath;
+        }
+
         /// <summary>
         /// Push a message 
         /// </summary>
@@ -38,14 +45,19 @@ namespace ICE_Server.PushNotifications
 
             // Configuration: Setup the GCM sender information here
             var config = new GcmConfiguration("877886927121 ", "AIzaSyBksWdag7DeN7h4jRM0gqLgjN6fyEcQ8r0", null);
+            var configApple = new ApnsConfiguration(ApnsConfiguration.ApnsServerEnvironment.Sandbox,
+                                    getPath(), "Swampmonster");
 
             // Create a new broker
             var gcmBroker = new GcmServiceBroker(config);
+            var apnsBroker = new ApnsServiceBroker(configApple);
 
             // Wire up events
-            gcmBroker.OnNotificationFailed += (notification, aggregateEx) => {
+            gcmBroker.OnNotificationFailed += (notification, aggregateEx) =>
+            {
 
-                aggregateEx.Handle(ex => {
+                aggregateEx.Handle(ex =>
+                {
 
                     // See what kind of exception it was to further diagnose
                     if (ex is GcmNotificationException)
@@ -107,26 +119,79 @@ namespace ICE_Server.PushNotifications
                 });
             };
 
-            gcmBroker.OnNotificationSucceeded += (notification) => {
+            gcmBroker.OnNotificationSucceeded += (notification) =>
+            {
                 Console.WriteLine("GCM Notification Sent!");
             };
-            
+
+            // Wire up Apple events
+            apnsBroker.OnNotificationFailed += (notification, aggregateEx) =>
+            {
+
+                aggregateEx.Handle(ex =>
+                {
+
+                    // See what kind of exception it was to further diagnose
+                    if (ex is ApnsNotificationException)
+                    {
+                        var notificationException = (ApnsNotificationException)ex;
+
+                        // Deal with the failed notification
+                        var apnsNotification = notificationException.Notification;
+                        var statusCode = notificationException.ErrorStatusCode;
+
+                        Console.WriteLine($"Apple Notification Failed: ID={apnsNotification.Identifier}, Code={statusCode}");
+
+                    }
+                    else {
+                        // Inner exception might hold more useful information like an ApnsConnectionException           
+                        Console.WriteLine($"Apple Notification Failed for some unknown reason : {ex.InnerException}");
+                    }
+
+                    // Mark it as handled
+                    return true;
+                });
+            };
+
+            apnsBroker.OnNotificationSucceeded += (notification) =>
+            {
+                Console.WriteLine("Apple Notification Sent!");
+            };
+
+
             // Start the broker
             gcmBroker.Start();
+            apnsBroker.Start();
+
             foreach (var regId in deviceRepository.GetAll())
             {
-                // Queue a notification to send
-                gcmBroker.QueueNotification(new GcmNotification
+                if (regId.DeviceOS == OS.Android)
                 {
-                    RegistrationIds = new List<string> { regId.DeviceID },
-                    Data = JObject.Parse("{\"Title\":\"" + title + "\",\"Content\":\"" + message + "\"}")
-                });
+                    // Queue an Android notification to send
+                    gcmBroker.QueueNotification(new GcmNotification
+                    {
+                        RegistrationIds = new List<string> { regId.DeviceID },
+                        Data = JObject.Parse("{\"Title\":\"" + title + "\",\"Content\":\"" + message + "\"}")
+                    });
+
+                }
+                if (regId.DeviceOS == OS.iOS)
+                {
+                    // edit with emergency id / predef messageid
+                    // Queue an Apple notification to send
+                    apnsBroker.QueueNotification(new ApnsNotification
+                    {
+                        DeviceToken = regId.DeviceID,
+                        Payload = JObject.Parse("{\"aps\":{\"alert\":\"" + title + "\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\""+ message +"\"}}}}")
+                    });
+                }
             }
 
             // Stop the broker, wait for it to finish   
             // This isn't done after every message, but after you're
             // done with the broker
             gcmBroker.Stop();
+            apnsBroker.Stop();
         }
     }
 }
