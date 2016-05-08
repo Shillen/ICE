@@ -21,12 +21,13 @@ namespace ICE_Server.PushNotifications
     {
         private string title { get; set; }
         private string message { get; set; }
+        private int predefinedID  { get; set; }
         private DevicesRepository deviceRepository;
 
         public enum PushTypes
         {
-            requestLocations,
-            sendPushNotifications
+            Emergency = 1,
+            Update
         }
 
         public static string getPath()
@@ -39,12 +40,12 @@ namespace ICE_Server.PushNotifications
         /// Push a message 
         /// </summary>
         /// <param name="message">String of the message</param>
-        public Pushmessage(string title, string message)
+        public Pushmessage(PushTypes pushType, int title, string message, int? predefinedID)
         {
             this.deviceRepository = new DevicesRepository(new ICEContext());
 
             // Configuration: Setup the GCM sender information here
-            var config = new GcmConfiguration("877886927121 ", "AIzaSyBksWdag7DeN7h4jRM0gqLgjN6fyEcQ8r0", null);
+            var config = new GcmConfiguration("504565507826", "AIzaSyAvQgiq9HMGVULdUVzloqW3DSghFTTJ5Wc", null);
             var configApple = new ApnsConfiguration(ApnsConfiguration.ApnsServerEnvironment.Sandbox,
                                     getPath(), "Swampmonster");
 
@@ -163,15 +164,31 @@ namespace ICE_Server.PushNotifications
             gcmBroker.Start();
             apnsBroker.Start();
 
-            foreach (var regId in deviceRepository.GetAll())
+
+            string androidParse;
+            string iOSParse;
+
+            if (predefinedID == null)
             {
+                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":" + title + ",\"Content\":{\"Message\":\"" + message + "\"}}";
+                iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\"Message\":\"" + message + "\"}}}}";
+            }
+            else
+            {
+                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":" + title + ",\"Content\":{\"Message\":\"" + message + "\",\"PredefinedMessage\":" + predefinedID + "}}";
+                iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\"Message\":\"" + message + "\"}}}}";
+            }
+            
+            foreach (var regId in deviceRepository.GetAll())
+             {
                 if (regId.DeviceOS == OS.Android)
                 {
+                    Debug.WriteLine("Test: "+ androidParse); 
                     // Queue an Android notification to send
                     gcmBroker.QueueNotification(new GcmNotification
                     {
                         RegistrationIds = new List<string> { regId.DeviceID },
-                        Data = JObject.Parse("{\"Title\":\"" + title + "\",\"Content\":\"" + message + "\"}")
+                        Data = JObject.Parse(androidParse)
                     });
 
                 }
@@ -182,7 +199,7 @@ namespace ICE_Server.PushNotifications
                     apnsBroker.QueueNotification(new ApnsNotification
                     {
                         DeviceToken = regId.DeviceID,
-                        Payload = JObject.Parse("{\"aps\":{\"alert\":\"" + title + "\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\""+ message +"\"}}}}")
+                        Payload = JObject.Parse(iOSParse)
                     });
                 }
             }

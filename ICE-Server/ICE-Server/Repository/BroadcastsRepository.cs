@@ -8,6 +8,7 @@ using ICE_Server.Models;
 using ICE_Server.DAL;
 using System.Data.Entity.Infrastructure;
 using ICE_Server.PushNotifications;
+using System.Diagnostics;
 
 namespace ICE_Server.Repository
 {
@@ -40,6 +41,7 @@ namespace ICE_Server.Repository
 
         public bool Insert(BroadcastItem item)
         {
+            Debug.WriteLine(item.PredefinedMessageID);
             DateTime time = DateTime.Now;
             Broadcast broadcast = new Broadcast
             {
@@ -49,6 +51,7 @@ namespace ICE_Server.Repository
                 BroadcastBuildings = new List<BroadcastBuilding>(),
                 Time = time
             };
+            
             context.Broadcasts.Add(broadcast);
             try
             {
@@ -75,7 +78,7 @@ namespace ICE_Server.Repository
             {
 
                 context.SaveChanges();
-                this.pushNotification = new Pushmessage("New Broadcast", item.Message);
+                this.pushNotification = new Pushmessage(Pushmessage.PushTypes.Emergency, item.EmergencyId, item.Message, item.PredefinedMessageID);
                 return true;
             }
             catch (DbUpdateConcurrencyException)

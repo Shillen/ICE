@@ -38,7 +38,7 @@ namespace ICE_Server.Controllers
         }
         public ActionResult TestPushNotification()
         {
-            this.pushNotification = new Pushmessage("Swampmonster", "Watch out! A swampmonster is in the building!");
+            this.pushNotification = new Pushmessage(Pushmessage.PushTypes.Emergency, 1, "Watch out! A swampmonster is in the building!", 0);
             return View("Index");
         }
     }
