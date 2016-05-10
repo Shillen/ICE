@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ICE_Server.Models
 {
-    public class Settings
+    public partial class Settings
     {
         [Key]
         public int ID { get; set; }

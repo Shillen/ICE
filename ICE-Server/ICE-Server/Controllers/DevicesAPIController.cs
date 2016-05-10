@@ -54,12 +54,13 @@ namespace ICE_Server.Controllers
         // PUT: api/DevicesAPI/5
         [ResponseType(typeof(void))]
         [HttpPut]
-        public IHttpActionResult Update(Device item, params int[] ids)
+        public IHttpActionResult Update(Device item)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            int[] ids = { item.ID };
             deviceRepository.Update(item, ids);
 
             return StatusCode(HttpStatusCode.NoContent);

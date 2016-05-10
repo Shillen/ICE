@@ -1,4 +1,4 @@
-﻿
+﻿@model List<ICE_Server.Models.Settings>
 @{
     ViewBag.Title = "Settings";
 }
@@ -11,40 +11,65 @@
 </div>
 
 <!-- PANELS -->
-
 <div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Application overview</h3>
+            </div>
+            <table class="table">
+                <tr>
+                    <th width="70%">Type</th>
+                    <th width="30%">Stats</th>
+                </tr>
+                <tr>
+                    <td>Broadcasts</td>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>Broadcasts</td>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>Buildings</td>
+                    <td>12</td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <div class="col-md-6">
         <div class="panel panel-default panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Website settings</h3>
             </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U
-            </div>
+            @using (@Html.BeginForm("Index", "Settings", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            @Html.HiddenFor(model => model[i].ID)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[i].Option, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model[i].Value, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model[i].Value, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="panel-footer rightText">
+                    <input type="button" value="Cancel" class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Settings")'" />
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+                }
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-default panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Application settings</h3>
-            </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.<br /><br />
-            </div>
-        </div>
+        <p style="color:green; font-size:12px;">
+            @ViewBag.Message
+        </p>
     </div>
 </div>
-
-<!-- User management -->
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">ICE user management</h3>
-            </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.<br /><br />
-            </div>
-        </div>
-    </div>
-</div>
+<input type="button" value="View devices" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Devices")'" />
+<input type="button" value="User management" class="btn btn-warning" onclick="location.href='@Url.Action("Users", "Settings")'" />

@@ -8,32 +8,63 @@ using System.Web;
 using System.Web.Mvc;
 using ICE_Server.DAL;
 using ICE_Server.Models;
+using ICE_Webserver.ViewModels;
+using System.Threading.Tasks;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace ICE_Webserver.Controllers
 {
-    public class EmergenciesController : Controller
+    public class EmergenciesController : BaseController
     {
-        private ICEContext db = new ICEContext();
-
+        #pragma warning disable CS0618
         // GET: Emergencies
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.Emergencies.ToList());
+            List<Emergency> Emergencies = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/EmergencyAPI");
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                Emergencies = await JsonConvert.DeserializeObjectAsync<List<Emergency>>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
+            return View(Emergencies.ToList());
         }
 
         // GET: Emergencies/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Emergency emergency = db.Emergencies.Find(id);
+            List<EmergencyTranslated> emergencytranslations = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/EmergencyTranslated", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                emergencytranslations = await JsonConvert.DeserializeObjectAsync<List<EmergencyTranslated>>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
+            Emergency emergency = null;
+            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI/", (int)id);
+
+            if (apiResponse2.IsSuccessStatusCode)
+            {
+                emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse2.Content.ReadAsStringAsync());
+            }
+
             if (emergency == null)
             {
                 return HttpNotFound();
             }
-            return View(emergency);
+            
+            EmergencyViewModel emergencyview = new EmergencyViewModel();
+            emergencyview.ID = emergency.ID;
+            emergencyview.Name = emergency.Name;
+            emergencyview.EmergencyTranslations = emergencytranslations;
+            return View(emergencyview);
         }
 
         // GET: Emergencies/Create
@@ -124,5 +155,6 @@ namespace ICE_Webserver.Controllers
             }
             base.Dispose(disposing);
         }
+        #pragma warning restore CS0618
     }
 }

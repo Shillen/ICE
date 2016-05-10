@@ -32,11 +32,25 @@ namespace ICE_Server.Controllers
             return broadcastRepository.GetAll();
         }
 
+        // GET: api/lastBroadcasts
+        [Route("api/lastBroadcasts")]
+        public IEnumerable<Broadcast> GetRecent()
+        {
+            return broadcastRepository.GetRecent();
+        }
+
         // GET: api/BroadcastsAPI/5
         [ResponseType(typeof(Broadcast))]
         public IHttpActionResult GetBroadcast(int id)
         {
             return Ok(broadcastRepository.Get(id));
+        }
+        // GET: api/BroadcastBuildings/5
+        [ResponseType(typeof(Building))]
+        [Route("api/BroadcastBuildings")]
+        public IHttpActionResult GetBroadcastBuildings(int id)
+        {
+            return Ok(broadcastRepository.GetBroadcastBuildings(id));
         }
 
         // POST: api/BroadcastsAPI

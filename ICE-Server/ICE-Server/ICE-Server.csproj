@@ -289,6 +289,7 @@
     <Compile Include="Controllers\HomeAPIController.cs" />
     <Compile Include="Controllers\LanguagesAPIController.cs" />
     <Compile Include="Controllers\PredefinedMessagesAPIController.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\SynchronizeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="DAL\ICEContext.cs" />
@@ -322,6 +323,7 @@
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\PredefinedMessageTranslated.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\Stats.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="PushNotifications\PushMessages.cs" />
     <Compile Include="Models\Building.cs" />

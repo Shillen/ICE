@@ -27,10 +27,30 @@ namespace ICE_Server.Repository
             return context.Broadcasts;
         }
 
+        public IEnumerable<Broadcast> GetRecent()
+        {
+            return context.Broadcasts.OrderByDescending(c => c.ID).Take(10);
+        }
+
         public Broadcast Get(int id)
         {
             var result = (from r in context.Broadcasts where r.ID == id select r).FirstOrDefault();
             return result;
+        }
+
+        public IEnumerable<Building> GetBroadcastBuildings(int id)
+        {
+            List<Building> actualBuildings = new List<Building>();
+            foreach (var item in context.BroadcastBuilding)
+            {
+                if (item.BroadcastID == id)
+                {
+                    var result = (from r in context.Buildings where r.ID == item.BuildingID select r).FirstOrDefault();
+                    actualBuildings.Add(new Building() { ID = result.ID, Name = result.Name });
+                }
+                
+            }
+            return actualBuildings;
         }
 
         public bool Insert(Broadcast item)

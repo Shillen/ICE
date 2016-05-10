@@ -1,4 +1,4 @@
-﻿@model ICE_Server.Models.Emergency
+﻿@model IEnumerable<ICE_Webserver.ViewModels.EmergencyViewModel>
 
 @{
     ViewBag.Title = "Details";
@@ -27,6 +27,13 @@
                     <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
                     <td>@Html.DisplayFor(model => model.Name)</td>
                 </tr>
+                @foreach (var item in Model.EmergencyTranslations)
+                {
+                    <tr>
+                        <td><strong>@Html.DisplayNameFor(model => item.Language.Code)</strong></td>
+                        <td>@Html.DisplayFor(model => item.Name)</td>
+                    </tr>
+                }
             </table>
             <div class="panel-footer rightText">
                 <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Emergencies")'" />

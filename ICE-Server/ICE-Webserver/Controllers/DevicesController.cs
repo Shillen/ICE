@@ -18,11 +18,9 @@ namespace ICE_Webserver.Controllers
     public class DevicesController : BaseController
     {
         #pragma warning disable CS0618
-        // GET: DevicesWeb
+        // GET: Devices
         public async Task<ActionResult> Index()
         {
-            //var broadcasts = db.Broadcasts.Include(b => b.Emergency);
-
             List<Device> devices = null;
             var apiResponse = await api.Request(HttpMethod.Get, "api/DevicesAPI");
 
@@ -34,7 +32,7 @@ namespace ICE_Webserver.Controllers
             return View(devices.ToList());
         }
 
-        // GET: DevicesWeb/Details/5
+        // GET: Devices/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -58,20 +56,19 @@ namespace ICE_Webserver.Controllers
             return View(devices);
         }
 
-        // GET: DevicesWeb/Create
+        // GET: Devices/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: DevicesWeb/Create
+        // POST: Devices/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,DeviceID,DeviceOS")] Device device)
         {
-
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
@@ -91,14 +88,21 @@ namespace ICE_Webserver.Controllers
             return View(device);
         }
 
-        // GET: DevicesWeb/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Devices/Edit/5
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Device device = db.Devices.Find(id);
+
+            Device device = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/DevicesAPI", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                device = await JsonConvert.DeserializeObjectAsync<Device>(await apiResponse.Content.ReadAsStringAsync());
+            }
             if (device == null)
             {
                 return HttpNotFound();
@@ -106,23 +110,33 @@ namespace ICE_Webserver.Controllers
             return View(device);
         }
 
-        // POST: DevicesWeb/Edit/5
+        // POST: Devices/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,DeviceID,DeviceOS")] Device device)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,DeviceID,DeviceOS")] Device device)
         {
+            // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
-                db.Entry(device).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // Request to API
+                var response = await api.Request(HttpMethod.Put, "api/DevicesAPI/", device);
+
+                // Check API's response
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                // Otherwise check if any model state error were returned that can be displayed
+                await DisplayModelStateErrors(response);
+
             }
             return View(device);
         }
 
-        // GET: DevicesWeb/Delete/5
+        // GET: Devices/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -146,7 +160,7 @@ namespace ICE_Webserver.Controllers
             return View(device);
         }
 
-        // POST: DevicesWeb/Delete/5
+        // POST: Devices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

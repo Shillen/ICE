@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using ICE_Webserver.Models;
 using Newtonsoft.Json;
+using ICE_Webserver.ViewModels;
 
 namespace ICE_Webserver.Controllers
 {
@@ -55,7 +56,20 @@ namespace ICE_Webserver.Controllers
                 return HttpNotFound();
             }
 
-            return View(broadcast);
+            List<Building> broadcastbuildings = null;
+            var apiResponse2 = await api.Request(HttpMethod.Get, "api/BroadcastBuildings?id=" + id);
+
+            if (apiResponse2.IsSuccessStatusCode)
+            {
+                broadcastbuildings = await JsonConvert.DeserializeObjectAsync<List<Building>>(await apiResponse2.Content.ReadAsStringAsync());
+            }
+           
+            BroadcastViewModel broadcastview = new BroadcastViewModel();
+            broadcastview.ID = broadcast.ID;
+            broadcastview.Message = broadcast.Message;
+            broadcastview.Time = broadcast.Time;
+            broadcastview.Buildings = broadcastbuildings;
+            return View(broadcastview);
         }
 
         // GET: Broadcasts/Create

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ICE_Server.DAL;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,20 @@ namespace ICE_Webserver.Models
 {
     public class API
     {
-        private string host = "http://localhost:6465/";
-        //private string host = "http://jeej-em.nl:443/";
+        private ICEContext context = new ICEContext();
+
+        // Query for the setting of the hostname
+        private string host;
         private string accessToken;
 
         public API()
         {
+            host = "http://localhost:6465/";
+            //host = "http://jeej-em.nl:443/";
+
+            // Query for the setting of the hostname
+            //host = context.Settings.Where(b => b.Option == "hostAPI").FirstOrDefault().ToString();
+
             if (HttpContext.Current.Session["AccessToken"] != null)
             {
                 accessToken = HttpContext.Current.Session["AccessToken"].ToString();

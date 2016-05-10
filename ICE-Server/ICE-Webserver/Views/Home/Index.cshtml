@@ -1,4 +1,4 @@
-﻿@model ICE_Webserver.Models.API
+﻿@model ICE_Webserver.ViewModels.DashboardViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -73,15 +73,19 @@
                 </tr>
                 <tr>
                     <td>Broadcasts</td>
-                    <td>21</td>
-                </tr>
-                <tr>
-                    <td>Broadcasts</td>
-                    <td>21</td>
+                    <td>@Html.DisplayFor(model => model.BroadcastCount)</td>
                 </tr>
                 <tr>
                     <td>Buildings</td>
-                    <td>12</td>
+                    <td>@Html.DisplayFor(model => model.BuildingCount)</td>
+                </tr>
+                <tr>
+                    <td>Emergencies</td>
+                    <td>@Html.DisplayFor(model => model.EmergenciesCount)</td>
+                </tr>
+                <tr>
+                    <td>Devices</td>
+                    <td>@Html.DisplayFor(model => model.DevicesCount)</td>
                 </tr>
             </table>
         </div>
@@ -97,35 +101,19 @@
             <!-- Table -->
             <table class="table">
                 <tr>
-                    <th width="25%">Title</th>
-                    <th width="40%">Message</th>
-                    <th width="15%">Emergency</th>
+                    <th width="60%">Message</th>
+                    <th width="20%">Emergency</th>
                     <th width="20%">Date</th>
                 </tr>
-                <tr>
-                    <td>Swampmonster attack</td>
-                    <td>Leave building X, there is an swampmonster!</td>
-                    <td>Other</td>
-                    <td>20/04/2016 12:32:44</td>
-                </tr>
-                <tr>
-                    <td>Swampmonster attack</td>
-                    <td>Leave building X, there is an swampmonster!</td>
-                    <td>Other</td>
-                    <td>20/04/2016 12:32:44</td>
-                </tr>
-                <tr>
-                    <td>Swampmonster attack</td>
-                    <td>Leave building X, there is an swampmonster!</td>
-                    <td>Other</td>
-                    <td>20/04/2016 12:32:44</td>
-                </tr>
-                <tr>
-                    <td>Swampmonster attack</td>
-                    <td>Leave building X, there is an swampmonster!</td>
-                    <td>Other</td>
-                    <td>20/04/2016 12:32:44</td>
-                </tr>
+                @foreach (var item in Model.Broadcasts)
+                {
+                    <tr>
+                        <td>@item.Message</td>
+                        <td>@item.EmergencyId</td>
+                        <td>@item.Time</td>
+                    </tr>
+                }
+                
             </table>
         </div>
     </div>
