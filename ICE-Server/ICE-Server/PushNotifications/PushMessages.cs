@@ -53,6 +53,14 @@ namespace ICE_Server.PushNotifications
             var gcmBroker = new GcmServiceBroker(config);
             var apnsBroker = new ApnsServiceBroker(configApple);
 
+            var fbs = new FeedbackService(configApple);
+            fbs.FeedbackReceived += (string deviceToken, DateTime timestamp) => {
+                // Remove the deviceToken from your database
+                // timestamp is the time the token was reported as expired
+                deviceRepository.DeleteToken(deviceToken);
+            };
+            fbs.Check();
+
             // Wire up events
             gcmBroker.OnNotificationFailed += (notification, aggregateEx) =>
             {
@@ -103,6 +111,10 @@ namespace ICE_Server.PushNotifications
                             // If this value isn't null, our subscription changed and we should update our database
                             deviceRepository.UpdateToken(oldId, newId);
                             Console.WriteLine($"Device RegistrationId Changed To: {newId}");
+                        }
+                        if (!string.IsNullOrWhiteSpace(oldId))
+                        {
+                            deviceRepository.DeleteToken(oldId);
                         }
                     }
                     else if (ex is RetryAfterException)

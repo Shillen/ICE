@@ -30,9 +30,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Time)
                             </th>
-                            <th>
-                                Emergency @Html.DisplayNameFor(model => model.Emergency.ID)
-                            </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -48,9 +45,6 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Time)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Emergency.ID)
                                 </td>
                                 <td class="rightText">
                                     <a href="@Url.Action("Details", "Broadcasts", new { id = item.ID })"><span class="glyphicon glyphicon-eye-open"></span></a>

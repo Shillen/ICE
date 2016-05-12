@@ -124,6 +124,29 @@ namespace ICE_Server.Repository
             }
         }
 
+        public bool DeleteToken(string Token)
+        {
+            Device item = context.Devices.SingleOrDefault(device => device.DeviceID == Token);
+
+            if (checkEntry(item.ID) == false)
+            {
+                return false;
+            }
+            context.Devices.Remove(item);
+
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
+
+        }
+
         private bool checkEntry(int id)
         {
             return context.Devices.Count(e => e.ID == id) > 0;

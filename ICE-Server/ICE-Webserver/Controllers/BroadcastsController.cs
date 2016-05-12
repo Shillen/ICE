@@ -73,10 +73,28 @@ namespace ICE_Webserver.Controllers
         }
 
         // GET: Broadcasts/Create
-        public ActionResult Create()
+        public async  Task<ActionResult> Create()
         {
-            ViewBag.EmergencyId = new SelectList(db.Emergencies, "ID", "ID");
-            return View(new Broadcast { Time = DateTime.Now });
+            List<Building> buildings = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/BuildingsAPI");
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                buildings = await JsonConvert.DeserializeObjectAsync<List<Building>>(await apiResponse.Content.ReadAsStringAsync());
+            }
+            List<Emergency> emergencies = null;
+            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI");
+
+            if (apiResponse2.IsSuccessStatusCode)
+            {
+                emergencies = await JsonConvert.DeserializeObjectAsync<List<Emergency>>(await apiResponse2.Content.ReadAsStringAsync());
+            }
+
+            BroadcastViewModel broadcastview = new BroadcastViewModel();
+            broadcastview.Time = DateTime.Now;
+            broadcastview.Buildings = buildings;
+            broadcastview.Emergencies = emergencies;
+            return View(broadcastview);
         }
 
         // POST: Broadcasts/Create
@@ -84,13 +102,13 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Message,Time,EmergencyId")] Broadcast broadcast)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Message,Buildings, Emergency")] BroadcastItem broadcastitem)
         {
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
                 // Request to API
-                var response = await api.Request(HttpMethod.Post, "api/BroadcastsAPI/", broadcast);
+                var response = await api.Request(HttpMethod.Post, "api/BroadcastsAPI/", broadcastitem);
 
                 // Check API's response
                 if (response.IsSuccessStatusCode)
@@ -102,8 +120,10 @@ namespace ICE_Webserver.Controllers
                 await DisplayModelStateErrors(response);
 
             }
-            ViewBag.EmergencyId = new SelectList(db.Emergencies, "ID", "ID", broadcast.EmergencyId);
-            return View(broadcast);
+            BroadcastViewModel broadcastview = new BroadcastViewModel();
+            broadcastview.Message = broadcastitem.Message;
+            broadcastview.Buildings = broadcastitem.Buildings;
+            return View(broadcastview);
         }
 
         // GET: Broadcasts/Edit/5
