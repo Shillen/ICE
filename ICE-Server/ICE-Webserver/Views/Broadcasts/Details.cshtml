@@ -32,16 +32,20 @@
                     <td>@Html.DisplayFor(model => model.Time)</td>
                 </tr>
                 <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.EmergencyName)</strong></td>
+                    <td>@Html.DisplayFor(model => model.EmergencyName)</td>
+                </tr>
+                <tr>
                     <td><strong>Buildings</strong></td>
                     <td>
                         @foreach (var item in Model.Buildings)
                         {
-                           @item.Name
-                           @Html.Raw(", ")
+                            @item.Name
+                            @Html.Raw(", ")
                         }
                     </td>
                 </tr>
-                
+
             </table>
             <div class="panel-footer rightText">
                 <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Broadcasts")'" />

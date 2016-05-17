@@ -61,12 +61,21 @@ namespace ICE_Webserver.Controllers
             {
                 broadcastbuildings = await JsonConvert.DeserializeObjectAsync<List<Building>>(await apiResponse2.Content.ReadAsStringAsync());
             }
-           
+
+            Emergency emergency = null;
+            var apiResponse3 = await api.Request(HttpMethod.Get, "api/EmergencyAPI/", (int)broadcast.EmergencyId);
+
+            if (apiResponse3.IsSuccessStatusCode)
+            {
+                emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse3.Content.ReadAsStringAsync());
+            }
+
             BroadcastViewModel broadcastview = new BroadcastViewModel();
             broadcastview.ID = broadcast.ID;
             broadcastview.Message = broadcast.Message;
             broadcastview.Time = broadcast.Time;
             broadcastview.Buildings = broadcastbuildings;
+            broadcastview.EmergencyName = emergency.Name;
             return View(broadcastview);
         }
 
@@ -125,18 +134,24 @@ namespace ICE_Webserver.Controllers
         }
 
         // GET: Broadcasts/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Broadcast broadcast = db.Broadcasts.Find(id);
+
+            Broadcast broadcast = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                broadcast = await JsonConvert.DeserializeObjectAsync<Broadcast>(await apiResponse.Content.ReadAsStringAsync());
+            }
             if (broadcast == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmergencyId = new SelectList(db.Emergencies, "ID", "ID", broadcast.EmergencyId);
             return View(broadcast);
         }
 
@@ -145,15 +160,24 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Message,Time,EmergencyId")] Broadcast broadcast)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Message,Time,EmergencyId")] Broadcast broadcast)
         {
+            // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
-                db.Entry(broadcast).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // Request to API
+                var response = await api.Request(HttpMethod.Put, "api/DevicesAPI/", broadcast);
+
+                // Check API's response
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                // Otherwise check if any model state error were returned that can be displayed
+                await DisplayModelStateErrors(response);
+
             }
-            ViewBag.EmergencyId = new SelectList(db.Emergencies, "ID", "ID", broadcast.EmergencyId);
             return View(broadcast);
         }
 
