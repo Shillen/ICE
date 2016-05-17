@@ -99,9 +99,17 @@ namespace ICE_Server.Repository
             }
 
             context.PredefinedMessages.Remove(item);
-            context.SaveChanges();
+            context.PredefinedMessagesTranslated.RemoveRange(context.PredefinedMessagesTranslated.Where(x => x.PredefinedMessageID == item.ID));
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
 
-            return true;
+            }
         }
 
         private bool checkEntry(int id)

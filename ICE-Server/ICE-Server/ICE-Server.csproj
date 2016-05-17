@@ -319,6 +319,7 @@
     <Compile Include="Models\Broadcast.cs" />
     <Compile Include="Models\BroadcastBuilding.cs" />
     <Compile Include="Models\BroadcastItem.cs" />
+    <Compile Include="Models\EmergencyItem.cs" />
     <Compile Include="Models\EmergencyTranslated.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\PredefinedMessageTranslated.cs" />

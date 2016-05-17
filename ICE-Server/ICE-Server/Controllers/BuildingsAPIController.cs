@@ -47,7 +47,7 @@ namespace ICE_Server.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            int[] ids = { item.ID };
             buildingRepository.Insert(item);
 
             return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
@@ -76,6 +76,15 @@ namespace ICE_Server.Controllers
             buildingRepository.Delete(item);
 
             return Ok(item);
+        }
+        // DELETE: api/BuildingsAPI/5
+        [ResponseType(typeof(Broadcast))]
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            buildingRepository.Delete(id);
+
+            return Ok(id);
         }
 
     }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ICE_Webserver.ViewModels.EmergencyViewModel>
+﻿@model ICE_Webserver.ViewModels.EmergencyViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -27,11 +27,11 @@
                     <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
                     <td>@Html.DisplayFor(model => model.Name)</td>
                 </tr>
-                @foreach (var item in Model.EmergencyTranslations)
+                @foreach (var item in Model.Languages)
                 {
                     <tr>
-                        <td><strong>@Html.DisplayNameFor(model => item.Language.Code)</strong></td>
-                        <td>@Html.DisplayFor(model => item.Name)</td>
+                        <td><strong>Translation for @Html.LabelFor(model => item.Code, item.Code)</strong></td>
+                        <td>@Html.DisplayFor(model => Model.EmergencyTranslations.FirstOrDefault(x => x.LanguageID == item.ID).Name)</td>
                     </tr>
                 }
             </table>

@@ -38,7 +38,6 @@ namespace ICE_Server.Controllers
 
         // GET: api/EmergencyAPI/5
         [ResponseType(typeof(Emergency))]
-        [Route("api/EmergencyAPI")]
         public IHttpActionResult GetEmergency(int id)
         {
             return Ok(emergencyRepository.Get(id));
@@ -47,9 +46,9 @@ namespace ICE_Server.Controllers
         // GET: api/EmergencyTranslated/5
         [ResponseType(typeof(EmergencyTranslated))]
         [Route("api/EmergencyTranslated")]
-        public IHttpActionResult GetEmergencyTranslations(int id)
+        public IEnumerable<EmergencyTranslated> GetEmergencyTranslations(int id)
         {
-            return Ok(emergencyRepository.GetEmergencyTranslations(id));
+            return emergencyRepository.GetEmergencyTranslations(id);
         }
 
         // POST: api/EmergencyAPI

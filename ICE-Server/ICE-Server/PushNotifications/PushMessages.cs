@@ -195,7 +195,7 @@ namespace ICE_Server.PushNotifications
              {
                 if (regId.DeviceOS == OS.Android)
                 {
-                    Debug.WriteLine("Test: "+ androidParse); 
+                    //Debug.WriteLine("Test: "+ androidParse); 
                     // Queue an Android notification to send
                     gcmBroker.QueueNotification(new GcmNotification
                     {

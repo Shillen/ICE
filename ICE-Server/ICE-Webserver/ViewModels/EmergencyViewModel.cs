@@ -16,7 +16,7 @@ namespace ICE_Webserver.ViewModels
 
         public virtual ICollection<EmergencyTranslated> EmergencyTranslations { get; set; }
 
-        public IEnumerable<Language> Languages { get; set; }
+        public ICollection<Language> Languages { get; set; }
 
     }
 }

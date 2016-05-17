@@ -8,17 +8,26 @@ using System.Web;
 using System.Web.Mvc;
 using ICE_Server.DAL;
 using ICE_Server.Models;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ICE_Webserver.Controllers
 {
-    public class PredefinedMessagesController : Controller
+    public class PredefinedMessagesController : BaseController
     {
-        private ICEContext db = new ICEContext();
-
+        #pragma warning disable CS0618
         // GET: PredefinedMessages
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var predefinedMessages = db.PredefinedMessages.Include(p => p.Emergency);
+            List<Broadcast> predefinedMessages = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/PredefinedMessagesAPI");
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                predefinedMessages = await JsonConvert.DeserializeObjectAsync<List<Broadcast>>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
             return View(predefinedMessages.ToList());
         }
 
@@ -96,13 +105,21 @@ namespace ICE_Webserver.Controllers
         }
 
         // GET: PredefinedMessages/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PredefinedMessage predefinedMessage = db.PredefinedMessages.Find(id);
+            PredefinedMessage predefinedMessage = null;
+
+            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                predefinedMessage = await JsonConvert.DeserializeObjectAsync<PredefinedMessage>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
             if (predefinedMessage == null)
             {
                 return HttpNotFound();
@@ -113,12 +130,23 @@ namespace ICE_Webserver.Controllers
         // POST: PredefinedMessages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            PredefinedMessage predefinedMessage = db.PredefinedMessages.Find(id);
-            db.PredefinedMessages.Remove(predefinedMessage);
-            db.SaveChanges();
+
+            if (ModelState.IsValid)
+            {
+                var response = await api.Request(HttpMethod.Delete, "api/PredefinedMessagesAPI/", id);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                await DisplayModelStateErrors(response);
+
+            }
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)

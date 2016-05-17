@@ -96,7 +96,7 @@ namespace ICE_Webserver.Controllers
             }
 
             Building building = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BuildingAPIs", (int)id);
+            var apiResponse = await api.Request(HttpMethod.Get, "api/BuildingsAPI", (int)id);
 
             if (apiResponse.IsSuccessStatusCode)
             {
@@ -114,7 +114,7 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Name")] Building building)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Name,Location")] Building building)
         {
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)

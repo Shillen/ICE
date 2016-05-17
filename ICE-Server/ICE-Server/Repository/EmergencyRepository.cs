@@ -34,9 +34,9 @@ namespace ICE_Server.Repository
             return result;
         }
 
-        public EmergencyTranslated GetEmergencyTranslations(int id)
+        public IEnumerable<EmergencyTranslated> GetEmergencyTranslations(int id)
         {
-            var result = (from r in context.EmergenciesTranslated where r.EmergencyID == id select r).FirstOrDefault();
+            var result = context.EmergenciesTranslated.Where(x => x.EmergencyID == id);
             return result;
         }
 
@@ -102,9 +102,17 @@ namespace ICE_Server.Repository
             }
 
             context.Emergencies.Remove(item);
-            context.SaveChanges();
+            context.EmergenciesTranslated.RemoveRange(context.EmergenciesTranslated.Where(x => x.EmergencyID == item.ID));
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
 
-            return true;
+            }
         }
 
         private bool checkEntry(int id)

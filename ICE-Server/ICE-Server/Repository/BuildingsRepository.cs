@@ -79,9 +79,35 @@ namespace ICE_Server.Repository
             }
 
             context.Buildings.Remove(item);
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
 
-            return true;
+            }
+        }
+        public bool Delete(int id)
+        {
+            if (checkEntry(id) == false)
+            {
+                return false;
+            }
+            Building building = context.Buildings.Find(id);
+            context.Buildings.Remove(building);
+            try
+            {
+                context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+
+            }
         }
 
         private bool checkEntry(int id)

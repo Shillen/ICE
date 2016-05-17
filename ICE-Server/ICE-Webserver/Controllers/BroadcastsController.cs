@@ -22,8 +22,6 @@ namespace ICE_Webserver.Controllers
         // GET: Broadcasts
         public async Task<ActionResult> Index()
         {
-            //var broadcasts = db.Broadcasts.Include(b => b.Emergency);
-
             List<Broadcast> broadcasts = null;
             var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI");
 
@@ -102,7 +100,7 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Message,Buildings, Emergency")] BroadcastItem broadcastitem)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Message,Buildings,Emergency")] BroadcastItem broadcastitem)
         {
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)

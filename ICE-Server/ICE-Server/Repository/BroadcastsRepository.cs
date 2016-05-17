@@ -137,6 +137,7 @@ namespace ICE_Server.Repository
             }
 
             context.Broadcasts.Remove(item);
+            context.BroadcastBuilding.RemoveRange(context.BroadcastBuilding.Where(x => x.BroadcastID == item.ID));
             try
             {
                 context.SaveChanges();

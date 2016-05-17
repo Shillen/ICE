@@ -18,6 +18,7 @@ namespace ICE_Webserver.Controllers
     public class EmergenciesController : BaseController
     {
         #pragma warning disable CS0618
+
         // GET: Emergencies
         public async Task<ActionResult> Index()
         {
@@ -40,7 +41,7 @@ namespace ICE_Webserver.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             List<EmergencyTranslated> emergencytranslations = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/EmergencyTranslated", (int)id);
+            var apiResponse = await api.Request(HttpMethod.Get, "api/EmergencyTranslated?id=" + id);
 
             if (apiResponse.IsSuccessStatusCode)
             {
@@ -55,6 +56,14 @@ namespace ICE_Webserver.Controllers
                 emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse2.Content.ReadAsStringAsync());
             }
 
+            List<Language> languages = null;
+            var apiResponse3 = await api.Request(HttpMethod.Get, "api/languagesAPI");
+
+            if (apiResponse3.IsSuccessStatusCode)
+            {
+                languages = await JsonConvert.DeserializeObjectAsync<List<Language>>(await apiResponse3.Content.ReadAsStringAsync());
+            }
+
             if (emergency == null)
             {
                 return HttpNotFound();
@@ -64,6 +73,7 @@ namespace ICE_Webserver.Controllers
             emergencyview.ID = emergency.ID;
             emergencyview.Name = emergency.Name;
             emergencyview.EmergencyTranslations = emergencytranslations;
+            emergencyview.Languages = languages;
             return View(emergencyview);
         }
 
@@ -78,7 +88,7 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID")] Emergency emergency)
+        public ActionResult Create([Bind(Include = "ID,Name")] Emergency emergency)
         {
             if (ModelState.IsValid)
             {
@@ -122,29 +132,49 @@ namespace ICE_Webserver.Controllers
         }
 
         // GET: Emergencies/Delete/5
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Emergency emergency = db.Emergencies.Find(id);
+
+            Emergency emergency = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/EmergencyAPI/", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
             if (emergency == null)
             {
                 return HttpNotFound();
             }
+
             return View(emergency);
         }
 
         // POST: Emergencies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Emergency emergency = db.Emergencies.Find(id);
-            db.Emergencies.Remove(emergency);
-            db.SaveChanges();
+
+            if (ModelState.IsValid)
+            {
+                var response = await api.Request(HttpMethod.Delete, "api/EmergencyAPI/", id);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                await DisplayModelStateErrors(response);
+
+            }
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)
