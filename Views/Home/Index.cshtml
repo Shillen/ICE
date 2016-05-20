@@ -70,15 +70,17 @@
                     <th width="20%">Emergency</th>
                     <th width="20%">Date</th>
                 </tr>
-                @foreach (var item in Model.Broadcasts)
+                @if (Model.Broadcasts != null)
                 {
-                    <tr>
-                        <td>@item.Message</td>
-                        <td>@item.EmergencyId</td>
-                        <td>@item.Time</td>
-                    </tr>
+                    foreach (var item in Model.Broadcasts)
+                    {
+                        <tr>
+                            <td>@item.Message</td>
+                            <td>@item.EmergencyId</td>
+                            <td>@item.Time</td>
+                        </tr>
+                    }
                 }
-                
             </table>
         </div>
     </div>
