@@ -9,7 +9,8 @@ using System.Web.Http;
 
 namespace ICE_Server.Controllers
 {
-    public class SynchronizeController : ApiController
+    [AllowAnonymous]
+    public class SynchronizeController : BaseController
     {
         private BroadcastsRepository broadcastRepository;
         private BuildingsRepository buildingRepository;

@@ -82,15 +82,17 @@ namespace ICE_Server.Repository
                 throw;
             }
             int id = broadcast.ID;
-
-            foreach (Building building in item.Buildings)
+            if (item.Buildings != null)
             {
-                broadcast.BroadcastBuildings.Add(new BroadcastBuilding { BroadcastID = id, BuildingID = building.ID });
-            }
+                foreach (Building building in item.Buildings)
+                {
+                    broadcast.BroadcastBuildings.Add(new BroadcastBuilding { BroadcastID = id, BuildingID = building.ID });
+                }
 
-            foreach (BroadcastBuilding BroadcastBuildingItem in broadcast.BroadcastBuildings)
-            {
-                context.BroadcastBuilding.Add(BroadcastBuildingItem);
+                foreach (BroadcastBuilding BroadcastBuildingItem in broadcast.BroadcastBuildings)
+                {
+                    context.BroadcastBuilding.Add(BroadcastBuildingItem);
+                }
             }
 
             context.Entry(broadcast).State = System.Data.Entity.EntityState.Modified;

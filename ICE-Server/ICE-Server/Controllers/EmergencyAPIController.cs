@@ -14,7 +14,7 @@ using ICE_Server.Repository;
 
 namespace ICE_Server.Controllers
 {
-    public class EmergencyAPIController : ApiController
+    public class EmergencyAPIController : BaseController
     {
         private EmergencyRepository emergencyRepository;
 

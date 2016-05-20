@@ -14,7 +14,7 @@ using ICE_Server.Repository;
 
 namespace ICE_Server.Controllers
 {
-    public class BuildingsAPIController : ApiController
+    public class BuildingsAPIController : BaseController
     {
         private BuildingsRepository buildingRepository;
 

@@ -33,9 +33,9 @@ namespace ICE_Server.Repository
             return result;
         }
 
-        public PredefinedMessageTranslated GetPredefinedMessageTranslations(int id)
+        public IEnumerable<PredefinedMessageTranslated> GetPredefinedMessageTranslations(int id)
         {
-            var result = (from r in context.PredefinedMessagesTranslated where r.PredefinedMessageID == id select r).FirstOrDefault();
+            var result = context.PredefinedMessagesTranslated.Where(x => x.PredefinedMessageID == id);
             return result;
         }
 

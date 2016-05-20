@@ -1,5 +1,6 @@
 namespace ICE_Server.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -39,18 +40,18 @@ namespace ICE_Server.Migrations
             context.Languages.Add(new Models.Language { ID = 2, Code = "NL" });
 
             // Add some EmergencyTyes
-            context.Emergencies.Add(new Models.Emergency { ID = 1, Name = "Fire" });
-            context.Emergencies.Add(new Models.Emergency { ID = 2, Name = "Shooting" });
-            context.Emergencies.Add(new Models.Emergency { ID = 3, Name = "Earthquake" });
+            context.Emergency.Add(new Models.Emergency { ID = 1, Name = "Fire" });
+            context.Emergency.Add(new Models.Emergency { ID = 2, Name = "Shooting" });
+            context.Emergency.Add(new Models.Emergency { ID = 3, Name = "Earthquake" });
 
             // Add some translations
-            context.EmergenciesTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 1, LanguageID = 1, Name = "Fire" });
-            context.EmergenciesTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 2, LanguageID = 1, Name = "Shooting" });
-            context.EmergenciesTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 3, LanguageID = 1, Name = "Gas leak" });
+            context.EmergencyTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 1, LanguageID = 1, Name = "Fire" });
+            context.EmergencyTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 2, LanguageID = 1, Name = "Shooting" });
+            context.EmergencyTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 3, LanguageID = 1, Name = "Gas leak" });
 
-            context.EmergenciesTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 1, LanguageID = 2, Name = "Vuur" });
-            context.EmergenciesTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 2, LanguageID = 2, Name = "Schiet partij" });
-            context.EmergenciesTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 3, LanguageID = 2, Name = "Gaslek" });
+            context.EmergencyTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 1, LanguageID = 2, Name = "Vuur" });
+            context.EmergencyTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 2, LanguageID = 2, Name = "Schiet partij" });
+            context.EmergencyTranslated.Add(new Models.EmergencyTranslated { EmergencyID = 3, LanguageID = 2, Name = "Gaslek" });
 
             // Add some messages
             context.PredefinedMessages.Add(new Models.PredefinedMessage { ID = 1, EmergencyID = 1 });
@@ -61,7 +62,43 @@ namespace ICE_Server.Migrations
             context.PredefinedMessagesTranslated.Add(new Models.PredefinedMessageTranslated { PredefinedMessageID = 1, LanguageID = 1, Message = "There is a fire!" });
             context.PredefinedMessagesTranslated.Add(new Models.PredefinedMessageTranslated { PredefinedMessageID = 1, LanguageID = 2, Message = "Er is een brand!" });
 
+            context.Roles.AddOrUpdate(
+                r => r.Id,
+                new Role
+                {
+                    Id = 1,
+                    Name = "Admin"
+                },
+                new Role
+                {
+                    Id = 2,
+                    Name = "User"
+                }
+            );
 
+            context.Users.AddOrUpdate(
+                    u => u.Id,
+                    new User
+                    {
+                        Id = 1,
+                        Email = "admin@windesheim.nl",
+                        EmailConfirmed = true,
+                        PasswordHash = "ABRYILynS2HeMz2PeFpd/a5K/6WnUaioZGbzqGdjL3qflAusqNuK1KmtAlCc4hXX6Q==",
+                        SecurityStamp = "40797fad-6af5-4651-8872-2990568d14bc",
+                        RoleId = 1,
+                        UserName = "Admin"
+                    },
+                    new User
+                    {
+                        Id = 2,
+                        Email = "michael@windesheim.nl",
+                        EmailConfirmed = true,
+                        PasswordHash = "ABRYILynS2HeMz2PeFpd/a5K/6WnUaioZGbzqGdjL3qflAusqNuK1KmtAlCc4hXX6Q==",
+                        SecurityStamp = "40797fad-6af5-4651-8872-2990568d14bc",
+                        RoleId = 2,
+                        UserName = "Michael"
+                    }
+                );
             // Add some broadcasts
             //context.Broadcasts.Add(new Models.Broadcast { Message = "There is a fire!", Buildings = new List<Models.Building>() { new Models.Building() { ID = 1, Name = "A" } }, EmergencyId = 1 });
             //context.Broadcasts.Add(new Models.Broadcast { Message = "There is a shooting", Buildings = new List<Models.Building>() { new Models.Building() { ID = 2, Name = "B" } }, EmergencyId = 2 });

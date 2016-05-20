@@ -11,6 +11,7 @@ using ICE_Server.Models;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ICE_Webserver.ViewModels;
 
 namespace ICE_Webserver.Controllers
 {
@@ -20,36 +21,75 @@ namespace ICE_Webserver.Controllers
         // GET: PredefinedMessages
         public async Task<ActionResult> Index()
         {
-            List<Broadcast> predefinedMessages = null;
+            List<PredefinedMessage> predefinedMessages = null;
             var apiResponse = await api.Request(HttpMethod.Get, "api/PredefinedMessagesAPI");
 
             if (apiResponse.IsSuccessStatusCode)
             {
-                predefinedMessages = await JsonConvert.DeserializeObjectAsync<List<Broadcast>>(await apiResponse.Content.ReadAsStringAsync());
+                predefinedMessages = await JsonConvert.DeserializeObjectAsync<List<PredefinedMessage>>(await apiResponse.Content.ReadAsStringAsync());
             }
+            List<Emergency> Emergencies = null;
+            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI");
+
+            if (apiResponse2.IsSuccessStatusCode)
+            {
+                Emergencies = await JsonConvert.DeserializeObjectAsync<List<Emergency>>(await apiResponse2.Content.ReadAsStringAsync());
+            }
+
+            PredefinedMessageViewModel messageview = new PredefinedMessageViewModel();
+            
 
             return View(predefinedMessages.ToList());
         }
 
         // GET: PredefinedMessages/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PredefinedMessage predefinedMessage = db.PredefinedMessages.Find(id);
-            if (predefinedMessage == null)
+            List<PredefinedMessageTranslated> messagetranslations = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/PredefinedMessageTranslated?id=" + id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                messagetranslations = await JsonConvert.DeserializeObjectAsync<List<PredefinedMessageTranslated>>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
+            Emergency emergency = null;
+            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI/", (int)id);
+
+            if (apiResponse2.IsSuccessStatusCode)
+            {
+                emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse2.Content.ReadAsStringAsync());
+            }
+
+            List<Language> languages = null;
+            var apiResponse3 = await api.Request(HttpMethod.Get, "api/languagesAPI");
+
+            if (apiResponse3.IsSuccessStatusCode)
+            {
+                languages = await JsonConvert.DeserializeObjectAsync<List<Language>>(await apiResponse3.Content.ReadAsStringAsync());
+            }
+
+            if (emergency == null)
             {
                 return HttpNotFound();
             }
-            return View(predefinedMessage);
+
+            PredefinedMessageViewModel messageview = new PredefinedMessageViewModel();
+            messageview.ID = id ?? default(int);
+            messageview.EmergencyName = emergency.Name;
+            messageview.PredefinedMessageTranslations = messagetranslations;
+            messageview.Languages = languages;
+            return View(messageview);
         }
 
         // GET: PredefinedMessages/Create
         public ActionResult Create()
         {
-            ViewBag.EmergencyID = new SelectList(db.Emergencies, "ID", "ID");
+            ViewBag.EmergencyID = new SelectList(db.Emergency, "ID", "ID");
             return View();
         }
 
@@ -67,7 +107,7 @@ namespace ICE_Webserver.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EmergencyID = new SelectList(db.Emergencies, "ID", "ID", predefinedMessage.EmergencyID);
+            ViewBag.EmergencyID = new SelectList(db.Emergency, "ID", "ID", predefinedMessage.EmergencyID);
             return View(predefinedMessage);
         }
 
@@ -83,7 +123,7 @@ namespace ICE_Webserver.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EmergencyID = new SelectList(db.Emergencies, "ID", "ID", predefinedMessage.EmergencyID);
+            ViewBag.EmergencyID = new SelectList(db.Emergency, "ID", "ID", predefinedMessage.EmergencyID);
             return View(predefinedMessage);
         }
 
@@ -100,7 +140,7 @@ namespace ICE_Webserver.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.EmergencyID = new SelectList(db.Emergencies, "ID", "ID", predefinedMessage.EmergencyID);
+            ViewBag.EmergencyID = new SelectList(db.Emergency, "ID", "ID", predefinedMessage.EmergencyID);
             return View(predefinedMessage);
         }
 

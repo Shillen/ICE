@@ -20,23 +20,23 @@ namespace ICE_Server.Repository
 
         public IEnumerable<Emergency> GetAll()
         {
-            return context.Emergencies;
+            return context.Emergency;
         }
 
         public IEnumerable<EmergencyTranslated> GetAllTranslated()
         {
-            return context.EmergenciesTranslated;
+            return context.EmergencyTranslated;
         }
 
         public Emergency Get(int id)
         {
-            var result = (from r in context.Emergencies where r.ID == id select r).FirstOrDefault();
+            var result = (from r in context.Emergency where r.ID == id select r).FirstOrDefault();
             return result;
         }
 
         public IEnumerable<EmergencyTranslated> GetEmergencyTranslations(int id)
         {
-            var result = context.EmergenciesTranslated.Where(x => x.EmergencyID == id);
+            var result = context.EmergencyTranslated.Where(x => x.EmergencyID == id);
             return result;
         }
 
@@ -48,7 +48,7 @@ namespace ICE_Server.Repository
         public bool InsertTranslations(List<EmergencyTranslated> itemList)
         {
             Emergency emergency = new Emergency();
-            context.Emergencies.Add(emergency);
+            context.Emergency.Add(emergency);
             context.SaveChanges();
 
             int id = emergency.ID;
@@ -56,7 +56,7 @@ namespace ICE_Server.Repository
             foreach (EmergencyTranslated translationItem in itemList)
             {
                 translationItem.EmergencyID = id;
-                context.EmergenciesTranslated.Add(translationItem);
+                context.EmergencyTranslated.Add(translationItem);
             }
 
             try
@@ -101,8 +101,8 @@ namespace ICE_Server.Repository
                 return false;
             }
 
-            context.Emergencies.Remove(item);
-            context.EmergenciesTranslated.RemoveRange(context.EmergenciesTranslated.Where(x => x.EmergencyID == item.ID));
+            context.Emergency.Remove(item);
+            context.EmergencyTranslated.RemoveRange(context.EmergencyTranslated.Where(x => x.EmergencyID == item.ID));
             try
             {
                 context.SaveChanges();
@@ -117,7 +117,7 @@ namespace ICE_Server.Repository
 
         private bool checkEntry(int id)
         {
-            return context.Emergencies.Count(e => e.ID == id) > 0;
+            return context.Emergency.Count(e => e.ID == id) > 0;
         }
 
 

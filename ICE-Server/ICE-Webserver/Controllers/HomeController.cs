@@ -1,6 +1,7 @@
 ﻿using ICE_Server.Controllers;
 using ICE_Server.Models;
 using ICE_Server.PushNotifications;
+using ICE_Webserver.Authorization;
 using ICE_Webserver.Models;
 using ICE_Webserver.ViewModels;
 using Newtonsoft.Json;
@@ -14,6 +15,7 @@ using System.Web.Mvc;
 
 namespace ICE_Webserver.Controllers
 {
+    [ICEAuthorize]
     public class HomeController : BaseController
     {
         private Pushmessage pushNotification;
@@ -42,11 +44,14 @@ namespace ICE_Webserver.Controllers
             }
 
             DashboardViewModel homeview = new DashboardViewModel();
-            homeview.BroadcastCount = stats.BroadcastCount;
-            homeview.BuildingCount = stats.BuildingCount;
-            homeview.EmergenciesCount = stats.EmergenciesCount;
-            homeview.PredefinedMessagesCount = stats.PredefinedMessagesCount;
-            homeview.DevicesCount = stats.DevicesCount;
+            if (stats != null)
+            {
+                homeview.BroadcastCount = stats.BroadcastCount;
+                homeview.BuildingCount = stats.BuildingCount;
+                homeview.EmergenciesCount = stats.EmergenciesCount;
+                homeview.PredefinedMessagesCount = stats.PredefinedMessagesCount;
+                homeview.DevicesCount = stats.DevicesCount;
+            }
             homeview.Broadcasts = broadcasts;
             return View(homeview);
         }

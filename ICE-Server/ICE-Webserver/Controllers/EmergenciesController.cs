@@ -92,7 +92,7 @@ namespace ICE_Webserver.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Emergencies.Add(emergency);
+                db.Emergency.Add(emergency);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -107,7 +107,7 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Emergency emergency = db.Emergencies.Find(id);
+            Emergency emergency = db.Emergency.Find(id);
             if (emergency == null)
             {
                 return HttpNotFound();

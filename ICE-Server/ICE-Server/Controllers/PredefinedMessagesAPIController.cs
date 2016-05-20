@@ -14,7 +14,7 @@ using ICE_Server.Repository;
 
 namespace ICE_Server.Controllers
 {
-    public class PredefinedMessagesController : ApiController
+    public class PredefinedMessagesController : BaseController
     {
         private PredefinedMessagesRepository predefinedmessageRepository;
 
@@ -48,9 +48,9 @@ namespace ICE_Server.Controllers
         // GET: api/PredefinedMessageTranslated/5
         [ResponseType(typeof(PredefinedMessageTranslated))]
         [Route("api/PredefinedMessageTranslated")]
-        public IHttpActionResult GetPredefinedMessageTranslations(int id)
+        public IEnumerable<PredefinedMessageTranslated> GetPredefinedMessageTranslations(int id)
         {
-            return Ok(predefinedmessageRepository.GetPredefinedMessageTranslations(id));
+            return predefinedmessageRepository.GetPredefinedMessageTranslations(id);
         }
 
         // POST: api/PredefinedMessagesAPI

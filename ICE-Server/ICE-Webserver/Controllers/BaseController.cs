@@ -1,5 +1,6 @@
 ﻿using ICE_Server.DAL;
 using ICE_Server.Models;
+using ICE_Webserver.Authorization;
 using ICE_Webserver.Models;
 using Newtonsoft.Json;
 using System;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 
 namespace ICE_Webserver.Controllers
 {
+    [ICEAuthorize]
     public class BaseController : Controller
     {
         protected API api;

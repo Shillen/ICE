@@ -19,6 +19,20 @@ namespace ICE_Webserver.Controllers
     public class BroadcastsController : BaseController
     {
         #pragma warning disable CS0618
+        // not working yet
+        public async Task<Broadcast> getBroadcast(int? id)
+        {
+            Broadcast broadcast = null;
+            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                broadcast = await JsonConvert.DeserializeObjectAsync<Broadcast>(await apiResponse.Content.ReadAsStringAsync());
+            }
+
+            return broadcast;
+        }
+
         // GET: Broadcasts
         public async Task<ActionResult> Index()
         {
@@ -100,6 +114,13 @@ namespace ICE_Webserver.Controllers
             BroadcastViewModel broadcastview = new BroadcastViewModel();
             broadcastview.Time = DateTime.Now;
             broadcastview.Buildings = buildings;
+
+            List<BuildingView> buildingview = new List<BuildingView>();
+            foreach (var item in buildings)
+            {
+                buildingview.Add(new BuildingView() { ID = item.ID, Name = item.Name, Selected = false });
+            }
+            broadcastview.Buildingview = buildingview;
             broadcastview.Emergencies = emergencies;
             return View(broadcastview);
         }
@@ -109,8 +130,9 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Message,Buildings,Emergency")] BroadcastItem broadcastitem)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Message,Buildings,EmergencyId")] BroadcastItem broadcastitem)
         {
+            //broadcastitem.Buildings.Add();
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
@@ -122,63 +144,41 @@ namespace ICE_Webserver.Controllers
                 {
                     return RedirectToAction("Index");
                 }
+                
 
                 // Otherwise check if any model state error were returned that can be displayed
                 await DisplayModelStateErrors(response);
 
             }
+
+            List<Emergency> emergencies = null;
+            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI");
+
+            if (apiResponse2.IsSuccessStatusCode)
+            {
+                emergencies = await JsonConvert.DeserializeObjectAsync<List<Emergency>>(await apiResponse2.Content.ReadAsStringAsync());
+            }
+
+            Emergency emergency = null;
+            var apiResponse3 = await api.Request(HttpMethod.Get, "api/EmergencyAPI/", (int)broadcastitem.EmergencyId);
+
+            if (apiResponse3.IsSuccessStatusCode)
+            {
+                emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse3.Content.ReadAsStringAsync());
+            }
+
             BroadcastViewModel broadcastview = new BroadcastViewModel();
             broadcastview.Message = broadcastitem.Message;
             broadcastview.Buildings = broadcastitem.Buildings;
+            List<BuildingView> buildingview = new List<BuildingView>();
+            foreach (var item in broadcastitem.Buildings)
+            {
+                buildingview.Add(new BuildingView() { ID = item.ID, Name = item.Name, Selected = false });
+            }
+            broadcastview.Buildingview = buildingview;
+            broadcastview.Emergencies = emergencies;
+            broadcastview.EmergencyName = emergency.Name;
             return View(broadcastview);
-        }
-
-        // GET: Broadcasts/Edit/5
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Broadcast broadcast = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                broadcast = await JsonConvert.DeserializeObjectAsync<Broadcast>(await apiResponse.Content.ReadAsStringAsync());
-            }
-            if (broadcast == null)
-            {
-                return HttpNotFound();
-            }
-            return View(broadcast);
-        }
-
-        // POST: Broadcasts/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Message,Time,EmergencyId")] Broadcast broadcast)
-        {
-            // Only if the model is valid it will be send to API
-            if (ModelState.IsValid)
-            {
-                // Request to API
-                var response = await api.Request(HttpMethod.Put, "api/DevicesAPI/", broadcast);
-
-                // Check API's response
-                if (response.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("Index");
-                }
-
-                // Otherwise check if any model state error were returned that can be displayed
-                await DisplayModelStateErrors(response);
-
-            }
-            return View(broadcast);
         }
 
         // GET: Broadcasts/Delete/5

@@ -14,7 +14,7 @@ using ICE_Server.Repository;
 
 namespace ICE_Server.Controllers
 {
-    public class DevicesAPIController : ApiController
+    public class DevicesAPIController : BaseController
     {
         private DevicesRepository deviceRepository;
 

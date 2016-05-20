@@ -1,4 +1,5 @@
 ﻿using ICE_Server.Models;
+using ICE_Webserver.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ICE_Webserver.Controllers
 {
+    [ICEAuthorize(Roles="Admin")]
     public class SettingsController : BaseController
     {
         // GET: Settings

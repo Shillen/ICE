@@ -14,7 +14,7 @@ using ICE_Server.Repository;
 
 namespace ICE_Server.Controllers
 {
-    public class BroadcastsAPIController : ApiController
+    public class BroadcastsAPIController : BaseController
     {
         private BroadcastsRepository broadcastRepository;
 

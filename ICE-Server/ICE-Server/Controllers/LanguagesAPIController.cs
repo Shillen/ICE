@@ -14,7 +14,7 @@ using ICE_Server.Repository;
 
 namespace ICE_Server.Controllers
 {
-    public class LanguagesAPIController : ApiController
+    public class LanguagesAPIController : BaseController
     {
         private LanguagesRepository languageRepository;
 

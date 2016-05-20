@@ -10,7 +10,7 @@ using System.Web.Http;
 namespace ICE_Server.Controllers
 {
 
-    public class StatsController : ApiController
+    public class StatsController : BaseController
     {
         private ICEContext context = new ICEContext();
         public StatsController()
@@ -24,7 +24,7 @@ namespace ICE_Server.Controllers
             Stats stats = new Stats();
             stats.BroadcastCount = context.Broadcasts.Count();
             stats.BuildingCount = context.Buildings.Count();
-            stats.EmergenciesCount = context.Emergencies.Count();
+            stats.EmergenciesCount = context.Emergency.Count();
             stats.PredefinedMessagesCount = context.PredefinedMessages.Count();
             stats.DevicesCount = context.Devices.Count();
             return Ok(stats);
