@@ -24,17 +24,17 @@ namespace ICE_Server.Repository
 
         public IEnumerable<Broadcast> GetAll()
         {
-            return context.Broadcasts;
+            return context.Broadcast;
         }
 
         public IEnumerable<Broadcast> GetRecent()
         {
-            return context.Broadcasts.OrderByDescending(c => c.ID).Take(10);
+            return context.Broadcast.OrderByDescending(c => c.ID).Take(10);
         }
 
         public Broadcast Get(int id)
         {
-            var result = (from r in context.Broadcasts where r.ID == id select r).FirstOrDefault();
+            var result = (from r in context.Broadcast where r.ID == id select r).FirstOrDefault();
             return result;
         }
 
@@ -72,7 +72,7 @@ namespace ICE_Server.Repository
                 Time = time
             };
             
-            context.Broadcasts.Add(broadcast);
+            context.Broadcast.Add(broadcast);
             try
             {
                 context.SaveChanges();
@@ -138,7 +138,7 @@ namespace ICE_Server.Repository
                 return false;
             }
 
-            context.Broadcasts.Remove(item);
+            context.Broadcast.Remove(item);
             context.BroadcastBuilding.RemoveRange(context.BroadcastBuilding.Where(x => x.BroadcastID == item.ID));
             try
             {
@@ -157,8 +157,8 @@ namespace ICE_Server.Repository
             {
                 return false;
             }
-            Broadcast bc = context.Broadcasts.Find(id);
-            context.Broadcasts.Remove(bc);
+            Broadcast bc = context.Broadcast.Find(id);
+            context.Broadcast.Remove(bc);
             try
             {
                 context.SaveChanges();
@@ -173,7 +173,7 @@ namespace ICE_Server.Repository
 
         private bool checkEntry(int id)
         {
-            return context.Broadcasts.Count(e => e.ID == id) > 0;
+            return context.Broadcast.Count(e => e.ID == id) > 0;
         }
     }
 }

@@ -20,8 +20,8 @@ namespace ICE_Webserver.Models
 
         public API()
         {
-            host = "http://localhost:6465/";
-            //host = "http://jeej-em.nl:443/";
+            //host = "http://localhost:6465/";
+            host = "http://jeej-em.nl:443/";
 
             // Query for the setting of the hostname
             //host = context.Settings.Where(b => b.Option == "hostAPI").FirstOrDefault().ToString();

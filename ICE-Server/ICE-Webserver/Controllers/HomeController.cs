@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace ICE_Webserver.Controllers
 {
-    [ICEAuthorize]
+    
     public class HomeController : BaseController
     {
         private Pushmessage pushNotification;

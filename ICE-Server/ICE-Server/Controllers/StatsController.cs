@@ -22,7 +22,7 @@ namespace ICE_Server.Controllers
         public IHttpActionResult Get()
         {
             Stats stats = new Stats();
-            stats.BroadcastCount = context.Broadcasts.Count();
+            stats.BroadcastCount = context.Broadcast.Count();
             stats.BuildingCount = context.Buildings.Count();
             stats.EmergenciesCount = context.Emergency.Count();
             stats.PredefinedMessagesCount = context.PredefinedMessages.Count();

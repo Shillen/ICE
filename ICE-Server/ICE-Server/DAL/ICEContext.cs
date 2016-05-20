@@ -21,7 +21,7 @@ namespace ICE_Server.DAL
             return new ICEContext();
         }
 
-        public virtual DbSet<Broadcast> Broadcasts { get; set; }
+        public virtual DbSet<Broadcast> Broadcast { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<BroadcastBuilding> BroadcastBuilding { get; set; }
         public virtual DbSet<Device> Devices { get; set; }
@@ -34,17 +34,18 @@ namespace ICE_Server.DAL
 
         //public virtual DbSet<User> User { get; set; }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //    modelBuilder.Entity<ApplicationUser>().ToTable("Users");
-        //    modelBuilder.Entity<IdentityRole>().ToTable("Roles");
-        //    modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
-        //    modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
-        //    modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<Emergency>().ToTable("Emergency");
+            modelBuilder.Entity<EmergencyTranslated>().ToTable("EmergencyTranslated");
+            //modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+            //modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
+            //modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
+            //modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
 
-        //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        //}
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
     }
 }
