@@ -1,4 +1,4 @@
-﻿@model ICE_Server.Models.PredefinedMessage
+﻿@model ICE_Webserver.ViewModels.PredefinedMessageViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -13,7 +13,7 @@
     </ol>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="panel panel-default panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Predefined message details</h3>
@@ -23,6 +23,17 @@
                     <td><strong>@Html.DisplayNameFor(model => model.ID)</strong></td>
                     <td>@Html.DisplayFor(model => model.ID)</td>
                 </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.EmergencyName)</strong></td>
+                    <td>@Html.DisplayFor(model => model.EmergencyName)</td>
+                </tr>
+                @foreach (var item in Model.Languages)
+                {
+                    <tr>
+                        <td><strong>Translation for @Html.LabelFor(model => item.Code, item.Code)</strong></td>
+                        <td>@Html.DisplayFor(model => Model.PredefinedMessageTranslations.FirstOrDefault(x => x.LanguageID == item.ID).Message)</td>
+                    </tr>
+                }
             </table>
             <div class="panel-footer rightText">
                 <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "PredefinedMessages")'" />

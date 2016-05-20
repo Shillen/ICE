@@ -1,4 +1,4 @@
-﻿@model ICE_Webserver.Models.API
+﻿@model ICE_Webserver.ViewModels.DashboardViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -15,50 +15,15 @@
 <!-- PANELS -->
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <div class="panel panel-default panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Welcome Swampy Swamp</h3>
             </div>
             <div class="panel-body">
                 It has been 8 hours since your last login. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.<br /><br />
-                <input type="button" value="Send in a swampmonster attack!" class="btn btn-block btn-default" onclick="location.href='@Url.Action("TestPushNotification", "Home")'" />
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Scheduled broadcasts</h3>
-            </div>
-            <table class="table">
-                <tr>
-                    <th width="40%">Title</th>
-                    <th width="50%">Date</th>
-                    <th width="10%"></th>
-                </tr>
-                <tr>
-                    <td>Swampmonster</td>
-                    <td>20/04/2016 12:32:44</td>
-                    <td>
-                        <a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Swampmonster</td>
-                    <td>20/04/2016 12:32:44</td>
-                    <td>
-                        <a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Swampmonster</td>
-                    <td>20/04/2016 12:32:44</td>
-                    <td>
-                        <a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>
-                    </td>
-                </tr>
-            </table>
         </div>
     </div>
     <div class="col-md-4">
@@ -73,15 +38,19 @@
                 </tr>
                 <tr>
                     <td>Broadcasts</td>
-                    <td>21</td>
-                </tr>
-                <tr>
-                    <td>Broadcasts</td>
-                    <td>21</td>
+                    <td>@Html.DisplayFor(model => model.BroadcastCount)</td>
                 </tr>
                 <tr>
                     <td>Buildings</td>
-                    <td>12</td>
+                    <td>@Html.DisplayFor(model => model.BuildingCount)</td>
+                </tr>
+                <tr>
+                    <td>Emergencies</td>
+                    <td>@Html.DisplayFor(model => model.EmergenciesCount)</td>
+                </tr>
+                <tr>
+                    <td>Devices</td>
+                    <td>@Html.DisplayFor(model => model.DevicesCount)</td>
                 </tr>
             </table>
         </div>
@@ -97,35 +66,19 @@
             <!-- Table -->
             <table class="table">
                 <tr>
-                    <th width="25%">Title</th>
-                    <th width="40%">Message</th>
-                    <th width="15%">Emergency</th>
+                    <th width="60%">Message</th>
+                    <th width="20%">Emergency</th>
                     <th width="20%">Date</th>
                 </tr>
-                <tr>
-                    <td>Swampmonster attack</td>
-                    <td>Leave building X, there is an swampmonster!</td>
-                    <td>Other</td>
-                    <td>20/04/2016 12:32:44</td>
-                </tr>
-                <tr>
-                    <td>Swampmonster attack</td>
-                    <td>Leave building X, there is an swampmonster!</td>
-                    <td>Other</td>
-                    <td>20/04/2016 12:32:44</td>
-                </tr>
-                <tr>
-                    <td>Swampmonster attack</td>
-                    <td>Leave building X, there is an swampmonster!</td>
-                    <td>Other</td>
-                    <td>20/04/2016 12:32:44</td>
-                </tr>
-                <tr>
-                    <td>Swampmonster attack</td>
-                    <td>Leave building X, there is an swampmonster!</td>
-                    <td>Other</td>
-                    <td>20/04/2016 12:32:44</td>
-                </tr>
+                @foreach (var item in Model.Broadcasts)
+                {
+                    <tr>
+                        <td>@item.Message</td>
+                        <td>@item.EmergencyId</td>
+                        <td>@item.Time</td>
+                    </tr>
+                }
+                
             </table>
         </div>
     </div>

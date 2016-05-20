@@ -26,6 +26,10 @@
                     <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
                     <td>@Html.DisplayFor(model => model.Name)</td>
                 </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Location)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Location)</td>
+                </tr>
             </table>
             <div class="panel-footer rightText">
                 <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Buildings")'" />

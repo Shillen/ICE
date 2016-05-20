@@ -1,4 +1,4 @@
-﻿@model ICE_Server.Models.Broadcast
+﻿@model ICE_Webserver.ViewModels.BroadcastViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -31,10 +31,25 @@
                     <td><strong>@Html.DisplayNameFor(model => model.Time)</strong></td>
                     <td>@Html.DisplayFor(model => model.Time)</td>
                 </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.EmergencyName)</strong></td>
+                    <td>@Html.DisplayFor(model => model.EmergencyName)</td>
+                </tr>
+                <tr>
+                    <td><strong>Buildings</strong></td>
+                    <td>
+                        @foreach (var item in Model.Buildings)
+                        {
+                            @item.Name
+                            @Html.Raw(", ")
+                        }
+                    </td>
+                </tr>
+
             </table>
             <div class="panel-footer rightText">
                 <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Broadcasts")'" />
-                <input type="button" value="Edit" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", "Broadcasts", new { id = Model.ID })'" />
+                <input type="button" value="Remove broadcast" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "Broadcasts", new { id = Model.ID })'" />
 
             </div>
         </div>

@@ -19,8 +19,8 @@
                 <li class="navLi">@Html.ActionLink("Buildings", "Index", "Buildings")</li>
                 <li class="navLi">@Html.ActionLink("Emergencies", "Index", "Emergencies")</li>
                 <li class="navLi">@Html.ActionLink("Messages", "Index", "PredefinedMessages")</li>
-                <li class="navLi">@Html.ActionLink("Devices", "Index", "Devices")</li>
-                <li class="navLi">@Html.ActionLink("Settings", "Settings", "Home")</li>
+                <li class="navLi">@Html.ActionLink("Settings", "Index", "Settings")</li>
+                <li class="navLi"><a href="#">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -31,11 +31,11 @@
     <footer class="mainFooter">
         <div>
             <div class="divLeft">
-                &copy; @DateTime.Now.Year - ICE Application Windesheim University
+                ICE Web application - &copy; @DateTime.Now.Year All rights reserved
             </div>
 
             <div class="divRight">
-                @Html.ActionLink("IT-Support", "Contact", "Home") - @Html.ActionLink("About", "About", "Home")
+                Download the <a href="#">Android</a> or <a href="#">iOS</a> application - @Html.ActionLink("Disclaimer", "Disclaimer", "Home")
             </div>
         </div>
     </footer>

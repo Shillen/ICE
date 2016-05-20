@@ -1,4 +1,4 @@
-﻿@model ICE_Server.Models.Broadcast
+﻿@model ICE_Webserver.ViewModels.BroadcastViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -28,24 +28,40 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
-                                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextAreaFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
+                        
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-3" })
+                            @Html.Label("Buildings", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
-                                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                                <div class="checkboxview">
+                                    <div class="checkboxitem">
+                                        <input type="checkbox" id="checkall" /><label>Check all buildings</label>
+                                    </div>
+                                    @foreach (var item in Model.Buildingview)
+                                    {
+                                        <div class="checkboxitem">
+                                            @Html.HiddenFor(model => item.ID)
+                                            @Html.CheckBoxFor(model => item.Selected)
+                                            @Html.LabelFor(model => item.Name, item.Name)
+                                        </div>
+                                    }
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.EmergencyId, "EmergencyId", htmlAttributes: new { @class = "control-label col-md-3" })
+                            @Html.Label("Emergency", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
-                                @Html.DropDownList("EmergencyId", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.EmergencyId, "", new { @class = "text-danger" })
+                                <select class="form-control" name="EmergencyId" id="EmergencyId">
+                                    @foreach (var item in Model.Emergencies)
+                                    {
+                                        
+                                        <option value="@item.ID">@item.Name</option>
+                                    }
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -59,16 +75,33 @@
     </div>
 }
 
-@section scripts {
-<script type="text/javascript">
-  $(function () {
-    $('.datepicker').datetimepicker({
-      defaultDate: '@Model.Time',
-      format: 'dd/MM/yyyy hh:mm:ss',
-      showClose: true,
-      showClear: true,
-      toolbarPlacement: 'top'
-    });
-  });
-</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        function toggleChecked(status) {
+            $(".checkboxitem input").each(function () {
+                // Set the checked status of each to match the
+                // checked status of the check all checkbox:
+                $(this).prop("checked", status);
+            });
+        }
+
+        $(document).ready(function () {
+
+            // Grab a reference to the check all box:
+            var checkAllBox = $("#checkall");
+
+            //Set the default value of the global checkbox to true:
+            checkAllBox.prop('checked', false);
+
+            // Attach the call to toggleChecked to the
+            // click event of the global checkbox:
+            checkAllBox.click(function () {
+                var status = checkAllBox.prop('checked');
+                toggleChecked(status);
+            });
+        });
+    </script>
 }
