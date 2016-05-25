@@ -159,6 +159,7 @@ namespace ICE_Server.Repository
             }
             Broadcast bc = context.Broadcast.Find(id);
             context.Broadcast.Remove(bc);
+            context.BroadcastBuilding.RemoveRange(context.BroadcastBuilding.Where(x => x.BroadcastID == bc.ID));
             try
             {
                 context.SaveChanges();

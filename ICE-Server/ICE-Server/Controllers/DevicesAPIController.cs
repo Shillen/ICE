@@ -35,7 +35,7 @@ namespace ICE_Server.Controllers
         {
             return Ok(deviceRepository.Get(id));
         }
-
+        [AllowAnonymous]
         // POST: api/DevicesAPI
         [ResponseType(typeof(Device))]
         [HttpPost]

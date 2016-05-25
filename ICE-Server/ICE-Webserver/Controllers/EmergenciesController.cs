@@ -41,7 +41,7 @@ namespace ICE_Webserver.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             List<EmergencyTranslated> emergencytranslations = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/EmergencyTranslated?id=" + id);
+            var apiResponse = await api.Request(HttpMethod.Get, "api/EmergencyTranslated/", (int)id);
 
             if (apiResponse.IsSuccessStatusCode)
             {

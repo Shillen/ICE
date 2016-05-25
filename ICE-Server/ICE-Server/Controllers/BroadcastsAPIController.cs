@@ -39,6 +39,7 @@ namespace ICE_Server.Controllers
             return broadcastRepository.GetRecent();
         }
 
+
         // GET: api/BroadcastsAPI/5
         [ResponseType(typeof(Broadcast))]
         public IHttpActionResult GetBroadcast(int id)
@@ -47,7 +48,7 @@ namespace ICE_Server.Controllers
         }
         // GET: api/BroadcastBuildings/5
         [ResponseType(typeof(Building))]
-        [Route("api/BroadcastBuildings")]
+        [Route("api/BroadcastBuildings/{id}")]
         public IHttpActionResult GetBroadcastBuildings(int id)
         {
             return Ok(broadcastRepository.GetBroadcastBuildings(id));

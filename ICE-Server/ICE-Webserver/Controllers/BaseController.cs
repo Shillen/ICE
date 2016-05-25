@@ -25,6 +25,54 @@ namespace ICE_Webserver.Controllers
             db = new ICEContext();
         }
 
+        public async Task<RequestResponse<T>> HandleObjectFromRequest<T>(HttpMethod method, string url) where T : new()
+        {
+            var apiResponse = await api.Request(method, url);
+
+            RequestResponse<T> response = new RequestResponse<T>();
+            response.IsSuccessStatusCode = apiResponse.IsSuccessStatusCode;
+            response.Item = new T();
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                response.Item = JsonConvert.DeserializeObject<T>(await apiResponse.Content.ReadAsStringAsync());
+            }
+            return response;
+        }
+        public async Task<RequestResponse<T>> HandleObjectFromRequest<T>(HttpMethod method, string url, int id) where T : new()
+        {
+            var apiResponse = await api.Request(method, url, id);
+
+            RequestResponse<T> response = new RequestResponse<T>();
+            response.IsSuccessStatusCode = apiResponse.IsSuccessStatusCode;
+            response.Item = new T();
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                if (method !=  HttpMethod.Delete)
+                {
+                    response.Item = JsonConvert.DeserializeObject<T>(await apiResponse.Content.ReadAsStringAsync());
+                }
+                
+            }
+            return response;
+        }
+
+        public async Task<RequestResponse<T>> HandleObjectFromRequest<T> (HttpMethod method, string url, object @object) where T : new ()
+        {
+            var apiResponse = await api.Request(method, url, @object);
+
+            RequestResponse<T> response = new RequestResponse<T>();
+            response.IsSuccessStatusCode = apiResponse.IsSuccessStatusCode;
+            response.Item = new T();
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                response.Item = JsonConvert.DeserializeObject<T>(await apiResponse.Content.ReadAsStringAsync());
+            }
+            return response;
+        }
+
         protected async Task DisplayModelStateErrors(HttpResponseMessage apiResponse)
         {
 
@@ -50,5 +98,12 @@ namespace ICE_Webserver.Controllers
             }
 
         }
+    }
+
+    public class RequestResponse<T>
+    {
+        public bool IsSuccessStatusCode { get; set; }
+
+        public T Item { get; set; }
     }
 }

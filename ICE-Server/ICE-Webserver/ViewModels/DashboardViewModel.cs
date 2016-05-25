@@ -13,7 +13,8 @@ namespace ICE_Webserver.ViewModels
         public int EmergenciesCount { get; set; }
         public int PredefinedMessagesCount { get; set; }
         public int DevicesCount { get; set; }
-
+        public string AboutName { get; set; }
+        public string AboutText { get; set; }
         public virtual ICollection<Broadcast> Broadcasts { get; set; }
 
     }

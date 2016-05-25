@@ -18,6 +18,7 @@ namespace ICE_Server.Models
         /// </summary>
         [Key]
         public int ID { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Get/set the id of type of the predefined message type.
@@ -29,6 +30,7 @@ namespace ICE_Server.Models
         /// Get/set the type of the predefined message type.
         /// </summary>
         public Emergency Emergency { get; set; }
+
 
     }
 }

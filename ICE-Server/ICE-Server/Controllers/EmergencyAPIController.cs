@@ -45,7 +45,7 @@ namespace ICE_Server.Controllers
 
         // GET: api/EmergencyTranslated/5
         [ResponseType(typeof(EmergencyTranslated))]
-        [Route("api/EmergencyTranslated")]
+        [Route("api/EmergencyTranslated/{id}")]
         public IEnumerable<EmergencyTranslated> GetEmergencyTranslations(int id)
         {
             return emergencyRepository.GetEmergencyTranslations(id);

@@ -50,7 +50,7 @@ namespace ICE_Webserver.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             List<PredefinedMessageTranslated> messagetranslations = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/PredefinedMessageTranslated?id=" + id);
+            var apiResponse = await api.Request(HttpMethod.Get, "api/PredefinedMessageTranslated/", (int)id);
 
             if (apiResponse.IsSuccessStatusCode)
             {

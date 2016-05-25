@@ -22,13 +22,13 @@ namespace ICE_Server.Controllers
         {
             this.languageRepository = new LanguagesRepository(new ICEContext());
         }
-
+        [AllowAnonymous]
         // GET: api/LanguagesAPI
         public IEnumerable<Language> GetAll()
         {
             return languageRepository.GetAll();
         }
-
+        [AllowAnonymous]
         // GET: api/LanguagesAPI/5
         [ResponseType(typeof(Language))]
         public IHttpActionResult GetLanguage(int id)

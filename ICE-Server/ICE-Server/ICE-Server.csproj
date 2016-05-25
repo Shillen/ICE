@@ -487,7 +487,6 @@
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\SynchronizeController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\ICEContext.cs" />
     <Compile Include="DAL\ICEInitialize.cs" />
@@ -504,6 +503,7 @@
     <Compile Include="Models\Broadcast.cs" />
     <Compile Include="Models\BroadcastBuilding.cs" />
     <Compile Include="Models\BroadcastItem.cs" />
+    <Compile Include="Models\PredefinedMessageItem.cs" />
     <Compile Include="Models\EmergencyItem.cs" />
     <Compile Include="Models\EmergencyTranslated.cs" />
     <Compile Include="Models\IdentityModels.cs" />

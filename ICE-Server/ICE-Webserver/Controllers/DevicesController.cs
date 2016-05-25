@@ -21,15 +21,9 @@ namespace ICE_Webserver.Controllers
         // GET: Devices
         public async Task<ActionResult> Index()
         {
-            List<Device> devices = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/DevicesAPI");
+            RequestResponse<List<Device>> devices = await HandleObjectFromRequest<List<Device>>(HttpMethod.Get, "api/DevicesAPI/");
 
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                devices = await JsonConvert.DeserializeObjectAsync<List<Device>>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
-            return View(devices.ToList());
+            return View(devices.Item.ToList());
         }
 
         // GET: Devices/Details/5
@@ -40,20 +34,14 @@ namespace ICE_Webserver.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Device devices = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/DevicesAPI/", (int)id);
+            RequestResponse<Device> device = await HandleObjectFromRequest<Device>(HttpMethod.Get, "api/DevicesAPI/", (int)id);
 
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                devices = await JsonConvert.DeserializeObjectAsync<Device>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
-            if (devices == null)
+            if (device == null)
             {
                 return HttpNotFound();
             }
 
-            return View(devices);
+            return View(device.Item);
         }
 
         // GET: Devices/Create
@@ -72,18 +60,13 @@ namespace ICE_Webserver.Controllers
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
-                // Request to API
-                var response = await api.Request(HttpMethod.Post, "api/DevicesAPI/", device);
+                RequestResponse<Device> response = await HandleObjectFromRequest<Device>(HttpMethod.Post, "api/DevicesAPI/", device);
 
                 // Check API's response
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
                 }
-
-                // Otherwise check if any model state error were returned that can be displayed
-                await DisplayModelStateErrors(response);
-
             }
             return View(device);
         }
@@ -95,14 +78,8 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Device device = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/DevicesAPI", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                device = await JsonConvert.DeserializeObjectAsync<Device>(await apiResponse.Content.ReadAsStringAsync());
-            }
+            RequestResponse<Device> device = await HandleObjectFromRequest<Device>(HttpMethod.Get, "api/DevicesAPI/", (int)id);
+            
             if (device == null)
             {
                 return HttpNotFound();

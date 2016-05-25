@@ -47,7 +47,7 @@ namespace ICE_Server.Controllers
 
         // GET: api/PredefinedMessageTranslated/5
         [ResponseType(typeof(PredefinedMessageTranslated))]
-        [Route("api/PredefinedMessageTranslated")]
+        [Route("api/PredefinedMessageTranslated/{id}")]
         public IEnumerable<PredefinedMessageTranslated> GetPredefinedMessageTranslations(int id)
         {
             return predefinedmessageRepository.GetPredefinedMessageTranslations(id);

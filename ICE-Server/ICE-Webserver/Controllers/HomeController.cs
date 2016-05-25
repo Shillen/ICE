@@ -18,13 +18,6 @@ namespace ICE_Webserver.Controllers
     
     public class HomeController : BaseController
     {
-        private Pushmessage pushNotification;
-
-        public ActionResult TestPushNotification()
-        {
-            this.pushNotification = new Pushmessage(Pushmessage.PushTypes.Emergency, 1, "Watch out! A swampmonster is in the building!", 0);
-            return View("Index");
-        }
         #pragma warning disable CS0618
         public async Task<ActionResult> Index()
         {
@@ -51,6 +44,8 @@ namespace ICE_Webserver.Controllers
                 homeview.EmergenciesCount = stats.EmergenciesCount;
                 homeview.PredefinedMessagesCount = stats.PredefinedMessagesCount;
                 homeview.DevicesCount = stats.DevicesCount;
+                homeview.AboutName = db.Settings.Where(b => b.Option == "WebTitle").FirstOrDefault().Value;
+                homeview.AboutText = db.Settings.Where(b => b.Option == "About").FirstOrDefault().Value;
             }
             homeview.Broadcasts = broadcasts;
             return View(homeview);

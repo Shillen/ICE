@@ -91,9 +91,10 @@ namespace ICE_Webserver.Controllers
             return false;
         }
 
-
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
+            Session.Abandon();
             return this.RedirectToAction("Login", "Account");
         }
     }

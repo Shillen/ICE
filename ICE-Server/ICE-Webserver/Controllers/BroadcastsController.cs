@@ -19,32 +19,12 @@ namespace ICE_Webserver.Controllers
     public class BroadcastsController : BaseController
     {
         #pragma warning disable CS0618
-        // not working yet
-        public async Task<Broadcast> getBroadcast(int? id)
-        {
-            Broadcast broadcast = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                broadcast = await JsonConvert.DeserializeObjectAsync<Broadcast>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
-            return broadcast;
-        }
 
         // GET: Broadcasts
         public async Task<ActionResult> Index()
         {
-            List<Broadcast> broadcasts = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI");
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                broadcasts = await JsonConvert.DeserializeObjectAsync<List<Broadcast>>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
-            return View(broadcasts.ToList());
+            RequestResponse<List<Broadcast>> broadcasts = await HandleObjectFromRequest<List<Broadcast>>(HttpMethod.Get, "api/BroadcastsAPI/");
+            return View(broadcasts.Item.ToList());
         }
 
         // GET: Broadcasts/Details/5
@@ -54,74 +34,47 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
+            RequestResponse<Broadcast> broadcast = await HandleObjectFromRequest<Broadcast>(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
 
-            Broadcast broadcast = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                broadcast = await JsonConvert.DeserializeObjectAsync<Broadcast>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
-            if (broadcast == null)
+            if (broadcast.Item == null)
             {
                 return HttpNotFound();
             }
 
-            List<Building> broadcastbuildings = null;
-            var apiResponse2 = await api.Request(HttpMethod.Get, "api/BroadcastBuildings?id=" + id);
-
-            if (apiResponse2.IsSuccessStatusCode)
-            {
-                broadcastbuildings = await JsonConvert.DeserializeObjectAsync<List<Building>>(await apiResponse2.Content.ReadAsStringAsync());
-            }
-
-            Emergency emergency = null;
-            var apiResponse3 = await api.Request(HttpMethod.Get, "api/EmergencyAPI/", (int)broadcast.EmergencyId);
-
-            if (apiResponse3.IsSuccessStatusCode)
-            {
-                emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse3.Content.ReadAsStringAsync());
-            }
-
+            RequestResponse<List<Building>> broadcastbuildings = await HandleObjectFromRequest<List<Building>>(HttpMethod.Get, "api/BroadcastBuildings/", (int)id);
+            RequestResponse<Emergency> emergency = await HandleObjectFromRequest<Emergency>(HttpMethod.Get, "api/EmergencyAPI/", (int)broadcast.Item.EmergencyId);
+            
             BroadcastViewModel broadcastview = new BroadcastViewModel();
-            broadcastview.ID = broadcast.ID;
-            broadcastview.Message = broadcast.Message;
-            broadcastview.Time = broadcast.Time;
-            broadcastview.Buildings = broadcastbuildings;
-            broadcastview.EmergencyName = emergency.Name;
+            broadcastview.ID = broadcast.Item.ID;
+            broadcastview.Message = broadcast.Item.Message;
+            broadcastview.Time = broadcast.Item.Time;
+            broadcastview.Buildings = broadcastbuildings.Item;
+            broadcastview.EmergencyName = emergency.Item.Name;
             return View(broadcastview);
         }
 
         // GET: Broadcasts/Create
         public async  Task<ActionResult> Create()
         {
-            List<Building> buildings = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BuildingsAPI");
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                buildings = await JsonConvert.DeserializeObjectAsync<List<Building>>(await apiResponse.Content.ReadAsStringAsync());
-            }
-            List<Emergency> emergencies = null;
-            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI");
-
-            if (apiResponse2.IsSuccessStatusCode)
-            {
-                emergencies = await JsonConvert.DeserializeObjectAsync<List<Emergency>>(await apiResponse2.Content.ReadAsStringAsync());
-            }
+            RequestResponse<List<Building>> buildings = await HandleObjectFromRequest<List<Building>>(HttpMethod.Get, "api/BuildingsAPI/");
+            RequestResponse<List<Emergency>> emergencies = await HandleObjectFromRequest<List<Emergency>>(HttpMethod.Get, "api/EmergencyAPI/");
 
             BroadcastViewModel broadcastview = new BroadcastViewModel();
             broadcastview.Time = DateTime.Now;
-            broadcastview.Buildings = buildings;
+            broadcastview.Buildings = buildings.Item;
 
             List<BuildingView> buildingview = new List<BuildingView>();
-            foreach (var item in buildings)
+            if (buildings.Item != null)
             {
-                buildingview.Add(new BuildingView() { ID = item.ID, Name = item.Name, Selected = false });
+                foreach (var item in buildings.Item)
+                {
+                    buildingview.Add(new BuildingView() { ID = item.ID, Name = item.Name, Selected = false });
+                }
             }
+                
             broadcastview.Buildingview = buildingview;
-            broadcastview.Emergencies = emergencies;
+            broadcastview.Emergencies = emergencies.Item;
             return View(broadcastview);
         }
 
@@ -132,52 +85,36 @@ namespace ICE_Webserver.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Message,Buildings,EmergencyId")] BroadcastItem broadcastitem)
         {
-            //broadcastitem.Buildings.Add();
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
-                // Request to API
-                var response = await api.Request(HttpMethod.Post, "api/BroadcastsAPI/", broadcastitem);
+                RequestResponse<BroadcastItem> response = await HandleObjectFromRequest<BroadcastItem>(HttpMethod.Post, "api/BroadcastsAPI/", broadcastitem);
 
                 // Check API's response
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
                 }
-                
-
-                // Otherwise check if any model state error were returned that can be displayed
-                await DisplayModelStateErrors(response);
-
             }
 
-            List<Emergency> emergencies = null;
-            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI");
-
-            if (apiResponse2.IsSuccessStatusCode)
-            {
-                emergencies = await JsonConvert.DeserializeObjectAsync<List<Emergency>>(await apiResponse2.Content.ReadAsStringAsync());
-            }
-
-            Emergency emergency = null;
-            var apiResponse3 = await api.Request(HttpMethod.Get, "api/EmergencyAPI/", (int)broadcastitem.EmergencyId);
-
-            if (apiResponse3.IsSuccessStatusCode)
-            {
-                emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse3.Content.ReadAsStringAsync());
-            }
+            RequestResponse<List<Emergency>> emergencies = await HandleObjectFromRequest<List<Emergency>>(HttpMethod.Get, "api/EmergencyAPI/");
+            RequestResponse<Emergency> emergency = await HandleObjectFromRequest<Emergency>(HttpMethod.Get, "api/EmergencyAPI/", (int)broadcastitem.EmergencyId);
 
             BroadcastViewModel broadcastview = new BroadcastViewModel();
             broadcastview.Message = broadcastitem.Message;
             broadcastview.Buildings = broadcastitem.Buildings;
             List<BuildingView> buildingview = new List<BuildingView>();
-            foreach (var item in broadcastitem.Buildings)
+            if (broadcastitem.Buildings != null)
             {
-                buildingview.Add(new BuildingView() { ID = item.ID, Name = item.Name, Selected = false });
+                foreach (var item in broadcastitem.Buildings)
+                {
+                    buildingview.Add(new BuildingView() { ID = item.ID, Name = item.Name, Selected = false });
+                }
             }
+            
             broadcastview.Buildingview = buildingview;
-            broadcastview.Emergencies = emergencies;
-            broadcastview.EmergencyName = emergency.Name;
+            broadcastview.Emergencies = emergencies.Item;
+            broadcastview.EmergencyName = emergency.Item.Name;
             return View(broadcastview);
         }
 
@@ -188,21 +125,14 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            RequestResponse<Broadcast> broadcast = await HandleObjectFromRequest<Broadcast>(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
 
-            Broadcast broadcast = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                broadcast = await JsonConvert.DeserializeObjectAsync<Broadcast>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
-            if (broadcast == null)
+            if (broadcast.Item == null)
             {
                 return HttpNotFound();
             }
 
-            return View(broadcast);
+            return View(broadcast.Item);
         }
 
         // POST: Broadcasts/Delete/5
@@ -213,15 +143,11 @@ namespace ICE_Webserver.Controllers
 
             if (ModelState.IsValid)
             {
-                var response = await api.Request(HttpMethod.Delete, "api/BroadcastsAPI/", id);
-
+                RequestResponse<Broadcast> response = await HandleObjectFromRequest<Broadcast>(HttpMethod.Delete, "api/BroadcastsAPI/", id);
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
                 }
-
-                await DisplayModelStateErrors(response);
-
             }
             return RedirectToAction("Index");
 
