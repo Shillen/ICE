@@ -97,18 +97,12 @@ namespace ICE_Webserver.Controllers
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
-                // Request to API
-                var response = await api.Request(HttpMethod.Put, "api/DevicesAPI/", device);
+                RequestResponse<Device> response = await HandleObjectFromRequest<Device>(HttpMethod.Put, "api/DevicesAPI/", device);
 
-                // Check API's response
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
                 }
-
-                // Otherwise check if any model state error were returned that can be displayed
-                await DisplayModelStateErrors(response);
-
             }
             return View(device);
         }
@@ -120,15 +114,7 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Device device = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/DevicesAPI/", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                device = await JsonConvert.DeserializeObjectAsync<Device>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
+            RequestResponse<Device> device = await HandleObjectFromRequest<Device>(HttpMethod.Get, "api/DevicesAPI/", (int)id);
             if (device == null)
             {
                 return HttpNotFound();
@@ -142,21 +128,15 @@ namespace ICE_Webserver.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-
             if (ModelState.IsValid)
             {
-                var response = await api.Request(HttpMethod.Delete, "api/DevicesAPI/", id);
-
+                RequestResponse<Device> response = await HandleObjectFromRequest<Device>(HttpMethod.Delete, "api/DevicesAPI/", id);
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
                 }
-
-                await DisplayModelStateErrors(response);
-
             }
             return RedirectToAction("Index");
-
         }
 
         protected override void Dispose(bool disposing)

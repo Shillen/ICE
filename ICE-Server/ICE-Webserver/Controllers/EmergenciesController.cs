@@ -40,29 +40,9 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<EmergencyTranslated> emergencytranslations = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/EmergencyTranslated/", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                emergencytranslations = await JsonConvert.DeserializeObjectAsync<List<EmergencyTranslated>>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
-            Emergency emergency = null;
-            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI/", (int)id);
-
-            if (apiResponse2.IsSuccessStatusCode)
-            {
-                emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse2.Content.ReadAsStringAsync());
-            }
-
-            List<Language> languages = null;
-            var apiResponse3 = await api.Request(HttpMethod.Get, "api/languagesAPI");
-
-            if (apiResponse3.IsSuccessStatusCode)
-            {
-                languages = await JsonConvert.DeserializeObjectAsync<List<Language>>(await apiResponse3.Content.ReadAsStringAsync());
-            }
+            RequestResponse<List<EmergencyTranslated>> emergencytranslations = await HandleObjectFromRequest<List<EmergencyTranslated>>(HttpMethod.Get, "api/EmergencyTranslated/", (int)id);
+            RequestResponse<Emergency> emergency = await HandleObjectFromRequest<Emergency>(HttpMethod.Get, "api/EmergencyAPI/", (int)id);
+            RequestResponse<List<Language>> languages = await HandleObjectFromRequest<List<Language>>(HttpMethod.Get, "api/languagesAPI");
 
             if (emergency == null)
             {
@@ -70,17 +50,20 @@ namespace ICE_Webserver.Controllers
             }
             
             EmergencyViewModel emergencyview = new EmergencyViewModel();
-            emergencyview.ID = emergency.ID;
-            emergencyview.Name = emergency.Name;
-            emergencyview.EmergencyTranslations = emergencytranslations;
-            emergencyview.Languages = languages;
+            emergencyview.ID = emergency.Item.ID;
+            emergencyview.Name = emergency.Item.Name;
+            emergencyview.EmergencyTranslations = emergencytranslations.Item;
+            emergencyview.Languages = languages.Item;
             return View(emergencyview);
         }
 
         // GET: Emergencies/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            RequestResponse<List<Language>> languages = await HandleObjectFromRequest<List<Language>>(HttpMethod.Get, "api/languagesAPI");
+            EmergencyViewModel emergencyview = new EmergencyViewModel();
+            emergencyview.Languages = languages.Item;
+            return View(emergencyview);
         }
 
         // POST: Emergencies/Create
