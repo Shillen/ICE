@@ -21,15 +21,14 @@ using System.Web;
 namespace ICE_Server.Controllers
 {
     [RoutePrefix("api/user")]
-    public class UserController : ApiController
+    public class UserController : BaseController
     {
 
         public CustomClaimsPrincipal CurrentUser
         {
             get { return new CustomClaimsPrincipal((ClaimsPrincipal)ControllerContext.RequestContext.Principal); }
         }
-
-
+        
         public UserController()
             : this(Startup.UserManagerFactory(), Startup.RoleManagerFactory(), Startup.OAuthOptions.AccessTokenFormat)
         {
@@ -75,32 +74,31 @@ namespace ICE_Server.Controllers
                 //var accessToken = Startup.OAuthOptions.AccessTokenFormat.Protect(ticket);
                 var accessToken = AccessTokenFormat.Protect(ticket);
 
+                UserViewModel userView = new UserViewModel
+                {
+                    Id = dboUser.Id,
+                    Email = dboUser.Email,
+                    UserName = dboUser.UserName,
+                    Role = dboUser.Role,
+                    RoleId = dboUser.RoleId
+                };
+
                 return Ok(new OAuthResponse
                 {
                     AccessToken = accessToken,
                     Expires = (DateTimeOffset)ticket.Properties.ExpiresUtc,
                     ExpiresIn = ticket.Properties.ExpiresUtc.Value.Ticks - ticket.Properties.IssuedUtc.Value.Ticks,
                     Issued = (DateTimeOffset)ticket.Properties.IssuedUtc,
-                    User = dboUser
+                    User = userView
                 });
             }
             ModelState.AddModelError("Password", "Incorrect login credentials, please try again.");
-            //if (dboUser == null)
-            //{
-            //    // ModelState.AddModelError("Password", Resources.Global.InvalidPassword);
-            //    ModelState.AddModelError("Password", "Invalid password");
-            //}
-            //else
-            //{
-            //    ModelState.AddModelError("Password", "Email not confirmed");
-            //}
             return BadRequest(ModelState);
         }
 
-
         // POST api/User/Register
-        [AllowAnonymous]
         [Route("Register")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -111,21 +109,15 @@ namespace ICE_Server.Controllers
             // Create a user database object from the binding model
             User user = new User
             {
-                UserName = model.UserName,
                 Email = model.Email,
-                RoleId = 2, // Registered user by default
+                RoleId = model.RoleId, // Registered user by default
                 Ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"]
             };
 
             // Check if the username already exists
-            var userNameExists = await UserManager.FindByNameAsync(model.UserName);
-
-            if (userNameExists != null)
-            {
-                //ModelState.AddModelError("UserName", Resources.Global.UserNameAlreadyExists);
-                ModelState.AddModelError("UserName", "User name already exists");
-                return BadRequest(ModelState);
-            }
+            string userName = user.Email.Substring(0, Math.Min(user.Email.IndexOf('@'), user.Email.IndexOf('.')));
+            string corportationName = user.Email.Substring(user.Email.IndexOf('@') + 1, user.Email.IndexOf('.', user.Email.IndexOf('@')) - user.Email.IndexOf('@') - 1);
+            user.UserName =  userName + corportationName;
 
             // Check if the email already exists
             var emailExists = await UserManager.FindByEmailAsync(model.Email);
@@ -136,8 +128,28 @@ namespace ICE_Server.Controllers
                 return BadRequest(ModelState);
             }
 
+            var userNameExists = await UserManager.FindByNameAsync(user.UserName);
+
+            if (userNameExists != null)
+            {
+                //ModelState.AddModelError("UserName", Resources.Global.UserNameAlreadyExists);
+                ModelState.AddModelError("UserName", "User name already exists");
+                return BadRequest(ModelState);
+            }
+            
+            // Create password
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            string password = "";
+            var random = new Random ();
+
+            for (int i = 0; i < 8; i++)
+            {
+                password += chars[random.Next(chars.Length)];
+            }
+            // string password = System.Web.Security.Membership.GeneratePassword(8, 0).Replace("_", "p").Replace(".", "a");
+
             // Add the user to the database
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            IdentityResult result = await UserManager.CreateAsync(user, password);
             IHttpActionResult errorResult = GetErrorResult(result);
 
             // If an error occurred, let the user know about it
@@ -180,8 +192,123 @@ namespace ICE_Server.Controllers
             return Ok(user);
         }
 
+        // GET api/User
+        [ResponseType(typeof(IEnumerable<User>))]
+        public IEnumerable<User> GetUsers()
+        {
+            return UserManager.Users;
+        }
 
+        // GET: api/User/5
+        [ResponseType(typeof(User))]
+        public async Task<IHttpActionResult> GetUser(int id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
+            return Ok(user);
+        }
+
+        // PUT: api/User
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutUser(EditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (model.Id < 0)
+            {
+                return BadRequest();
+            }
+
+            if (CurrentUser == null)
+            {
+                ModelState.AddModelError("Email", "You must be logged in to edit.");
+                return BadRequest(ModelState);
+            }
+
+            // Get the original user details from the database
+            var user = await UserManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            if (CurrentUser.RoleId != RoleManager.FindByName("Admin").Id || CurrentUser.UserId == model.Id)
+            {
+                // If the old password is empty
+                if (model.OldPassword == null)
+                {
+                    ModelState.AddModelError("OldPassword", "The old password is necessary.");
+                    return BadRequest(ModelState);
+                }
+                // If the old password is not correct
+                if (!UserManager.CheckPassword(user, model.OldPassword))
+                {
+                    ModelState.AddModelError("OldPassword", "The old password does not match.");
+                    return BadRequest(ModelState);
+                }
+            }
+
+            // If a user changed an email address, but the email address is already in use by 
+            // another user, return a bad request
+            if (user.Email != model.Email && UserManager.FindByEmail(model.Email) != null)
+            {
+                ModelState.AddModelError("Email", "This email is already taken");
+                return BadRequest(ModelState);
+            }
+
+            // Add the edited values
+            user.Email = model.Email;
+            user.UserName = model.UserName;
+
+            if (CurrentUser.UserId != model.Id && CurrentUser.RoleId == RoleManager.FindByName("Admin").Id)
+            {
+                user.RoleId = model.RoleId;
+            }
+
+            // Update the user
+            var result = await UserManager.UpdateAsync(user);
+            var errorResult = GetErrorResult(result);
+
+            // If an error occurred, let the user know about it
+            if (errorResult != null)
+            {
+                return errorResult;
+            }
+
+            // If the user's password was changed, update it
+            if (model.NewPassword != null)
+            {
+                // First remove the current one
+                result = await UserManager.RemovePasswordAsync(user.Id);
+                errorResult = GetErrorResult(result);
+
+                // If an error occurred, let the user know about it
+                if (errorResult != null)
+                {
+                    return errorResult;
+                }
+
+                // Now update to the new one
+                result = await UserManager.AddPasswordAsync(user.Id, model.NewPassword);
+                errorResult = GetErrorResult(result);
+
+                // If an error occurred, let the user know about it
+                if (errorResult != null)
+                {
+                    return errorResult;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
         private IHttpActionResult GetErrorResult(IdentityResult result)
         {
@@ -212,81 +339,6 @@ namespace ICE_Server.Controllers
             return null;
         }
 
-
-
-
-
-
-        // Automatically created
-        // GET: api/User
-        public IQueryable<User> GetUsers()
-        {
-            return UserManager.Users;
-        }
-
-        // GET: api/User/5
-        [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> GetUser(int id)
-        {
-            var user = await UserManager.FindByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(user);
-        }
-
-        // PUT: api/User/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutUser(int id, User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/User
-        [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> PostUser(User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Users.Add(user);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
-        }
-
         // DELETE: api/User/5
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> DeleteUser(int id)
@@ -297,9 +349,8 @@ namespace ICE_Server.Controllers
                 return NotFound();
             }
 
-            db.Users.Remove(user);
-            await db.SaveChangesAsync();
-
+            UserManager.Delete(user);
+            
             return Ok(user);
         }
 

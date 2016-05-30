@@ -484,7 +484,8 @@
     <Compile Include="Controllers\HomeAPIController.cs" />
     <Compile Include="Controllers\LanguagesAPIController.cs" />
     <Compile Include="Controllers\PredefinedMessagesAPIController.cs" />
-    <Compile Include="Controllers\SettingsAPIController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\SynchronizeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -514,7 +515,9 @@
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\Stats.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Views\Authentication\UserViewModel.cs" />
     <Compile Include="Models\Views\Authentication\LoginViewModel.cs" />
+    <Compile Include="Models\Views\Authentication\EditViewModel.cs" />
     <Compile Include="Models\Views\Authentication\RegisterViewModel.cs" />
     <Compile Include="Providers\ApplicationOAuthProviders.cs" />
     <Compile Include="PushNotifications\PushMessages.cs" />
@@ -529,7 +532,6 @@
     <Compile Include="Repository\EmergencyRepository.cs" />
     <Compile Include="Repository\LanguagesRepository.cs" />
     <Compile Include="Repository\PredefinedMessagesRepository.cs" />
-    <Compile Include="Repository\SettingsRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

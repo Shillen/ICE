@@ -18,8 +18,8 @@ namespace ICE_Server.Models
 
         //[Required(ErrorMessageResourceType = typeof(Resources.Global), ErrorMessageResourceName = "UserNameRequired")]
         [Required(ErrorMessage = "User name is required")]
-        [MaxLength(30, ErrorMessage = "User name must be less than 30 caracteres")]
-        [MinLength(3, ErrorMessage = "User name must have at least 3 caracteres")]
+        //[MaxLength(30, ErrorMessage = "User name must be less than 30 caracteres")]
+        //[MinLength(3, ErrorMessage = "User name must have at least 3 caracteres")]
         [RegularExpression("([a-z]|[A-Z]|[0-9]|_|-)+", ErrorMessage = "User name can only have letters, numbers and the special caracteres '_' and '-'")]
         public override string UserName { get; set; }
 

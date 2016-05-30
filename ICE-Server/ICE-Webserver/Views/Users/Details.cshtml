@@ -35,6 +35,10 @@
                     <td><strong>@Html.DisplayNameFor(model => model.EmailConfirmed)</strong></td>
                     <td>@Html.DisplayFor(model => model.EmailConfirmed)</td>
                 </tr>
+                <tr>
+                    <td><strong>Role @Html.DisplayNameFor(model => model.Role.Name)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Role.Name)</td>
+                </tr>
             </table>
             <div class="panel-footer rightText">
                 <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Users")'" />

@@ -29,13 +29,6 @@ namespace ICE_Webserver.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            //if (!this.ModelState.IsValid)
-            //{
-            //    return this.View(model);
-            //}
-
-            //return this.RedirectToAction("Index", "Home");
-
             // Try to login the user
             var successfulLogin = await ExecuteLogin(model);
 

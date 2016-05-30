@@ -1,4 +1,5 @@
 ﻿using ICE_Server.Models;
+using ICE_Server.Models.Views.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace ICE_Webserver.Authorization
             }
 
             // If a user is banned, don't authorize
-            if (((User)httpContext.Session["User"]).Role.Name.Equals("Banned"))
+            if (((UserViewModel)httpContext.Session["User"]).Role.Name.Equals("Banned"))
             {
                 return false;
             }
@@ -37,7 +38,7 @@ namespace ICE_Webserver.Authorization
                 // Check if the user contains one of the required roles
                 foreach (var role in roles)
                 {
-                    if (role.Equals(((User)httpContext.Session["User"]).Role.Name))
+                    if (role.Equals(((UserViewModel)httpContext.Session["User"]).Role.Name))
                     {
                         validRole = true;
                         break;
@@ -82,7 +83,9 @@ namespace ICE_Webserver.Authorization
 
         private List<string> RolesToRolesList()
         {
-            return Roles.Split(new char[','], StringSplitOptions.RemoveEmptyEntries).ToList();
+            var carac = new char[] { ',' };
+            var roles = Roles.Split(carac, StringSplitOptions.RemoveEmptyEntries);
+            return roles.ToList();
         }
     }
 }
