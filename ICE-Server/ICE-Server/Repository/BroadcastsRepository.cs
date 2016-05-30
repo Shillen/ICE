@@ -61,7 +61,7 @@ namespace ICE_Server.Repository
 
         public bool Insert(BroadcastItem item)
         {
-            Debug.WriteLine(item.PredefinedMessageID);
+            //Debug.WriteLine(item.PredefinedMessageID);
             DateTime time = DateTime.Now;
             Broadcast broadcast = new Broadcast
             {
@@ -100,7 +100,7 @@ namespace ICE_Server.Repository
             {
 
                 context.SaveChanges();
-                this.pushNotification = new Pushmessage(Pushmessage.PushTypes.Emergency, item.EmergencyId, item.Message, item.PredefinedMessageID);
+                this.pushNotification = new Pushmessage(Pushmessage.PushTypes.Emergency, item);
                 return true;
             }
             catch (DbUpdateConcurrencyException)

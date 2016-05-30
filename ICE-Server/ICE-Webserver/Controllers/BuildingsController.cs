@@ -20,15 +20,8 @@ namespace ICE_Webserver.Controllers
         // GET: Buildings
         public async Task<ActionResult> Index()
         {
-            List<Building> buildings = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BuildingsAPI");
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                buildings = await JsonConvert.DeserializeObjectAsync<List<Building>>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
-            return View(buildings.ToList());
+            RequestResponse<List<Building>> buildings = await HandleObjectFromRequest<List<Building>>(HttpMethod.Get, "api/BuildingsAPI/");
+            return View(buildings.Item.ToList());
         }
 
         // GET: Buildings/Details/5
@@ -39,20 +32,14 @@ namespace ICE_Webserver.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Building building = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BuildingsAPI/", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                building = await JsonConvert.DeserializeObjectAsync<Building>(await apiResponse.Content.ReadAsStringAsync());
-            }
+            RequestResponse<Broadcast> building = await HandleObjectFromRequest<Broadcast>(HttpMethod.Get, "api/BuildingsAPI/", (int)id);
 
             if (building == null)
             {
                 return HttpNotFound();
             }
 
-            return View(building);
+            return View(building.Item);
         }
 
         // GET: Buildings/Create
@@ -79,7 +66,6 @@ namespace ICE_Webserver.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-
                 // Otherwise check if any model state error were returned that can be displayed
                 await DisplayModelStateErrors(response);
 
@@ -94,19 +80,12 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Building building = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BuildingsAPI", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                building = await JsonConvert.DeserializeObjectAsync<Building>(await apiResponse.Content.ReadAsStringAsync());
-            }
+            RequestResponse<Building> building = await HandleObjectFromRequest<Building>(HttpMethod.Get, "api/BuildingsAPI/", (int)id);
             if (building == null)
             {
                 return HttpNotFound();
             }
-            return View(building);
+            return View(building.Item);
         }
 
         // POST: Buildings/Edit/5
@@ -142,21 +121,13 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Building building = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BuildingsAPI/", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                building = await JsonConvert.DeserializeObjectAsync<Building>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
+            RequestResponse<Building> building = await HandleObjectFromRequest<Building>(HttpMethod.Get, "api/BuildingsAPI/", (int)id);
             if (building == null)
             {
                 return HttpNotFound();
             }
 
-            return View(building);
+            return View(building.Item);
         }
 
         // POST: Buildings/Delete/5

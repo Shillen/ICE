@@ -9,8 +9,6 @@ namespace ICE_Server.Controllers
 {
     public class HomeAPIController : Controller
     {
-        private Pushmessage pushNotification;
-       
         public ActionResult Index()
         {
             return View();
@@ -38,7 +36,6 @@ namespace ICE_Server.Controllers
         }
         public ActionResult TestPushNotification()
         {
-            this.pushNotification = new Pushmessage(Pushmessage.PushTypes.Emergency, 1, "Watch out! A swampmonster is in the building!", 0);
             return View("Index");
         }
     }

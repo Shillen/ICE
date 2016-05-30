@@ -55,7 +55,7 @@ namespace ICE_Server.Controllers
         [ResponseType(typeof(Emergency))]
         [HttpPost]
         [Route("api/EmergencyAPI")]
-        public IHttpActionResult Insert(Emergency item)
+        public IHttpActionResult Insert(EmergencyItem item)
         {
             if (!ModelState.IsValid)
             {
@@ -64,38 +64,20 @@ namespace ICE_Server.Controllers
 
             emergencyRepository.Insert(item);
 
-            return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
+            return (Ok());
         }
-
-        // POST: api/EmergencyTranslated
-        [ResponseType(typeof(EmergencyTranslated))]
-        [HttpPost]
-        [Route("api/EmergencyTranslated")]
-        public IHttpActionResult InsertTranslations(List<EmergencyTranslated> itemList)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            emergencyRepository.InsertTranslations(itemList);
-
-            return Ok(itemList);
-
-        }
-
 
         // PUT: api/EmergencyAPI/5
         [ResponseType(typeof(void))]
         [HttpPut]
         [Route("api/EmergencyAPI")]
-        public IHttpActionResult Update(Emergency item)
+        public IHttpActionResult Update(EmergencyItem item, int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            int[] ids = { item.ID };
+            int[] ids = { id };
             emergencyRepository.Update(item, ids);
 
             return StatusCode(HttpStatusCode.NoContent);

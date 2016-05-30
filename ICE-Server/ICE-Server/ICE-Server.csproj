@@ -484,7 +484,7 @@
     <Compile Include="Controllers\HomeAPIController.cs" />
     <Compile Include="Controllers\LanguagesAPIController.cs" />
     <Compile Include="Controllers\PredefinedMessagesAPIController.cs" />
-    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\SettingsAPIController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\SynchronizeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -529,6 +529,7 @@
     <Compile Include="Repository\EmergencyRepository.cs" />
     <Compile Include="Repository\LanguagesRepository.cs" />
     <Compile Include="Repository\PredefinedMessagesRepository.cs" />
+    <Compile Include="Repository\SettingsRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

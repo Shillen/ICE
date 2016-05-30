@@ -21,7 +21,8 @@ namespace ICE_Server.PushNotifications
     {
         private string title { get; set; }
         private string message { get; set; }
-        private int predefinedID  { get; set; }
+        private int? predefinedID  { get; set; }
+        private List<Building> buildings { get; set; }
         private DevicesRepository deviceRepository;
 
         public enum PushTypes
@@ -40,9 +41,22 @@ namespace ICE_Server.PushNotifications
         /// Push a message 
         /// </summary>
         /// <param name="message">String of the message</param>
-        public Pushmessage(PushTypes pushType, int title, string message, int? predefinedID)
-        {
+        public Pushmessage(PushTypes pushType, BroadcastItem item)
+        //public Pushmessage(PushTypes pushType, int title, string message, int? predefinedID)
+        { 
             this.deviceRepository = new DevicesRepository(new ICEContext());
+
+            // update variables
+            if (pushType == PushTypes.Emergency)
+            {
+                title = "New emergency";
+            }
+            if (pushType == PushTypes.Update)
+            {
+                title = "New update";
+            }
+            buildings = item.Buildings;
+            message = item.Message;
 
             // Configuration: Setup the GCM sender information here
             var config = new GcmConfiguration("504565507826", "AIzaSyAvQgiq9HMGVULdUVzloqW3DSghFTTJ5Wc", null);
@@ -217,8 +231,7 @@ namespace ICE_Server.PushNotifications
             }
 
             // Stop the broker, wait for it to finish   
-            // This isn't done after every message, but after you're
-            // done with the broker
+            // This isn't done after every message, but after you're done with the broker
             gcmBroker.Stop();
             apnsBroker.Stop();
         }

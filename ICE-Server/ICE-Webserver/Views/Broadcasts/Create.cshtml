@@ -40,13 +40,34 @@
                                     <div class="checkboxitem">
                                         <input type="checkbox" id="checkall" /><label>Check all buildings</label>
                                     </div>
-                                    @foreach (var item in Model.Buildingview)
+                                    @if (Model.Buildings != null)
                                     {
-                                        <div class="checkboxitem">
-                                            @Html.HiddenFor(model => item.ID)
-                                            @Html.CheckBoxFor(model => item.Selected)
-                                            @Html.LabelFor(model => item.Name, item.Name)
-                                        </div>
+                                        @*for (int i = 0; i < Model.Buildingview.Count; i++)
+                                        {
+                                            <div class="checkboxitem">
+                                                @Html.CheckBoxFor(m => m.Buildingview[i].Selected, new { id = "building-" + i })
+                                                @Html.HiddenFor(m => m.Buildingview[i].Name)
+                                                @Html.DisplayFor(m => m.Buildingview[i].Name)
+                                            </div>
+                                        }*@
+                                        @*foreach (var item in Model.Buildingview)
+                                        {
+                                            <div class="checkboxitem">
+                                                <input type="checkbox" id="@item.Value" name="BuildingIds" value="@item.Text" />
+                                                <label for="buildingID">@item.Text</label>
+                                            </div>
+                                        }*@
+                                        foreach (var item in Model.Buildings)
+                                        {
+                                            <div class="checkboxitem">
+                                                <input type="checkbox" name="SelectedBuildings" value="@item.ID" />
+                                                <label for="SelectedBuildings">@item.Name 
+                                                    @if (item.Location != "") {
+                                                        @Html.Raw("- ") @item.Location;
+                                                    }
+                                                </label>
+                                            </div>
+                                        }
                                     }
                                 </div>
                             </div>
@@ -56,10 +77,12 @@
                             @Html.Label("Emergency", htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
                                 <select class="form-control" name="EmergencyId" id="EmergencyId">
-                                    @foreach (var item in Model.Emergencies)
+                                    @if (Model.Emergencies != null)
                                     {
-                                        
-                                        <option value="@item.ID">@item.Name</option>
+                                        foreach (var item in Model.Emergencies)
+                                        {
+                                            <option value="@item.ID">@item.Name</option>
+                                        }
                                     }
                                 </select>
                             </div>

@@ -44,18 +44,20 @@ namespace ICE_Server.Repository
             return true;
         }
 
-        public bool InsertTranslations(List<PredefinedMessageTranslated> itemList)
+        public bool Insert(PredefinedMessageItem item)
         {
-            PredefinedMessage predefinedMessage = new PredefinedMessage();
-            context.PredefinedMessages.Add(predefinedMessage);
+            PredefinedMessage predefMessage = new PredefinedMessage();
+            predefMessage.Name = item.Name;
+            predefMessage.EmergencyID = item.EmergencyId;
+            context.PredefinedMessages.Add(predefMessage);
             context.SaveChanges();
 
-            int id = predefinedMessage.ID;
+            int id = predefMessage.ID;
 
-            foreach (PredefinedMessageTranslated translationItem in itemList)
+            foreach (var translation in item.Translations)
             {
-                translationItem.PredefinedMessageID = id;
-                context.PredefinedMessagesTranslated.Add(translationItem);
+                translation.PredefinedMessageID = id;
+                context.PredefinedMessagesTranslated.Add(translation);
             }
 
             try
@@ -72,25 +74,43 @@ namespace ICE_Server.Repository
 
         public bool Update(PredefinedMessage item, int[] ids)
         {
-            if (checkEntry(item.ID) == false)
+            return true;
+
+        }
+
+        public bool Update(PredefinedMessageItem item, int[] ids)
+        {
+            if (checkEntry(ids[0]) == false)
             {
                 return false;
             }
-
-            context.Entry(item).State = System.Data.Entity.EntityState.Modified;
-
+            PredefinedMessage predefMessage = new PredefinedMessage();
+            predefMessage.ID = ids[0];
+            predefMessage.Name = item.Name;
             try
             {
-                context.SaveChanges();
-                return true;
+                context.Entry(predefMessage).State = System.Data.Entity.EntityState.Modified;
             }
             catch (DbUpdateConcurrencyException)
             {
                 throw;
-
+            }
+            foreach (PredefinedMessageTranslated translation in item.Translations)
+            {
+                try
+                {
+                    context.Entry(translation).State = System.Data.Entity.EntityState.Modified;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
             }
 
+            return true;
+
         }
+
         public bool Delete(PredefinedMessage item)
         {
             if (checkEntry(item.ID) == false)

@@ -21,25 +21,8 @@ namespace ICE_Webserver.Controllers
         // GET: PredefinedMessages
         public async Task<ActionResult> Index()
         {
-            List<PredefinedMessage> predefinedMessages = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/PredefinedMessagesAPI");
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                predefinedMessages = await JsonConvert.DeserializeObjectAsync<List<PredefinedMessage>>(await apiResponse.Content.ReadAsStringAsync());
-            }
-            List<Emergency> Emergencies = null;
-            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI");
-
-            if (apiResponse2.IsSuccessStatusCode)
-            {
-                Emergencies = await JsonConvert.DeserializeObjectAsync<List<Emergency>>(await apiResponse2.Content.ReadAsStringAsync());
-            }
-
-            PredefinedMessageViewModel messageview = new PredefinedMessageViewModel();
-            
-
-            return View(predefinedMessages.ToList());
+            RequestResponse<List<PredefinedMessage>> predefinedMessages = await HandleObjectFromRequest<List<PredefinedMessage>>(HttpMethod.Get, "api/PredefinedMessagesAPI");
+            return View(predefinedMessages.Item.ToList());
         }
 
         // GET: PredefinedMessages/Details/5
@@ -49,30 +32,9 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<PredefinedMessageTranslated> messagetranslations = null;
-            var apiResponse = await api.Request(HttpMethod.Get, "api/PredefinedMessageTranslated/", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                messagetranslations = await JsonConvert.DeserializeObjectAsync<List<PredefinedMessageTranslated>>(await apiResponse.Content.ReadAsStringAsync());
-            }
-
-            Emergency emergency = null;
-            var apiResponse2 = await api.Request(HttpMethod.Get, "api/EmergencyAPI/", (int)id);
-
-            if (apiResponse2.IsSuccessStatusCode)
-            {
-                emergency = await JsonConvert.DeserializeObjectAsync<Emergency>(await apiResponse2.Content.ReadAsStringAsync());
-            }
-
-            List<Language> languages = null;
-            var apiResponse3 = await api.Request(HttpMethod.Get, "api/languagesAPI");
-
-            if (apiResponse3.IsSuccessStatusCode)
-            {
-                languages = await JsonConvert.DeserializeObjectAsync<List<Language>>(await apiResponse3.Content.ReadAsStringAsync());
-            }
-
+            RequestResponse<List<PredefinedMessageTranslated>> messagetranslations = await HandleObjectFromRequest<List<PredefinedMessageTranslated>>(HttpMethod.Get, "api/PredefinedMessageTranslated/", (int)id);
+            RequestResponse<Emergency> emergency = await HandleObjectFromRequest<Emergency>(HttpMethod.Get, "api/EmergencyAPI/", (int)id);
+            RequestResponse<List<Language>> languages = await HandleObjectFromRequest<List<Language>>(HttpMethod.Get, "api/languagesAPI");
             if (emergency == null)
             {
                 return HttpNotFound();
@@ -80,9 +42,9 @@ namespace ICE_Webserver.Controllers
 
             PredefinedMessageViewModel messageview = new PredefinedMessageViewModel();
             messageview.ID = id ?? default(int);
-            messageview.EmergencyName = emergency.Name;
-            messageview.PredefinedMessageTranslations = messagetranslations;
-            messageview.Languages = languages;
+            messageview.EmergencyName = emergency.Item.Name;
+            messageview.PredefinedMessageTranslations = messagetranslations.Item;
+            messageview.Languages = languages.Item;
             return View(messageview);
         }
 
@@ -151,20 +113,14 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PredefinedMessage predefinedMessage = null;
 
-            var apiResponse = await api.Request(HttpMethod.Get, "api/BroadcastsAPI/", (int)id);
-
-            if (apiResponse.IsSuccessStatusCode)
-            {
-                predefinedMessage = await JsonConvert.DeserializeObjectAsync<PredefinedMessage>(await apiResponse.Content.ReadAsStringAsync());
-            }
+            RequestResponse<PredefinedMessage> predefinedMessage = await HandleObjectFromRequest<PredefinedMessage>(HttpMethod.Get, "api/PredefinedMessagesAPI/", (int)id);
 
             if (predefinedMessage == null)
             {
                 return HttpNotFound();
             }
-            return View(predefinedMessage);
+            return View(predefinedMessage.Item);
         }
 
         // POST: PredefinedMessages/Delete/5

@@ -18,8 +18,6 @@ namespace ICE_Webserver.Controllers
 {
     public class BroadcastsController : BaseController
     {
-        #pragma warning disable CS0618
-
         // GET: Broadcasts
         public async Task<ActionResult> Index()
         {
@@ -63,17 +61,6 @@ namespace ICE_Webserver.Controllers
             BroadcastViewModel broadcastview = new BroadcastViewModel();
             broadcastview.Time = DateTime.Now;
             broadcastview.Buildings = buildings.Item;
-
-            List<BuildingView> buildingview = new List<BuildingView>();
-            if (buildings.Item != null)
-            {
-                foreach (var item in buildings.Item)
-                {
-                    buildingview.Add(new BuildingView() { ID = item.ID, Name = item.Name, Selected = false });
-                }
-            }
-                
-            broadcastview.Buildingview = buildingview;
             broadcastview.Emergencies = emergencies.Item;
             return View(broadcastview);
         }
@@ -83,8 +70,20 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Message,Buildings,EmergencyId")] BroadcastItem broadcastitem)
+        public async Task<ActionResult> Create(BroadcastViewModel viewresult)
         {
+
+            BroadcastItem broadcastitem = new BroadcastItem();
+            broadcastitem.Message = viewresult.Message;
+            broadcastitem.EmergencyId = Int32.Parse(viewresult.EmergencyId);
+            if(viewresult.SelectedBuildings != null){
+                broadcastitem.Buildings = new List<Building>();
+                foreach (string value in viewresult.SelectedBuildings)
+                {
+                    broadcastitem.Buildings.Add(new Building() { ID = Int32.Parse(value) });
+                }
+            }
+            
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
@@ -103,16 +102,6 @@ namespace ICE_Webserver.Controllers
             BroadcastViewModel broadcastview = new BroadcastViewModel();
             broadcastview.Message = broadcastitem.Message;
             broadcastview.Buildings = broadcastitem.Buildings;
-            List<BuildingView> buildingview = new List<BuildingView>();
-            if (broadcastitem.Buildings != null)
-            {
-                foreach (var item in broadcastitem.Buildings)
-                {
-                    buildingview.Add(new BuildingView() { ID = item.ID, Name = item.Name, Selected = false });
-                }
-            }
-            
-            broadcastview.Buildingview = buildingview;
             broadcastview.Emergencies = emergencies.Item;
             broadcastview.EmergencyName = emergency.Item.Name;
             return View(broadcastview);

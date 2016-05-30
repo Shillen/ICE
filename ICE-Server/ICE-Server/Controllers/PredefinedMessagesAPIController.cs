@@ -57,7 +57,7 @@ namespace ICE_Server.Controllers
         [ResponseType(typeof(PredefinedMessage))]
         [HttpPost]
         [Route("api/PredefinedMessagesAPI")]
-        public IHttpActionResult Insert(PredefinedMessage item)
+        public IHttpActionResult Insert(PredefinedMessageItem item)
         {
             if (!ModelState.IsValid)
             {
@@ -66,25 +66,9 @@ namespace ICE_Server.Controllers
 
             predefinedmessageRepository.Insert(item);
 
-            return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
+            return (Ok());
         }
 
-        // POST: api/PredefinedMessageTranslated
-        [ResponseType(typeof(PredefinedMessageTranslated))]
-        [HttpPost]
-        [Route("api/PredefinedMessageTranslated")]
-        public IHttpActionResult InsertTranslations(List<PredefinedMessageTranslated> itemList)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            predefinedmessageRepository.InsertTranslations(itemList);
-
-            return Ok(itemList);
-
-        }
 
         // PUT: api/PredefinedMessagesAPI/5
         [ResponseType(typeof(void))]

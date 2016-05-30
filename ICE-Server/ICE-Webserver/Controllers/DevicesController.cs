@@ -130,7 +130,7 @@ namespace ICE_Webserver.Controllers
         {
             if (ModelState.IsValid)
             {
-                RequestResponse<Device> response = await HandleObjectFromRequest<Device>(HttpMethod.Delete, "api/DevicesAPI/", id);
+                var response = await api.Request(HttpMethod.Delete, "api/DevicesAPI/", id);
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");

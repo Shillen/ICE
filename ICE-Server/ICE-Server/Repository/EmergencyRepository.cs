@@ -45,18 +45,19 @@ namespace ICE_Server.Repository
             return true;
         }
 
-        public bool InsertTranslations(List<EmergencyTranslated> itemList)
+        public bool Insert(EmergencyItem item)
         {
             Emergency emergency = new Emergency();
+            emergency.Name = item.Name;
             context.Emergency.Add(emergency);
             context.SaveChanges();
 
             int id = emergency.ID;
 
-            foreach (EmergencyTranslated translationItem in itemList)
+            foreach (var translation in item.Translations)
             {
-                translationItem.EmergencyID = id;
-                context.EmergencyTranslated.Add(translationItem);
+                translation.EmergencyID = id;
+                context.EmergencyTranslated.Add(translation);
             }
 
             try
@@ -71,27 +72,42 @@ namespace ICE_Server.Repository
             }
         }
 
-        
-
         public bool Update(Emergency item, int[] ids)
         {
-            if (checkEntry(item.ID) == false)
+            return true;
+
+        }
+
+        public bool Update(EmergencyItem item, int[] ids)
+        {
+            if (checkEntry(ids[0]) == false)
             {
                 return false;
             }
-
-            context.Entry(item).State = System.Data.Entity.EntityState.Modified;
-
+            Emergency emergency = new Emergency();
+            emergency.ID = ids[0];
+            emergency.Name = item.Name;
             try
             {
-                context.SaveChanges();
-                return true;
+                context.Entry(emergency).State = System.Data.Entity.EntityState.Modified;
             }
             catch (DbUpdateConcurrencyException)
             {
                 throw;
-
             }
+            foreach (EmergencyTranslated translation in item.Translations)
+            {
+                try
+                {
+                    context.Entry(translation).State = System.Data.Entity.EntityState.Modified;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+            }
+
+            return true;
 
         }
         public bool Delete(Emergency item)
