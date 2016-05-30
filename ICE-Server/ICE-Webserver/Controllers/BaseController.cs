@@ -47,11 +47,13 @@ namespace ICE_Webserver.Controllers
             response.IsSuccessStatusCode = apiResponse.IsSuccessStatusCode;
             response.Item = new T();
 
+            response.Response = apiResponse;
+
             if (apiResponse.IsSuccessStatusCode)
             {
                 if (method !=  HttpMethod.Delete)
                 {
-                    response.Item = JsonConvert.DeserializeObject<T>(await apiResponse.Content.ReadAsStringAsync());
+                    response.Item = JsonConvert.DeserializeObject<T>(await response.Response.Content.ReadAsStringAsync());
                 }
                 
             }
@@ -66,10 +68,13 @@ namespace ICE_Webserver.Controllers
             response.IsSuccessStatusCode = apiResponse.IsSuccessStatusCode;
             response.Item = new T();
 
+            response.Response = apiResponse;
+
             if (apiResponse.IsSuccessStatusCode)
             {
-                response.Item = JsonConvert.DeserializeObject<T>(await apiResponse.Content.ReadAsStringAsync());
+                response.Item = JsonConvert.DeserializeObject<T>(await response.Response.Content.ReadAsStringAsync());
             }
+            
             return response;
         }
 
@@ -105,5 +110,7 @@ namespace ICE_Webserver.Controllers
         public bool IsSuccessStatusCode { get; set; }
 
         public T Item { get; set; }
+
+        public HttpResponseMessage Response { get; set; }
     }
 }
