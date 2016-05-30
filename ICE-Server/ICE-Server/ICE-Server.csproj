@@ -533,6 +533,7 @@
     <Compile Include="Repository\EmergencyRepository.cs" />
     <Compile Include="Repository\LanguagesRepository.cs" />
     <Compile Include="Repository\PredefinedMessagesRepository.cs" />
+    <Compile Include="Repository\SettingsRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
