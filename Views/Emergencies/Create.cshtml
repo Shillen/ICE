@@ -1,4 +1,4 @@
-﻿@model ICE_Server.Models.Emergency
+﻿@model ICE_Webserver.ViewModels.EmergencyViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -32,6 +32,19 @@
                                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                        @if (Model.Languages != null)
+                        {
+                            foreach (var item in Model.Languages)
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => Model.Translations, "Translation for " + item.Code ,htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        <input id="LanguageIds" name="LanguageIds" type="hidden" value="@item.ID">
+                                        <input type="text" name="Translations" value="" class="form-control" />
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
                 <div class="panel-footer rightText">

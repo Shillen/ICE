@@ -38,10 +38,13 @@
                 <tr>
                     <td><strong>Buildings</strong></td>
                     <td>
-                        @foreach (var item in Model.Buildings)
+                        @if (Model.Buildings != null)
                         {
-                            @item.Name
-                            @Html.Raw(", ")
+                            foreach (var item in Model.Buildings)
+                            {
+                                @item.Name
+                                @Html.Raw(", ")
+                            }
                         }
                     </td>
                 </tr>
@@ -50,7 +53,6 @@
             <div class="panel-footer rightText">
                 <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Broadcasts")'" />
                 <input type="button" value="Remove broadcast" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "Broadcasts", new { id = Model.ID })'" />
-
             </div>
         </div>
     </div>
