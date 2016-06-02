@@ -486,7 +486,6 @@
     <Compile Include="Controllers\PredefinedMessagesAPIController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SettingsAPIController.cs" />
-    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\SynchronizeController.cs" />
     <Compile Include="Controllers\UserController.cs" />

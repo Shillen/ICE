@@ -12,7 +12,7 @@ using System.Web.Http.Description;
 
 namespace ICE_Server.Controllers
 {
-    [ICEApiAuthorize(Roles="Admin")]
+   
     public class SettingsAPIController : BaseController
     {
         private SettingsRepository settingsRepository;

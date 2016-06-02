@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace ICE_Webserver.Controllers
 {
-    [ICEAuthorize(Roles="Admin")]
+    [ICEAuthorize]
     public class SettingsController : BaseController
     {
         // GET: Settings
