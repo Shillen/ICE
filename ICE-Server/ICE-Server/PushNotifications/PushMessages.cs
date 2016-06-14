@@ -47,15 +47,17 @@ namespace ICE_Server.PushNotifications
         { 
             this.deviceRepository = new DevicesRepository(new ICEContext());
 
+            title = item.EmergencyId.ToString();
+
             // update variables
-            if (pushType == PushTypes.Emergency)
-            {
-                title = "New emergency";
-            }
-            if (pushType == PushTypes.Update)
-            {
-                title = "New update";
-            }
+            //if (pushType == PushTypes.Emergency)
+            //{
+            //    title = "1";
+            //}
+            //if (pushType == PushTypes.Update)
+            //{
+            //    title = "2";
+            //}
             buildings = item.Buildings;
             message = item.Message;
 
@@ -74,13 +76,13 @@ namespace ICE_Server.PushNotifications
             // var config = new WnsConfiguration("WNS_PACKAGE_NAME", "WNS_PACKAGE_SID", "WNS_CLIENT_SECRET");
 
             // Apple feedback service
-            var fbs = new FeedbackService(configApple);
-            fbs.FeedbackReceived += (string deviceToken, DateTime timestamp) => {
-                // Remove the deviceToken from your database
-                // timestamp is the time the token was reported as expired
-                deviceRepository.DeleteToken(deviceToken);
-            };
-            fbs.Check();
+            //var fbs = new FeedbackService(configApple);
+            //fbs.FeedbackReceived += (string deviceToken, DateTime timestamp) => {
+            //    // Remove the deviceToken from your database
+            //    // timestamp is the time the token was reported as expired
+            //    deviceRepository.DeleteToken(deviceToken);
+            //};
+            //fbs.Check();
 
             // Wire up events for Google 
             gcmBroker.OnNotificationFailed += (notification, aggregateEx) =>
@@ -228,19 +230,20 @@ namespace ICE_Server.PushNotifications
             buildingMsg = "[";
             foreach (Building buildingitem in buildings)
             {
-                buildingMsg += buildingitem.ID + ", ";
+                buildingMsg += buildingitem.ID + ",";
             }
-            buildingMsg.Remove(buildingMsg.Length - 1, 1);
+            buildingMsg = buildingMsg.Remove(buildingMsg.LastIndexOf(","), 1);
             buildingMsg += "]";
 
             if (predefinedID == null)
             {
-                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":" + title + ",\"Content\":{\"Message\":\"" + message + ", \"Building\":" + buildingMsg + "}}";
-                iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\"Message\":\"" + message + ", \"Building\":" + buildingMsg + "}}}}";
+                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":\"" + title + "\",\"Content\":{\"Message\":\"" + message + "\", \"Building\":" + buildingMsg + "}}";
+                //iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\"Message\":\"" + message + ", \"Building\":" + buildingMsg + "}}}}";
+                iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":" + androidParse + "}}";
             }
             else
             {
-                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":" + title + ",\"Content\":{\"Message\":\"" + message + ", \"Building\":" + buildingMsg + "\",\"PredefinedMessage\":" + predefinedID + "}}";
+                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":\"" + title + "\",\"Content\":{\"Message\":\"" + message + "\", \"Building\":" + buildingMsg + "\",\"PredefinedMessage\":" + predefinedID + "}}";
                 iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\"Message\":\"" + message + ", \"Building\":" + buildingMsg + "}}}}";
             }
             

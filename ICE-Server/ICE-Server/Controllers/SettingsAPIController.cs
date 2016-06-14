@@ -22,12 +22,13 @@ namespace ICE_Server.Controllers
         }
 
         // GET: api/SettingsAPI
+        [Route("api/SettingsAPI")]
         public IEnumerable<Settings> GetAll()
         {
             return settingsRepository.GetAll();
         }
 
-        // PUT: api/DevicesAPI/5
+        // PUT: api/SettingsAPI/5
         [ResponseType(typeof(void))]
         [HttpPut]
         public IHttpActionResult Update(List<Settings> settings)
