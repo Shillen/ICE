@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ICE_Server.Models.Language>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <hr class="hr-primary" />
+    <ol class="breadcrumb bread-primary ">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>Language overview</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">All languages</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table" id="overview">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Code)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Code)
+                                </td>
+                                <td class="rightText">
+                                    <a href="@Url.Action("Details", "Languages", new { id = item.ID })"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a href="@Url.Action("Delete", "Languages", new { id = item.ID })"><span class="glyphicon glyphicon-trash"></span></a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+
+                </table>
+            </div>
+            <div class="panel-footer rightText">
+                <input type="button" value="Create new language" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Languages")'" />
+            </div>
+        </div>
+    </div>
+</div>

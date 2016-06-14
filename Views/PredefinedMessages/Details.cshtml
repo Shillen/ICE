@@ -24,6 +24,10 @@
                     <td>@Html.DisplayFor(model => model.ID)</td>
                 </tr>
                 <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
                     <td><strong>@Html.DisplayNameFor(model => model.EmergencyName)</strong></td>
                     <td>@Html.DisplayFor(model => model.EmergencyName)</td>
                 </tr>
@@ -40,7 +44,7 @@
             </table>
             <div class="panel-footer rightText">
                 <input type="button" value="Go back" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "PredefinedMessages")'" />
-                <input type="button" value="Edit" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", "PredefinedMessages ", new { id = Model.ID }) |'" />
+                <input type="button" value="Edit" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", "PredefinedMessages ", new { id = Model.ID })" />
             </div>
         </div>
     </div>

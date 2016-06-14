@@ -1,4 +1,4 @@
-﻿@model ICE_Server.Models.PredefinedMessage
+﻿@model ICE_Webserver.ViewModels.PredefinedMessageViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -8,7 +8,7 @@
     <ol class="breadcrumb bread-primary ">
         <li>@Html.ActionLink("Home", "Index", "Home")</li>
         <li>@Html.ActionLink("Predefined messages overview", "Index", "PredefinedMessages")</li>
-        <li>Create Emergency</li>
+        <li>Create predefined message</li>
     </ol>
 </div>
 
@@ -20,19 +20,45 @@
         <div class="col-md-6">
             <div class="panel panel-default panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Create a broadcast</h3>
+                    <h3 class="panel-title">Create a predefined message</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.EmergencyID, "EmergencyID", htmlAttributes: new { @class = "control-label col-md-3" })
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
-                                @Html.DropDownList("EmergencyID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.EmergencyID, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            @Html.Label("Emergency", htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                <select class="form-control" name="EmergencyId" id="EmergencyId">
+                                    @if (Model.Emergencies != null)
+                                    {
+                                        foreach (var item in Model.Emergencies)
+                                        {
+                                            <option value="@item.ID">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        @if (Model.Languages != null)
+                        {
+                            foreach (var item in Model.Languages)
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => Model.PredefinedMessageTranslations, "Translation for " + item.Code, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        <input id="LanguageIds" name="LanguageIds" type="hidden" value="@item.ID">
+                                        <input type="text" name="Translations" value="" class="form-control" />
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
                 <div class="panel-footer rightText">

@@ -1,0 +1,45 @@
+﻿@model ICE_Server.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <hr class="hr-primary" />
+    <ol class="breadcrumb bread-primary ">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("User overview", "Index", "Users")</li>
+        <li>My profile</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">My profile</h3>
+            </div>
+            <table class="table">
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Id)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Id)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.UserName)</strong></td>
+                    <td>@Html.DisplayFor(model => model.UserName)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.Email)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Email)</td>
+                </tr>
+                <tr>
+                    <td><strong>@Html.DisplayNameFor(model => model.EmailConfirmed)</strong></td>
+                    <td>@Html.DisplayFor(model => model.EmailConfirmed)</td>
+                </tr>
+                <tr>
+                    <td><strong>Role @Html.DisplayNameFor(model => model.Role.Name)</strong></td>
+                    <td>@Html.DisplayFor(model => model.Role.Name)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

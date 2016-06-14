@@ -28,7 +28,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-3" })
                             <div class="col-md-9">
-                                @Html.TextAreaFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextAreaFor(model => model.Message, new { htmlAttributes = new { maxlength="80", @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -42,21 +42,6 @@
                                     </div>
                                     @if (Model.Buildings != null)
                                     {
-                                        @*for (int i = 0; i < Model.Buildingview.Count; i++)
-                                        {
-                                            <div class="checkboxitem">
-                                                @Html.CheckBoxFor(m => m.Buildingview[i].Selected, new { id = "building-" + i })
-                                                @Html.HiddenFor(m => m.Buildingview[i].Name)
-                                                @Html.DisplayFor(m => m.Buildingview[i].Name)
-                                            </div>
-                                        }*@
-                                        @*foreach (var item in Model.Buildingview)
-                                        {
-                                            <div class="checkboxitem">
-                                                <input type="checkbox" id="@item.Value" name="BuildingIds" value="@item.Text" />
-                                                <label for="buildingID">@item.Text</label>
-                                            </div>
-                                        }*@
                                         foreach (var item in Model.Buildings)
                                         {
                                             <div class="checkboxitem">
