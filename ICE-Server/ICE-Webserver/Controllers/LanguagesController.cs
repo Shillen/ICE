@@ -14,17 +14,17 @@ using Newtonsoft.Json;
 
 namespace ICE_Webserver.Controllers
 {
-    public class BuildingsController : BaseController
+    public class LanguagesController : BaseController
     {
-        #pragma warning disable CS0618
-        // GET: Buildings
+#pragma warning disable CS0618
+        // GET: Languages
         public async Task<ActionResult> Index()
         {
-            RequestResponse<List<Building>> buildings = await HandleObjectFromRequest<List<Building>>(HttpMethod.Get, "api/BuildingsAPI/");
-            return View(buildings.Item.ToList());
+            RequestResponse<List<Language>> languages = await HandleObjectFromRequest<List<Language>>(HttpMethod.Get, "api/LanguagesAPI/");
+            return View(languages.Item.ToList());
         }
 
-        // GET: Buildings/Details/5
+        // GET: Languages/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,34 +32,34 @@ namespace ICE_Webserver.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            RequestResponse<Building> building = await HandleObjectFromRequest<Building>(HttpMethod.Get, "api/BuildingsAPI/", (int)id);
+            RequestResponse<Language> language = await HandleObjectFromRequest<Language>(HttpMethod.Get, "api/LanguagesAPI/", (int)id);
 
-            if (building == null)
+            if (language == null)
             {
                 return HttpNotFound();
             }
 
-            return View(building.Item);
+            return View(language.Item);
         }
 
-        // GET: Buildings/Create
+        // GET: Languages/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Buildings/Create
+        // POST: Languages/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name, Location")] Building building)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Code")] Language language)
         {
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
                 // Request to API
-                var response = await api.Request(HttpMethod.Post, "api/BuildingsAPI/", building);
+                var response = await api.Request(HttpMethod.Post, "api/LanguagesAPI/", language);
 
                 // Check API's response
                 if (response.IsSuccessStatusCode)
@@ -70,36 +70,36 @@ namespace ICE_Webserver.Controllers
                 await DisplayModelStateErrors(response);
 
             }
-            return View(building);
+            return View(language);
         }
 
-        // GET: Buildings/Edit/5
+        // GET: Languages/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RequestResponse<Building> building = await HandleObjectFromRequest<Building>(HttpMethod.Get, "api/BuildingsAPI/", (int)id);
-            if (building == null)
+            RequestResponse<Language> language = await HandleObjectFromRequest<Language>(HttpMethod.Get, "api/LanguagesAPI/", (int)id);
+            if (language == null)
             {
                 return HttpNotFound();
             }
-            return View(building.Item);
+            return View(language.Item);
         }
 
-        // POST: Buildings/Edit/5
+        // POST: Languages/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Name,Location")] Building building)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Code")] Language language)
         {
             // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
                 // Request to API
-                var response = await api.Request(HttpMethod.Put, "api/BuildingsAPI/", building);
+                var response = await api.Request(HttpMethod.Put, "api/LanguagesAPI/", language);
 
                 // Check API's response
                 if (response.IsSuccessStatusCode)
@@ -111,26 +111,26 @@ namespace ICE_Webserver.Controllers
                 await DisplayModelStateErrors(response);
 
             }
-            return View(building);
+            return View(language);
         }
 
-        // GET: Buildings/Delete/5
+        // GET: Languages/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RequestResponse<Building> building = await HandleObjectFromRequest<Building>(HttpMethod.Get, "api/BuildingsAPI/", (int)id);
-            if (building == null)
+            RequestResponse<Language> language = await HandleObjectFromRequest<Language>(HttpMethod.Get, "api/LanguagesAPI/", (int)id);
+            if (language == null)
             {
                 return HttpNotFound();
             }
 
-            return View(building.Item);
+            return View(language.Item);
         }
 
-        // POST: Buildings/Delete/5
+        // POST: Languages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -138,7 +138,7 @@ namespace ICE_Webserver.Controllers
 
             if (ModelState.IsValid)
             {
-                var response = await api.Request(HttpMethod.Delete, "api/BuildingsAPI/", id);
+                var response = await api.Request(HttpMethod.Delete, "api/LanguagesAPI/", id);
 
                 if (response.IsSuccessStatusCode)
                 {

@@ -70,16 +70,29 @@ namespace ICE_Server.Repository
         }
         public bool Delete(Language item)
         {
-            if (checkEntry(item.ID) == false)
+            
+            return true;
+        }
+        public bool Delete(int id)
+        {
+            if (checkEntry(id) == false)
             {
                 return false;
             }
+            Language language = context.Languages.Find(id);
+            //context.Languages.Remove(language);
+            try
+            {
+                //context.SaveChanges();
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
 
-            context.Languages.Remove(item);
-            context.SaveChanges();
-
-            return true;
+            }
         }
+
 
         private bool checkEntry (int id)
         {

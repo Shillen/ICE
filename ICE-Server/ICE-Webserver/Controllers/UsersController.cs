@@ -160,5 +160,27 @@ namespace ICE_Webserver.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        //GET: Users/Profile
+        public async Task<ActionResult> MyProfile()
+        {
+            User user = null;
+            if (((ICE_Server.Models.Views.Authentication.UserViewModel)Session["User"]) != null &&
+            ((ICE_Server.Models.Views.Authentication.UserViewModel)Session["User"]).Role.Name == "User")
+            {
+                user = (await HandleObjectFromRequest<User>(HttpMethod.Get, "api/User", (int)((ICE_Server.Models.Views.Authentication.UserViewModel)Session["User"]).Id)).Item;
+
+                if (user == null ||  user.Email == string.Empty || user.UserName == string.Empty)
+                {
+                    return HttpNotFound();
+                }
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(user);
+        }
     }
 }

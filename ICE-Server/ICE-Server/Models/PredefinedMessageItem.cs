@@ -7,6 +7,11 @@ namespace ICE_Server.Models
 {
     public class PredefinedMessageItem
     {
+
+        /// <summary>
+        /// Get/set the ID of the predefined message
+        /// </summary>
+        public int ID { get; set; }
         /// <summary>
         /// Get/set the name of the message.
         /// </summary>

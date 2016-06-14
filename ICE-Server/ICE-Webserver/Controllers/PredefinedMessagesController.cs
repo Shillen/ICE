@@ -32,6 +32,7 @@ namespace ICE_Webserver.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            RequestResponse<PredefinedMessage> predefMessage = await HandleObjectFromRequest<PredefinedMessage>(HttpMethod.Get, "api/PredefinedMessagesAPI/", (int)id);
             RequestResponse<List<PredefinedMessageTranslated>> messagetranslations = await HandleObjectFromRequest<List<PredefinedMessageTranslated>>(HttpMethod.Get, "api/PredefinedMessageTranslated/", (int)id);
             RequestResponse<Emergency> emergency = await HandleObjectFromRequest<Emergency>(HttpMethod.Get, "api/EmergencyAPI/", (int)id);
             RequestResponse<List<Language>> languages = await HandleObjectFromRequest<List<Language>>(HttpMethod.Get, "api/languagesAPI");
@@ -45,14 +46,24 @@ namespace ICE_Webserver.Controllers
             messageview.EmergencyName = emergency.Item.Name;
             messageview.PredefinedMessageTranslations = messagetranslations.Item;
             messageview.Languages = languages.Item;
+            messageview.Name = predefMessage.Item.Name;
             return View(messageview);
         }
 
         // GET: PredefinedMessages/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            ViewBag.EmergencyID = new SelectList(db.Emergency, "ID", "ID");
-            return View();
+            // Get all the data from the database via API calls
+            RequestResponse<List<Language>> languages = await HandleObjectFromRequest<List<Language>>(HttpMethod.Get, "api/languagesAPI");
+            RequestResponse<List<Emergency>> emergencies = await HandleObjectFromRequest<List<Emergency>>(HttpMethod.Get, "api/EmergencyAPI/");
+
+            // Create the new viewmodel and add the data from the API calls
+            PredefinedMessageViewModel messageview = new PredefinedMessageViewModel();
+            messageview.Languages = languages.Item;
+            messageview.Emergencies = emergencies.Item;
+
+            // Return the new viewmodel to the webpage
+            return View(messageview);
         }
 
         // POST: PredefinedMessages/Create
@@ -60,33 +71,63 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,EmergencyID")] PredefinedMessage predefinedMessage)
+        public async Task<ActionResult> Create(PredefinedMessageViewModel viewresult)
         {
-            if (ModelState.IsValid)
+            PredefinedMessageItem messageItem = new PredefinedMessageItem();
+            messageItem.EmergencyId = Int32.Parse(viewresult.EmergencyId);
+            messageItem.Name = viewresult.Name;
+            if (viewresult.Translations != null)
             {
-                db.PredefinedMessages.Add(predefinedMessage);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                messageItem.Translations = new List<PredefinedMessageTranslated>();
+                var i = 0;
+                foreach (string value in viewresult.Translations)
+                {
+                    messageItem.Translations.Add(new PredefinedMessageTranslated() { LanguageID = viewresult.LanguageIds[i], Message = value });
+                    i++;
+                }
             }
 
-            ViewBag.EmergencyID = new SelectList(db.Emergency, "ID", "ID", predefinedMessage.EmergencyID);
-            return View(predefinedMessage);
+            // Only if the model is valid it will be send to API
+            if (ModelState.IsValid)
+            {
+                RequestResponse<PredefinedMessageItem> response = await HandleObjectFromRequest<PredefinedMessageItem>(HttpMethod.Post, "api/PredefinedMessagesAPI/", messageItem);
+
+                // Check API's response
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            RequestResponse<List<Language>> languages = await HandleObjectFromRequest<List<Language>>(HttpMethod.Get, "api/languagesAPI");
+            PredefinedMessageViewModel messageview = new PredefinedMessageViewModel();
+            messageview.Languages = languages.Item;
+            return View(messageview);
         }
 
         // GET: PredefinedMessages/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PredefinedMessage predefinedMessage = db.PredefinedMessages.Find(id);
-            if (predefinedMessage == null)
+            RequestResponse<PredefinedMessage> predefMessage = await HandleObjectFromRequest<PredefinedMessage>(HttpMethod.Get, "api/PredefinedMessagesAPI/", (int)id);
+            if (predefMessage == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmergencyID = new SelectList(db.Emergency, "ID", "ID", predefinedMessage.EmergencyID);
-            return View(predefinedMessage);
+            RequestResponse<List<PredefinedMessageTranslated>> predefMessageTranslations = await HandleObjectFromRequest<List<PredefinedMessageTranslated>>(HttpMethod.Get, "api/PredefinedMessageTranslated/", (int)id);
+            RequestResponse<List<Language>> languages = await HandleObjectFromRequest<List<Language>>(HttpMethod.Get, "api/languagesAPI");
+            RequestResponse<List<Emergency>> emergencies = await HandleObjectFromRequest<List<Emergency>>(HttpMethod.Get, "api/EmergencyAPI/");
+
+
+            PredefinedMessageViewModel messageview = new PredefinedMessageViewModel();
+            messageview.ID = predefMessage.Item.ID;
+            messageview.Name = predefMessage.Item.Name;
+            messageview.PredefinedMessageTranslations = predefMessageTranslations.Item;
+            messageview.Languages = languages.Item;
+            messageview.Emergencies = emergencies.Item;
+            return View(messageview);
         }
 
         // POST: PredefinedMessages/Edit/5
@@ -94,16 +135,35 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,EmergencyID")] PredefinedMessage predefinedMessage)
+        public async Task<ActionResult> Edit(PredefinedMessageViewModel viewresult)
         {
+            PredefinedMessageItem predefMessageItem = new PredefinedMessageItem();
+            predefMessageItem.ID = viewresult.ID;
+            predefMessageItem.Name = viewresult.Name;
+            if (viewresult.Translations != null)
+            {
+                predefMessageItem.Translations = new List<PredefinedMessageTranslated>();
+                var i = 0;
+                foreach (string value in viewresult.Translations)
+                {
+                    predefMessageItem.Translations.Add(new PredefinedMessageTranslated() { PredefinedMessageID = predefMessageItem.ID, LanguageID = viewresult.LanguageIds[i], Message = value });
+                    i++;
+                }
+            }
+
+            // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
-                db.Entry(predefinedMessage).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                RequestResponse<PredefinedMessageItem> response = await HandleObjectFromRequest<PredefinedMessageItem>(HttpMethod.Put, "api/PredefinedMessageAPI/", predefMessageItem);
+
+                // Check API's response
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            ViewBag.EmergencyID = new SelectList(db.Emergency, "ID", "ID", predefinedMessage.EmergencyID);
-            return View(predefinedMessage);
+
+            return View(viewresult);
         }
 
         // GET: PredefinedMessages/Delete/5

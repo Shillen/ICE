@@ -23,6 +23,7 @@ namespace ICE_Server.PushNotifications
         private string message { get; set; }
         private int? predefinedID  { get; set; }
         private List<Building> buildings { get; set; }
+        private string buildingMsg { get; set; }
         private DevicesRepository deviceRepository;
 
         public enum PushTypes
@@ -63,10 +64,16 @@ namespace ICE_Server.PushNotifications
             var configApple = new ApnsConfiguration(ApnsConfiguration.ApnsServerEnvironment.Sandbox,
                                     getPath(), "Swampmonster");
 
+            // Windows push notification is currently NOT enabled. Please add the credentials here and uncomment the code which start with WIN-PUSH-ENABLE THIS
+
+
             // Create a new broker
             var gcmBroker = new GcmServiceBroker(config);
             var apnsBroker = new ApnsServiceBroker(configApple);
+            // WIN PUSH ENABLE THIS
+            // var config = new WnsConfiguration("WNS_PACKAGE_NAME", "WNS_PACKAGE_SID", "WNS_CLIENT_SECRET");
 
+            // Apple feedback service
             var fbs = new FeedbackService(configApple);
             fbs.FeedbackReceived += (string deviceToken, DateTime timestamp) => {
                 // Remove the deviceToken from your database
@@ -75,7 +82,7 @@ namespace ICE_Server.PushNotifications
             };
             fbs.Check();
 
-            // Wire up events
+            // Wire up events for Google 
             gcmBroker.OnNotificationFailed += (notification, aggregateEx) =>
             {
 
@@ -185,24 +192,56 @@ namespace ICE_Server.PushNotifications
                 Console.WriteLine("Apple Notification Sent!");
             };
 
+            // WIN PUSH ENABLE THIS
+            // Wire up Windows events
+            //wnsBroker.OnNotificationFailed += (notification, aggregateEx) => {
+
+            //    aggregateEx.Handle(ex => {
+
+            //        // See what kind of exception it was to further diagnose
+            //        if (ex is WnsNotificationException)
+            //        {
+            //            var notificationException = (WnsNotificationException)ex;
+            //            Console.WriteLine($"WNS Notification Failed: {notificationException.Message}");
+            //        }
+            //        else {
+            //            Console.WriteLine("WNS Notification Failed for some (Unknown Reason)");
+            //        }
+
+            //        // Mark it as handled
+            //        return true;
+            //    });
+            //};
+
 
             // Start the broker
             gcmBroker.Start();
             apnsBroker.Start();
+            // WIN PUSH ENABLE THIS
+            //wnsBroker.Start();
 
 
             string androidParse;
             string iOSParse;
+            // WIN PUSH ENABLE THIS
+            //string windowsParse;
+            buildingMsg = "[";
+            foreach (Building buildingitem in buildings)
+            {
+                buildingMsg += buildingitem.ID + ", ";
+            }
+            buildingMsg.Remove(buildingMsg.Length - 1, 1);
+            buildingMsg += "]";
 
             if (predefinedID == null)
             {
-                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":" + title + ",\"Content\":{\"Message\":\"" + message + "\"}}";
-                iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\"Message\":\"" + message + "\"}}}}";
+                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":" + title + ",\"Content\":{\"Message\":\"" + message + ", \"Building\":" + buildingMsg + "}}";
+                iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\"Message\":\"" + message + ", \"Building\":" + buildingMsg + "}}}}";
             }
             else
             {
-                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":" + title + ",\"Content\":{\"Message\":\"" + message + "\",\"PredefinedMessage\":" + predefinedID + "}}";
-                iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\"Message\":\"" + message + "\"}}}}";
+                androidParse = "{\"Type\":" + (int)pushType + ",\"Title\":" + title + ",\"Content\":{\"Message\":\"" + message + ", \"Building\":" + buildingMsg + "\",\"PredefinedMessage\":" + predefinedID + "}}";
+                iOSParse = "{\"aps\":{\"alert\":\"New emergency\",\"badge\":\"1\", \"ICE\":{\"Type\":1,\"Title\":1,\"Content\":{\"Message\":\"" + message + ", \"Building\":" + buildingMsg + "}}}}";
             }
             
             foreach (var regId in deviceRepository.GetAll())
@@ -220,13 +259,33 @@ namespace ICE_Server.PushNotifications
                 }
                 if (regId.DeviceOS == OS.iOS)
                 {
-                    // edit with emergency id / predef messageid
                     // Queue an Apple notification to send
                     apnsBroker.QueueNotification(new ApnsNotification
                     {
                         DeviceToken = regId.DeviceID,
                         Payload = JObject.Parse(iOSParse)
                     });
+                }
+                if (regId.DeviceOS == OS.WinPhone)
+                {
+                    // Queue an Windows notification to send
+                    // WIN PUSH ENABLE THIS (ALSO EDIT THIS PART)
+                    //wnsBroker.QueueNotification(new WnsToastNotification
+                    //{
+                    //    ChannelUri = uri,
+                    //    Payload = XElement.Parse (@"
+                                                //< toast >
+                                                //    < visual >
+                                                //        < binding template = ""ToastText01"" >
+   
+                                                //               < text id = ""1"" > WNS_Send_Single </ text >
+      
+                                                //              </ binding >
+      
+                                                //          </ visual >
+      
+                                                //      </ toast > ")
+                    //});
                 }
             }
 

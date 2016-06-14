@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using ICE_Server.DAL;
 using ICE_Server.Models;
 using ICE_Server.Repository;
+using ICE_Server.Authorization;
 
 namespace ICE_Server.Controllers
 {
@@ -36,6 +37,7 @@ namespace ICE_Server.Controllers
             return Ok(languageRepository.Get(id));
         }
 
+        [ICEApiAuthorize(Roles = "Admin")]
         // POST: api/LanguagesAPI
         [ResponseType(typeof(Language))]
         [HttpPost]
@@ -50,7 +52,7 @@ namespace ICE_Server.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = item.ID }, item);
         }
-
+        [ICEApiAuthorize(Roles = "Admin")]
         // PUT: api/LanguagesAPI/5
         [ResponseType(typeof(void))]
         [HttpPut]
@@ -65,7 +67,7 @@ namespace ICE_Server.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        [ICEApiAuthorize(Roles = "Admin")]
         // DELETE: api/LanguagesAPI/5
         [ResponseType(typeof(Language))]
         [HttpDelete]
@@ -75,6 +77,16 @@ namespace ICE_Server.Controllers
 
             return Ok(item);
         }
-        
+        [ICEApiAuthorize(Roles = "Admin")]
+        // DELETE: api/LanguagesAPI/5
+        [ResponseType(typeof(Broadcast))]
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            languageRepository.Delete(id);
+
+            return Ok(id);
+        }
+
     }
 }

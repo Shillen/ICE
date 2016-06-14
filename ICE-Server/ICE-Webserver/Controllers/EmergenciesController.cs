@@ -129,15 +129,35 @@ namespace ICE_Webserver.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID")] Emergency emergency)
+        public async Task<ActionResult> Edit(EmergencyViewModel viewresult)
         {
+            EmergencyItem emergencyitem = new EmergencyItem();
+            emergencyitem.Name = viewresult.Name;
+            emergencyitem.EmergencyId = viewresult.ID;
+            if (viewresult.Translations != null)
+            {
+                emergencyitem.Translations = new List<EmergencyTranslated>();
+                var i = 0;
+                foreach (string value in viewresult.Translations)
+                {
+                    emergencyitem.Translations.Add(new EmergencyTranslated() { EmergencyID = emergencyitem.EmergencyId, LanguageID = viewresult.LanguageIds[i], Name = value });
+                    i++;
+                }
+            }
+
+            // Only if the model is valid it will be send to API
             if (ModelState.IsValid)
             {
-                db.Entry(emergency).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                RequestResponse<EmergencyItem> response = await HandleObjectFromRequest<EmergencyItem>(HttpMethod.Put, "api/EmergencyAPI/", emergencyitem);
+
+                // Check API's response
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            return View(emergency);
+
+            return View(viewresult);
         }
 
         // GET: Emergencies/Delete/5

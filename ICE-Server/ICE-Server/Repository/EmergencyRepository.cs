@@ -107,6 +107,15 @@ namespace ICE_Server.Repository
                 }
             }
 
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
             return true;
 
         }

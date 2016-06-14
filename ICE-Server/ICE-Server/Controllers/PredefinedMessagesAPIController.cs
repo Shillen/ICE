@@ -39,7 +39,7 @@ namespace ICE_Server.Controllers
 
         // GET: api/PredefinedMessagesAPI/5
         [ResponseType(typeof(PredefinedMessage))]
-        [Route("api/PredefinedMessagesAPI")]
+        [Route("api/PredefinedMessagesAPI/{id}")]
         public IHttpActionResult GetPredefinedMessage(int id)
         {
             return Ok(predefinedmessageRepository.Get(id));
@@ -72,13 +72,13 @@ namespace ICE_Server.Controllers
 
         // PUT: api/PredefinedMessagesAPI/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Update(PredefinedMessage item)
+        public IHttpActionResult Update(PredefinedMessageItem item)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            int[] ids = { item.ID };
+            int[] ids = { item.ID};
             predefinedmessageRepository.Update(item, ids);
 
             return StatusCode(HttpStatusCode.NoContent);

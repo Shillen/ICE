@@ -14,7 +14,14 @@ namespace ICE_Webserver.ViewModels
 
         public virtual Emergency Emergency { get; set; }
 
+        public string EmergencyId { get; set; }
+
+        public string Name { get; set; }
+
         public string EmergencyName { get; set; }
+
+        public int[] LanguageIds { get; set; }
+        public string[] Translations { get; set; }
 
         public virtual ICollection<PredefinedMessageTranslated> PredefinedMessageTranslations { get; set; }
 

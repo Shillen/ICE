@@ -67,17 +67,17 @@ namespace ICE_Server.Controllers
             return (Ok());
         }
 
-        // PUT: api/EmergencyAPI/5
+        // PUT: api/EmergencyAPI
         [ResponseType(typeof(void))]
         [HttpPut]
         [Route("api/EmergencyAPI")]
-        public IHttpActionResult Update(EmergencyItem item, int id)
+        public IHttpActionResult Update(EmergencyItem item)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            int[] ids = { id };
+            int[] ids = { item.EmergencyId };
             emergencyRepository.Update(item, ids);
 
             return StatusCode(HttpStatusCode.NoContent);

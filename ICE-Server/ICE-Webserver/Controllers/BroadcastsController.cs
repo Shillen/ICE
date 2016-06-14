@@ -99,12 +99,7 @@ namespace ICE_Webserver.Controllers
             RequestResponse<List<Emergency>> emergencies = await HandleObjectFromRequest<List<Emergency>>(HttpMethod.Get, "api/EmergencyAPI/");
             RequestResponse<Emergency> emergency = await HandleObjectFromRequest<Emergency>(HttpMethod.Get, "api/EmergencyAPI/", (int)broadcastitem.EmergencyId);
 
-            BroadcastViewModel broadcastview = new BroadcastViewModel();
-            broadcastview.Message = broadcastitem.Message;
-            broadcastview.Buildings = broadcastitem.Buildings;
-            broadcastview.Emergencies = emergencies.Item;
-            broadcastview.EmergencyName = emergency.Item.Name;
-            return View(broadcastview);
+            return View(viewresult);
         }
 
         // GET: Broadcasts/Delete/5
