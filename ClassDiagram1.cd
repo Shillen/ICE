@@ -1,0 +1,649 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ICE_Server.BundleConfig" Collapsed="true">
+    <Position X="26.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.FilterConfig" Collapsed="true">
+    <Position X="38.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.RouteConfig" Collapsed="true">
+    <Position X="31.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Startup" Collapsed="true">
+    <Position X="36.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAIABAAAAAAAAAAEAgIAAAAAAAAA=</HashCode>
+      <FileName>App_Start\Startup.Auth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.WebApiConfig" Collapsed="true">
+    <Position X="31.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\WebApiConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.MvcApplication" Collapsed="true">
+    <Position X="26.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ApiDescriptionExtensions" Collapsed="true">
+    <Position X="26.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ApiDescriptionExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.HelpPageConfig" Collapsed="true">
+    <Position X="29.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\App_Start\HelpPageConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.HelpPageAreaRegistration" Collapsed="true">
+    <Position X="28" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\HelpPageAreaRegistration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.HelpPageConfigurationExtensions" Collapsed="true">
+    <Position X="31.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAABAICACACEAACGSCAAAADABAAAEMAAAAAIEA=</HashCode>
+      <FileName>Areas\HelpPage\HelpPageConfigurationExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.HelpPageSampleGenerator" Collapsed="true">
+    <Position X="33.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAYAARQAQAAEAJgAAAQAAgAAEAgFAAAAABCAAAI=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.HelpPageSampleKey" Collapsed="true">
+    <Position X="35" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAABAAAgAgAAAAAAAAAAAAICQAAAEAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ImageSample" Collapsed="true">
+    <Position X="26.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAIAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\ImageSample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.InvalidSample" Collapsed="true">
+    <Position X="29.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\InvalidSample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ObjectGenerator" Collapsed="true">
+    <Position X="29.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABDAoAAAAAACAEAICAAAYAAACAAAAAAgCAgAAAAIA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\ObjectGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.TextSample" Collapsed="true">
+    <Position X="40.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAAIAAAAAACAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\TextSample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.XmlDocumentationProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIEAAAAIBAEAQAAABIAAAAAAAAAAAAAAAAAAAAAAAkg=</HashCode>
+      <FileName>Areas\HelpPage\XmlDocumentationProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.Controllers.HelpController" Collapsed="true">
+    <Position X="40.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAABAAAAAAAAAAAAAAAAAAAAAAAgAEAAAAgAAA=</HashCode>
+      <FileName>Areas\HelpPage\Controllers\HelpController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.CollectionModelDescription" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.ComplexTypeModelDescription" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.DictionaryModelDescription" Collapsed="true">
+    <Position X="7.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.EnumTypeModelDescription" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.EnumValueDescription" Collapsed="true">
+    <Position X="36.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.KeyValuePairModelDescription" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.ModelDescription" Collapsed="true">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator" Collapsed="true">
+    <Position X="36.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAGQBAAJAABAAACBAgAAAAASBAAAAAAAAAEAACAQAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.ModelNameAttribute" Collapsed="true">
+    <Position X="38.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.ModelNameHelper" Collapsed="true">
+    <Position X="40.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.ParameterAnnotation" Collapsed="true">
+    <Position X="31.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.ParameterDescription" Collapsed="true">
+    <Position X="33.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAQAQAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\ParameterDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.ModelDescriptions.SimpleTypeModelDescription" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Areas.HelpPage.Models.HelpPageApiModel" Collapsed="true">
+    <Position X="26.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAGBAAAAAAAAAAAAAgAAAAAAAUBAAAAAQAQAg=</HashCode>
+      <FileName>Areas\HelpPage\Models\HelpPageApiModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Authorization.ICEApiAuthorizeAttribute" Collapsed="true">
+    <Position X="38.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAACAAAAAAAACBAAAAAAAAAAAAA=</HashCode>
+      <FileName>Authorization\ICEApiAuthorizeAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.BaseController" Collapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\BaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.BroadcastsAPIController" Collapsed="true">
+    <Position X="12.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAEAAAAAAAAAAAgAAAAAAAAEAABAAAgAAAgAAAAA=</HashCode>
+      <FileName>Controllers\BroadcastsAPIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.BuildingsAPIController" Collapsed="true">
+    <Position X="17" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAQAAAAAAAAAAAAAAAAEAAAAAAgAAAAAQAAA=</HashCode>
+      <FileName>Controllers\BuildingsAPIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.DevicesAPIController" Collapsed="true">
+    <Position X="21.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAABAAAAAAAAAAAAAAAEAAAgAAgAAAAAAAAA=</HashCode>
+      <FileName>Controllers\DevicesAPIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.EmergencyAPIController" Collapsed="true">
+    <Position X="23.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAEAAAAAAAAAAAAAAAAAAIAEAAAABAgIAAAAAAAA=</HashCode>
+      <FileName>Controllers\EmergencyAPIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.HomeAPIController" Collapsed="true">
+    <Position X="36.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAQCAAAAAAAAAAAAAAAUAAAAAAAABEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeAPIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.LanguagesAPIController" Collapsed="true">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAgAgAAAAACA=</HashCode>
+      <FileName>Controllers\LanguagesAPIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.PredefinedMessagesController" Collapsed="true">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAIMAAAAAAAAAAAAAIAAAAAAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Controllers\PredefinedMessagesAPIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.RoleController" Collapsed="true">
+    <Position X="5.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAEQACAAAAAAAAAAwAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Controllers\RolesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.SettingsAPIController" Collapsed="true">
+    <Position X="8" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Controllers\SettingsAPIController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.StatsController" Collapsed="true">
+    <Position X="10.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\StatsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.SynchronizeController" Collapsed="true">
+    <Position X="14.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAIAAAAIAAAABAAIAAgAAAQAAA=</HashCode>
+      <FileName>Controllers\SynchronizeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Controllers.UserController" Collapsed="true">
+    <Position X="19.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgAAEACAAKAQAQAEAAAQAAAAAAABAAAAEAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.DAL.ICEContext" Collapsed="true">
+    <Position X="40.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAggABAACACAAAAAAAAAAACAUAABAEAAgAAAAQAAAAA=</HashCode>
+      <FileName>DAL\ICEContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Migrations.Initial" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="28" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAMAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAI=</HashCode>
+      <FileName>Migrations\201605201313274_Initial.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICE_Server.Migrations.Configuration" Collapsed="true">
+    <Position X="28" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Migrations\Configuration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.ApiResponseModel" Collapsed="true">
+    <Position X="28" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\ApiResponseModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Broadcast" Collapsed="true">
+    <Position X="31.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAggAAAAAAAAgAAACAAAAAAAAAAAAAAAAAACIQAAAQA=</HashCode>
+      <FileName>Models\Broadcast.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.BroadcastBuilding" Collapsed="true">
+    <Position X="33.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAABAAAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\BroadcastBuilding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.BroadcastItem" Collapsed="true">
+    <Position X="35" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAACAAAAAAAAAAAAAAAAAACIAAAAAA=</HashCode>
+      <FileName>Models\BroadcastItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Building" Collapsed="true">
+    <Position X="38.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Building.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Device" Collapsed="true">
+    <Position X="40.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Models\Device.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Emergency" Collapsed="true">
+    <Position X="29.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Emergency.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.EmergencyItem" Collapsed="true">
+    <Position X="31.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACCAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\EmergencyItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.EmergencyTranslated" Collapsed="true">
+    <Position X="35" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAQAAAAAAAIACAAAAQAAAAA=</HashCode>
+      <FileName>Models\EmergencyTranslated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.CustomUserRole" Collapsed="true">
+    <Position X="36.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.CustomUserClaim" Collapsed="true">
+    <Position X="33.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.CustomUserLogin" Collapsed="true">
+    <Position X="35" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.CustomUserStore" Collapsed="true">
+    <Position X="38.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.CustomRoleStore" Collapsed="true">
+    <Position X="31.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.CustomClaimsPrincipal" Collapsed="true">
+    <Position X="29.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Language" Collapsed="true">
+    <Position X="31.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Language.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.OAuthResponse" Collapsed="true">
+    <Position X="28" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAAAAAAAAAAAAAAAAEAAAAQAAIAAAAAAAAAA=</HashCode>
+      <FileName>Models\OAuthResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.PredefinedMessage" Collapsed="true">
+    <Position X="35" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAACAAAAQAAAAA=</HashCode>
+      <FileName>Models\PredefinedMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.PredefinedMessageItem" Collapsed="true">
+    <Position X="36.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACCAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\PredefinedMessageItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.PredefinedMessageTranslated" Collapsed="true">
+    <Position X="40.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAACAAAAAAAAAAAAAAAAAAAAAIAAAACIAAAAAA=</HashCode>
+      <FileName>Models\PredefinedMessageTranslated.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Role" Collapsed="true">
+    <Position X="29.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Settings" Collapsed="true">
+    <Position X="33.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAACAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Stats" Collapsed="true">
+    <Position X="38.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAASAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Models\Stats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.User" Collapsed="true">
+    <Position X="26.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIACCAAAAAAEAAAAAAAAAAAAAAAAQAAAAAAIAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Views.Authentication.EditViewModel" Collapsed="true">
+    <Position X="28" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAACAAAAAAEFAAAAAAAEAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Views\Authentication\EditViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Views.Authentication.RegisterViewModel" Collapsed="true">
+    <Position X="28" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Views\Authentication\RegisterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Views.Authentication.UserViewModel" Collapsed="true">
+    <Position X="29.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAACAAAAAAEAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\Views\Authentication\UserViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Models.Views.LoginViewModel" Collapsed="true">
+    <Position X="35" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAA=</HashCode>
+      <FileName>Models\Views\Authentication\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Providers.ApplicationOAuthProvider" Collapsed="true">
+    <Position X="29.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAACAAAAAAgAAAAAAEAAEIAAAAAAAAAAAgA=</HashCode>
+      <FileName>Providers\ApplicationOAuthProviders.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.PushNotifications.Pushmessage" Collapsed="true">
+    <Position X="26.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAQABAAAAAAAAAAAIAAAAgAAAAAAAAAAAAACA=</HashCode>
+      <FileName>PushNotifications\PushMessages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Repository.BroadcastsRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQCAEAAAAAAAABAAgAAAAAAEAEAAAAAAgAAAAAAIAA=</HashCode>
+      <FileName>Repository\BroadcastsRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICE_Server.Repository.BuildingsRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAEAAAAAAAABAAAAAAAAAEAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repository\BuildingsRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICE_Server.Repository.DevicesRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="26.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAEQAAAAAAABAAAAAAAAAEAEAAAAAAwAAAAAAAAA=</HashCode>
+      <FileName>Repository\DevicesRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICE_Server.Repository.EmergencyRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQCAEAAAAAAAABAAAAAAAAAEAEAAAAAAgIAAAAAAAA=</HashCode>
+      <FileName>Repository\EmergencyRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICE_Server.Repository.LanguagesRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAEAAAAAAAABAAAAAAAAAEAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repository\LanguagesRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICE_Server.Repository.PredefinedMessagesRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQCIEAAAAAAAABAAAAAAAAAEAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repository\PredefinedMessagesRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ICE_Server.Repository.SettingsRepository" Collapsed="true">
+    <Position X="35" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Repository\SettingsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICE_Server.Repository.UserRepository" Collapsed="true">
+    <Position X="28" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\UserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ICE_Server.Areas.HelpPage.ModelDescriptions.IModelDocumentationProvider" Collapsed="true">
+    <Position X="26.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ICE_Server.Interfaces.IRepository&lt;T&gt;" Collapsed="true">
+    <Position X="28" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAABAAAAAAAAAAAEAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ICE_Server.Areas.HelpPage.SampleDirection" Collapsed="true">
+    <Position X="28" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\HelpPage\SampleGeneration\SampleDirection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ICE_Server.Models.OS" Collapsed="true">
+    <Position X="26.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAQAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Device.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
